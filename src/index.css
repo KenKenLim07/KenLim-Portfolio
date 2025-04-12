@@ -10,9 +10,9 @@ body {
 }
 
 @layer utilities {
+  /* Blinking cursor animation */
   @keyframes blink {
-    0%,
-    100% {
+    0%, 100% {
       opacity: 1;
     }
     50% {
@@ -24,27 +24,33 @@ body {
     animation: blink 0.8s step-end infinite;
   }
 
-  @keyframes loading {
+  /* Loading bar slide animation */
+  @keyframes loading-bar {
     0% {
       transform: translateX(-100%);
     }
+    50% {
+      transform: translateX(0%);
+    }
     100% {
-      transform: translateX(250%);
+      transform: translateX(100%);
     }
   }
 
   .animate-loading-bar {
-    animation: loading 0.8s ease infinite;
+    animation: loading-bar 2s ease-in-out infinite;
+    box-shadow: 0 0 10px #3b82f6;
   }
-}
 
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
