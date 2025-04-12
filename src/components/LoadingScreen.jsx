@@ -22,14 +22,16 @@ export const LoadingScreen = ({ onComplete }) => {
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black text-gray-100 flex flex-col items-center justify-center">
-      <div className="mb-4 text-4xl font-mono font-bold text-white transition-all">
-        {text}
-        <span className="animate-blink ml-1 text-white">|</span>
-      </div>
+    <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
+      <div className="flex flex-col items-center space-y-6">
+        <div className="text-5xl font-mono text-white tracking-widest">
+          {text}
+          <span className="animate-blink text-blue-400 ml-1">|</span>
+        </div>
 
-      <div className="w-[200px] h-[2px] bg-gray-800 rounded relative overflow-hidden">
-        <div className="w-[40%] h-full bg-white shadow-[0_0_15px_white] animate-loading-bar"></div>
+        <div className="w-64 h-1 bg-gray-700 rounded overflow-hidden">
+          <div className="h-full w-1/3 bg-blue-500 animate-loading-bar rounded shadow-[0_0_10px_#3b82f6]"></div>
+        </div>
       </div>
     </div>
   );

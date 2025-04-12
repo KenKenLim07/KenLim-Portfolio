@@ -11,7 +11,7 @@ export const About = () => {
     >
       <RevealOnScroll>
         <div className="max-w-3xl mx-auto px-4">
-        <h2 class="bg-gradient-to-r from-cyan-500 to-pink-500 bg-clip-text text-transparent">
+        <h2 class="text-3xl font-bold mb-8 text-white-500 text-center leading-tight will-change-transform">
       About me
         </h2>
 
@@ -31,7 +31,7 @@ export const About = () => {
                   {frontendSkills.map((tech, key) => (
                     <span
                       key={key}
-                      className="bg-orange-500/10 text-yellow-400 py-1 px-3 rounded-full text-sm hover:bg-orange-500/20 hover:shadow-[0_2px_8px_rgba(251,146,60,0.2)] transition"
+                      className="bg-white-500/10 text-grey-400 py-1 px-3 rounded-full text-sm hover:bg-orange-500/20 hover:shadow-[0_2px_8px_rgba(251,146,60,0.2)] transition"
                     >
                       {tech}
                     </span>
@@ -45,7 +45,7 @@ export const About = () => {
                   {backendSkills.map((tech, key) => (
                     <span
                       key={key}
-                      className="bg-yellow-400/10 text-yellow-400 py-1 px-3 rounded-full text-sm hover:bg-yellow-400/20 hover:shadow-[0_2px_8px_rgba(250,204,21,0.2)] transition"
+                      className="bg-white-500/10 text-grey-400 py-1 px-3 rounded-full text-sm hover:bg-yellow-400/20 hover:shadow-[0_2px_8px_rgba(250,204,21,0.2)] transition"
                     >
                       {tech}
                     </span>

@@ -11,9 +11,9 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
           <a href="#home" className="font-mono text-xl font-bold text-white">
             {" "}
             <span>
-            <span className="text-orange-500">Ken</span>
+            <span className="text-cyan-500">Ken</span>
               <span className="text-white">.</span>
-            <span className="text-yellow-500">Lim</span>
+            <span className="text-pink-400">Lim</span>
             </span>
 
 
