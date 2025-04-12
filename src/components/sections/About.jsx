@@ -11,9 +11,10 @@ export const About = () => {
     >
       <RevealOnScroll>
         <div className="max-w-3xl mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-8 text-white text-center leading-tight will-change-transform">
-            About Me
+        <h2 class="bg-gradient-to-r from-cyan-500 to-pink-500 bg-clip-text text-transparent">
+      About me
         </h2>
+
 
           {/* Summary */}
           <div className="rounded-xl p-8 border-white/10 border hover:-translate-y-1 transition-all">
