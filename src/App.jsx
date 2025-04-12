@@ -3,7 +3,6 @@ import "./App.css";
 import { LoadingScreen } from "./components/LoadingScreen";
 import { Navbar } from "./components/Navbar";
 import { MobileMenu } from "./components/MobileMenu";
-import { RevealOnScroll } from "./components/RevealOnScroll";
 import { Home } from "./components/sections/Home";
 import { About } from "./components/sections/About";
 import { Projects } from "./components/sections/Projects";
@@ -24,13 +23,11 @@ function App() {
         <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
         <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
-        <RevealOnScroll>
-          <Home />
-          <About />
-          <Projects />
-          <Contact />
-        </RevealOnScroll>
-
+        {/* No RevealOnScroll here */}
+        <Home />
+        <About />
+        <Projects />
+        <Contact />
       </div>
     </>
   );
