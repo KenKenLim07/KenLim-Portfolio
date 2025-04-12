@@ -6,17 +6,18 @@ export const Home = () => {
       id="home"
       className="min-h-screen flex items-center justify-center relative"
     >
-      <div className="text-center z-10 px-4">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent leading-right">
-          Hi, I'm Jose Marie Lim
-        </h1>
+      <div className="text-center z-10 px-4 max-w-xl mx-auto">
+        <RevealOnScroll>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-orange-500 to-yellow-400 bg-clip-text text-transparent leading-tight">
+            Hi, I'm Jose Marie Lim
+          </h1>
 
-        <p className="text-gray-400 text-lg mb-8 max-w-lg mx-auto">
-          A driven tech enthusiast with a strong focus on coding, cybersecurity,
-          operating system development, and web app development...
-        </p>
+          <p className="text-gray-400 text-lg mb-8">
+            A driven tech enthusiast with a strong focus on coding, cybersecurity,
+            operating system development, and web app development...
+          </p>
+        </RevealOnScroll>
 
-        {/* Only animate the buttons on scroll */}
         <RevealOnScroll>
           <div className="flex justify-center space-x-4">
             <a
