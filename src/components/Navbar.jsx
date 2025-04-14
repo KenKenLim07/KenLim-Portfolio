@@ -12,7 +12,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
         {/* Signature Branding */}
         <a
           href="#home"
-          className="text-white font-mono text-2xl tracking-wide select-none"
+          className=" text-2xl tracking-wide select-none fade-in-text"
         >
           <span className="text-cyan-400">ken</span>
           <span className="text-white">.</span>
@@ -33,18 +33,21 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
           ))}
         </div>
 
-        {/* Mobile Icon */}
-        <button
-  className="md:hidden text-gray-300 focus:outline-none text-xl"
-  onClick={() => setMenuOpen((prev) => !prev)}
->
-  {menuOpen ? (
-    <i className="fas fa-times"></i> // Close icon
-  ) : (
-    <i className="fas fa-bars"></i> // Hamburger icon
-  )}
-</button>
-
+        {/* Mobile Icon - Dribbble-style */}
+        <div 
+          className="md:hidden flex flex-col justify-center items-center w-6 h-5 gap-[6px] cursor-pointer z-50"
+          onClick={() => setMenuOpen(prev => !prev)}
+        >
+          <span className={`block w-8 h-[4px] bg-white rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)]
+            ${menuOpen ? 'rotate-45 translate-y-[10px]' : ''}`}
+          />
+          <span className={`block w-7 h-[3px] bg-white rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)]
+            ${menuOpen ? 'opacity-0' : ''}`}
+          />
+          <span className={`block w-6 h-[2px] bg-white rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)]
+            ${menuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}
+          />
+        </div>
       </div>
     </nav>
   );
