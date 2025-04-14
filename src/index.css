@@ -11,17 +11,17 @@ body {
 
 @layer utilities {
   /* Blinking cursor animation */
-  @keyframes blink {
+  @keyframes soft-blink {
     0%, 100% {
       opacity: 1;
     }
     50% {
-      opacity: 0;
+      opacity: 1;
     }
   }
 
-  .animate-blink {
-    animation: blink 0.8s step-end infinite;
+  .animate-soft-blink {
+    animation: blink 1s step-end infinite;
   }
 
   /* Loading bar slide animation */
@@ -29,16 +29,15 @@ body {
     0% {
       transform: translateX(-100%);
     }
-    50% {
-      transform: translateX(0%);
-    }
+    
+    
     100% {
       transform: translateX(100%);
     }
   }
 
   .animate-loading-bar {
-    animation: loading-bar 2s ease-in-out infinite;
+    animation: loading-bar 2s ease-in-out forwards;
     box-shadow: 0 0 10px #3b82f6;
   }
 
