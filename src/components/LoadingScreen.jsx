@@ -1,38 +1,35 @@
 import { useEffect, useState } from "react";
 
+// LoadingScreen.jsx
 export const LoadingScreen = ({ onComplete }) => {
-  const [text, setText] = useState("");
-  const fullText = "Thank you for visiting";
+  const fullText = "Loading...";
 
   useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      setText(fullText.substring(0, index));
-      index++;
+    const timer = setTimeout(() => {
+      onComplete();
+    }, 3000); // Adjust duration as needed
 
-      if (index > fullText.length) {
-        clearInterval(interval);
-        setTimeout(() => {
-          onComplete();
-        }, 1000);
-      }
-    }, 60);
-
-    return () => clearInterval(interval);
+    return () => clearTimeout(timer);
   }, [onComplete]);
 
   return (
     <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
       <div className="flex flex-col items-center space-y-6">
-        <div className="text-3xl md:text-5xl font-mono text-white tracking-wide text-center">
-          {text}
-          <span className="animate-soft-blink ml-1 text-blue-400">|</span>
+        {/* Fade-in text */}
+        <div className="text-3xl md:text-5xl font-mono text-white tracking-wide text-center fade-in-text">
+          {fullText.split("").map((char, index) => (
+            <span key={index} style={{ animationDelay: `${index * 0.05}s` }}>
+              {char}
+            </span>
+          ))}
         </div>
 
+        {/* Loading bar */}
         <div className="w-64 h-1 bg-gray-700 rounded overflow-hidden">
-          <div className="animate-loading-bar h-full w-1/2 bg-blue-500 rounded"></div>
+          <div className="animate-loading-bar h-full w-1/2 bg-yellow-500 rounded"></div>
         </div>
       </div>
     </div>
   );
 };
+
