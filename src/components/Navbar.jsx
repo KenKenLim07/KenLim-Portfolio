@@ -12,7 +12,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
         {/* Signature Branding */}
         <a
           href="#home"
-          className=" text-2xl tracking-wide select-none fade-in-text"
+          className="text-2xl tracking-wide select-none fade-in-text"
         >
           <span className="text-cyan-400">ken</span>
           <span className="text-white">.</span>
@@ -33,21 +33,25 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
           ))}
         </div>
 
-        {/* Mobile Icon - Dribbble-style */}
+        {/* Mobile Burger Icon */}
         <div 
-          className="md:hidden flex flex-col justify-center items-center w-6 h-5 gap-[6px] cursor-pointer z-50"
+          className="md:hidden flex flex-col justify-center items-end w-8 h-6 gap-[5px] cursor-pointer z-50  "
           onClick={() => setMenuOpen(prev => !prev)}
         >
-          <span className={`block w-8 h-[4px] bg-white rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)]
-            ${menuOpen ? 'rotate-45 translate-y-[10px]' : ''}`}
+          <span
+            className={`h-[4px] w-8 bg-white rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)] 
+              ${menuOpen ? 'rotate-45 translate-y-[10px]' : ''}`}
           />
-          <span className={`block w-7 h-[3px] bg-white rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)]
-            ${menuOpen ? 'opacity-0' : ''}`}
+          <span
+            className={`h-[3px] w-7 bg-white rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)] 
+              ${menuOpen ? 'opacity-0' : ''}`}
           />
-          <span className={`block w-6 h-[2px] bg-white rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)]
-            ${menuOpen ? '-rotate-45 -translate-y-[10px]' : ''}`}
+          <span
+            className={`h-[2px] w-6 bg-white rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)] 
+              ${menuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`}
           />
         </div>
+
       </div>
     </nav>
   );
