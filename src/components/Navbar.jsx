@@ -1,7 +1,10 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export const Navbar = ({ menuOpen, setMenuOpen }) => {
+  const [animationKey, setAnimationKey] = useState(0);
+
   useEffect(() => {
+    setAnimationKey(prev => prev + 1); // trigger animation once on mount
     document.body.style.overflow = menuOpen ? "hidden" : "";
   }, [menuOpen]);
 
@@ -12,11 +15,29 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
         {/* Signature Branding */}
         <a
           href="#home"
-          className="text-2xl tracking-wide select-none fade-in-text"
+          className="text-2xl tracking-wide select-none flex space-x-1"
         >
-          <span className="text-cyan-400">ken</span>
-          <span className="text-white">.</span>
-          <span className="text-pink-400">lim</span>
+          <span
+            key={animationKey + "-ken"}
+            className="text-cyan-400 fade-in-text inline-block"
+            style={{ animationDelay: "0.1s" }}
+          >
+           <span className="fade-up">ken</span>
+          </span>
+          <span
+            key={animationKey + "-dot"}
+            className="text-white fade-up inline-block"
+            style={{ animationDelay: "0.3s" }}
+          >
+            .
+          </span>
+          <span
+            key={animationKey + "-lim"}
+            className="text-pink-400 fade-up inline-block"
+            style={{ animationDelay: "0.5s" }}
+          >
+            lim
+          </span>
         </a>
 
         {/* Desktop Nav */}
@@ -35,7 +56,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
 
         {/* Mobile Burger Icon */}
         <div 
-          className="md:hidden flex flex-col justify-center items-end w-8 h-6 gap-[5px] cursor-pointer z-50  "
+          className="md:hidden flex flex-col justify-center items-end w-8 h-6 gap-[5px] cursor-pointer z-50"
           onClick={() => setMenuOpen(prev => !prev)}
         >
           <span
@@ -51,7 +72,6 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
               ${menuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`}
           />
         </div>
-
       </div>
     </nav>
   );

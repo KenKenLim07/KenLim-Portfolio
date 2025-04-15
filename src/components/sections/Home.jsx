@@ -1,6 +1,6 @@
 import { RevealOnScroll } from "../RevealOnScroll";
 
-export const Home = () => {
+export const Home = ({ showTypewriter }) => {
   return (
     <section
       id="home"
@@ -8,12 +8,23 @@ export const Home = () => {
     >
       <div className="text-center z-10 px-4 max-w-xl mx-auto">
         <RevealOnScroll>
-          <h1 className="text-5xl font-bold mb-8 text-white-500 text-center leading-tight will-change-transform">
+          <h1
+            className={`text-4xl font-bold mb-4 text-white text-center leading-tight will-change-transform ${
+              showTypewriter ? "typewriter" : ""
+            }`}
+          >
             Hi, I'm Jose Marie Lim
           </h1>
 
           <p className="text-gray-400 text-lg mb-8">
-          A driven tech enthusiast with a strong focus on coding, cybersecurity, operating system development, and web app development. Currently pursuing a Computer Science degree, I'm dedicated to mastering the technical skills required to excel in the ever-evolving field of technology. Passionate about solving complex problems, optimizing systems, and building secure and efficient applications. Constantly pushing myself to innovate, learn, and grow.
+            A driven tech enthusiast with a strong focus on coding,
+            cybersecurity, operating system development, and web app
+            development. Currently pursuing a Computer Science degree, I'm
+            dedicated to mastering the technical skills required to excel in the
+            ever-evolving field of technology. Passionate about solving complex
+            problems, optimizing systems, and building secure and efficient
+            applications. Constantly pushing myself to innovate, learn, and
+            grow.
           </p>
         </RevealOnScroll>
 

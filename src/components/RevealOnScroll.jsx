@@ -6,9 +6,21 @@ export const RevealOnScroll = ({ children }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && ref.current) {
-          ref.current.classList.add("visible");
-          observer.unobserve(ref.current); // only reveal once
+        const el = ref.current;
+        if (entry.isIntersecting && el) {
+          // Add reveal animation
+          el.classList.add("visible");
+
+          // Re-trigger any child animations (like typewriter)
+          const typewriter = el.querySelector(".typewriter");
+          if (typewriter) {
+            typewriter.classList.remove("typewriter");
+            void typewriter.offsetWidth; // Force reflow
+            typewriter.classList.add("typewriter");
+          }
+        } else {
+          // Optionally remove classes if you want it to animate again
+          ref.current?.classList.remove("visible");
         }
       },
       {
@@ -18,7 +30,6 @@ export const RevealOnScroll = ({ children }) => {
     );
 
     if (ref.current) observer.observe(ref.current);
-
     return () => observer.disconnect();
   }, []);
 
