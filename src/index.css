@@ -98,7 +98,7 @@ body {
     overflow: hidden;
     white-space: nowrap;
     width: 0;
-    animation: typewriter 1.5s steps(50, end) forwards;
+    animation: typewriter 2s steps(50, end) forwards;
     color: white;
     font-weight: 500; /* minimalist look */
   }
@@ -107,17 +107,17 @@ body {
 @keyframes slideDown {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-50px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0px);
   }
 }
 
 /* Class to trigger the slideDown animation */
 .animate-slideDown {
-  animation: slideDown 0.3s ease-out forwards;
+  animation: slideDown 0.5s ease-out forwards;
 }
 
 @keyframes fadeSlideUp {
@@ -137,16 +137,16 @@ body {
 @keyframes slideInLeft {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(100px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(100px);
   }
 }
 
 .animate-slideInLeft {
-  animation: slideInLeft 0.4s ease-out forwards;
+  animation: slideInLeft 0.7s ease-out backwards;
 }
 
 

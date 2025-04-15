@@ -23,7 +23,7 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
         className={`text-xl font-medium text-white my-4 !bg-transparent
         transform transition-all duration-300 ease-in-out
         opacity-0 
-        ${menuOpen ? `opacity-100 animate-fadeSlideUp delay-${i * 100}` : ""} 
+        ${menuOpen ? `opacity-100 animate-slideDown delay-${i * 100}` : ""} 
         hover:text-cyan-300 hover:tracking-wider`}
       >
         {section.charAt(0).toUpperCase() + section.slice(1)}
