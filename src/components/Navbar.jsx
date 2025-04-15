@@ -4,7 +4,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
   const [animationKey, setAnimationKey] = useState(0);
 
   useEffect(() => {
-    setAnimationKey(prev => prev + 1); // trigger animation once on mount
+    setAnimationKey(prev => prev + 1); // Trigger animation once on mount
     document.body.style.overflow = menuOpen ? "hidden" : "";
   }, [menuOpen]);
 
@@ -22,7 +22,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
             className="text-cyan-400 fade-in-text inline-block"
             style={{ animationDelay: "0.1s" }}
           >
-           <span className="fade-up">ken</span>
+            <span className="fade-up">ken</span>
           </span>
           <span
             key={animationKey + "-dot"}

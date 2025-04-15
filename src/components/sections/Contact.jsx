@@ -3,27 +3,21 @@ import { RevealOnScroll } from "../RevealOnScroll";
 import emailjs from "emailjs-com";
 
 export const Contact = () => {
-    const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
 
-
-  const SERVICE_ID = "service_3gnzubf"
-  const TEMPLATE_ID = "template_8xpd072"
-  const PUBLIC_KEY = "ThYLaaQPCUATIOrgE"
+  const SERVICE_ID = "service_3gnzubf";
+  const TEMPLATE_ID = "template_8xpd072";
+  const PUBLIC_KEY = "ThYLaaQPCUATIOrgE";
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     emailjs
-      .sendForm(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        e.target,
-        PUBLIC_KEY
-      )
+      .sendForm(SERVICE_ID, TEMPLATE_ID, e.target, PUBLIC_KEY)
       .then((result) => {
         alert("Message Sent!");
         setFormData({ name: "", email: "", message: "" });
@@ -34,12 +28,11 @@ export const Contact = () => {
   return (
     <section
       id="contact"
-      className="min-h-screen flex items-center justify-center py-20"
+      className="min-h-screen flex items-center justify-center py-20 bg-gradient-to-r from-black to-gray-800"
     >
       <RevealOnScroll>
-        <div className="px-4 w-full min-w-[300px] md:w-[500px] sm:w-2/3 p-6">
-          <h2 className="text-3xl font-bold mb-8 text-white-500 text-center leading-tight will-change-transform">
-            {" "}
+        <div className="px-4 w-full min-w-[300px] md:w-[500px] sm:w-2/3 p-6 border-2 border-transparent hover:border-cyan-500 rounded-xl transition-all hover:translate-y-1 hover:shadow-xl">
+          <h2 className="text-3xl font-bold mb-8 text-white text-center leading-tight transition-all duration-300 ease-in-out">
             Get In Touch
           </h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
@@ -80,7 +73,7 @@ export const Contact = () => {
                 required
                 rows={5}
                 value={formData.message}
-                className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-orange transition focus:outline-none focus:border-cyan-400 focus:bg-blue-500/5"
+                className="w-full bg-white/5 border border-white/10 rounded px-4 py-3 text-white transition focus:outline-none focus:border-cyan-500 focus:bg-blue-500/5"
                 placeholder="Your Message..."
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })

@@ -17,59 +17,45 @@ body {
       opacity: 1;
     }
     50% {
-      opacity: 1;
+      opacity: 0;
     }
   }
 
   .animate-soft-blink {
-    animation: blink 1s step-end infinite;
+    animation: soft-blink 1s step-end infinite;
   }
 
   /* Loading bar slide animation */
-  @layer utilities {
-    /* ...existing styles... */
-  
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  
-    .fade-in-text span {
+  @keyframes fade-in {
+    from {
       opacity: 0;
-      animation: fade-in 0.4s ease forwards;
-      display: inline-block;
+      transform: translateY(8px);
     }
-  
-    .animate-soft-blink {
-      animation: soft-blink 1s step-end infinite;
-    }
-  
-    @keyframes soft-blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-  
-    @keyframes loading-bar {
-      0% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(100%);
-      }
-    }
-  
-    .animate-loading-bar {
-      animation: loading-bar 2s ease-in-out forwards;
-      box-shadow: 0 0 10px #facc15;
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
-  
+
+  .fade-in-text span {
+    opacity: 0;
+    animation: fade-in 0.4s ease forwards;
+    display: inline-block;
+  }
+
+  @keyframes loading-bar {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-loading-bar {
+    animation: loading-bar 2s ease-in-out forwards;
+    box-shadow: 0 0 10px #facc15;
+  }
 
   /* Reveal on scroll */
   .reveal {
@@ -84,34 +70,36 @@ body {
   }
 
   @keyframes fadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(8px);
+    0% {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+
+  .fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
   }
-}
 
-.fade-up {
-  animation: fadeUp 0.6s ease-out forwards;
-}
+  @keyframes typewriter {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
 
-@keyframes typewriter {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-.typewriter {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 0;
-  animation: typewriter 3s steps(40, end) forwards;
-  color: white;
-  font-weight: 500; /* minimalist look */
-}
-
-
+  .typewriter {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: typewriter 1.5s steps(50, end) forwards;
+    color: white;
+    font-weight: 500; /* minimalist look */
+  }
 }

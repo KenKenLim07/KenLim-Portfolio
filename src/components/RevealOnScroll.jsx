@@ -1,26 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export const RevealOnScroll = ({ children }) => {
+export const RevealOnScroll = ({ children, animationClass = "translate-y-8" }) => {
   const ref = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        const el = ref.current;
-        if (entry.isIntersecting && el) {
-          // Add reveal animation
-          el.classList.add("visible");
-
-          // Re-trigger any child animations (like typewriter)
-          const typewriter = el.querySelector(".typewriter");
-          if (typewriter) {
-            typewriter.classList.remove("typewriter");
-            void typewriter.offsetWidth; // Force reflow
-            typewriter.classList.add("typewriter");
-          }
-        } else {
-          // Optionally remove classes if you want it to animate again
-          ref.current?.classList.remove("visible");
+        if (entry.isIntersecting && ref.current) {
+          setIsVisible(true);
+          observer.unobserve(ref.current); // only run once
         }
       },
       {
@@ -36,7 +25,9 @@ export const RevealOnScroll = ({ children }) => {
   return (
     <div
       ref={ref}
-      className="opacity-0 translate-y-8 transition-all duration-700 ease-out reveal"
+      className={`opacity-0 transition-all duration-700 ease-out transform ${
+        isVisible ? `opacity-100 ${animationClass}` : ""
+      }`}
     >
       {children}
     </div>

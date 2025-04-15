@@ -13,14 +13,30 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showTypewriter, setShowTypewriter] = useState(false);
-
+  const [showFadeUp, setShowFadeUp] = useState(false);
+  const [showfadein, setShowfadein] = useState(false);
   useEffect(() => {
     if (isLoaded) {
-      // Slight delay to ensure the fade-in transition completes
-      const timer = setTimeout(() => setShowTypewriter(true), 100); 
-      return () => clearTimeout(timer);
+      const timer = setTimeout(() => {
+        setShowTypewriter(true);
+      }, 100); // Start typewriter after 100ms
+  
+      const fadeUpTimer = setTimeout(() => {
+        setShowFadeUp(true);
+      }, 500); // Start fade-up after typewriter finishes
+  
+      const fadeInTimer = setTimeout(() => {
+        setShowfadein(true);
+      }, 100); // Fade-in comes last after all animations
+  
+      return () => {
+        clearTimeout(timer);
+        clearTimeout(fadeUpTimer);
+        clearTimeout(fadeInTimer);
+      };
     }
   }, [isLoaded]);
+  
 
   return (
     <>
@@ -37,7 +53,12 @@ function App() {
       >
         <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
         <MobileMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-        <Home showTypewriter={showTypewriter} /> {/* 👈 Pass the prop here */}
+        <Home 
+          showTypewriter={showTypewriter} 
+          showFadeUp={showFadeUp} 
+           showfadein={showfadein} 
+        />
+        
         <About />
         <Projects />
         <Contact />

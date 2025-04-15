@@ -1,22 +1,21 @@
 import { RevealOnScroll } from "../RevealOnScroll";
 
-export const Home = ({ showTypewriter }) => {
+export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative"
+      className="min-h-screen flex items-center justify-center py-20 bg-gradient-to-r from-black to-gray-800"
     >
       <div className="text-center z-10 px-4 max-w-xl mx-auto">
         <RevealOnScroll>
           <h1
-            className={`text-4xl font-bold mb-4 text-white text-center leading-tight will-change-transform ${
-              showTypewriter ? "typewriter" : ""
-            }`}
+            className={`text-4xl font-bold mb-3 text-white leading-tight transition-all duration-300 ease-in-out
+              ${showTypewriter ? "typewriter" : ""}`}
           >
             Hi, I'm Jose Marie Lim
           </h1>
 
-          <p className="text-gray-400 text-lg mb-8">
+          <p className="text-gray-300 text-lg mb-8">
             A driven tech enthusiast with a strong focus on coding,
             cybersecurity, operating system development, and web app
             development. Currently pursuing a Computer Science degree, I'm
@@ -32,13 +31,13 @@ export const Home = ({ showTypewriter }) => {
           <div className="flex justify-center space-x-4">
             <a
               href="#projects"
-              className="bg-cyan-300 text-black py-3 px-6 rounded font-medium transition relative overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]"
+              className="bg-transparent text-white border-2 border-cyan-500 py-3 px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300 hover:bg-cyan-500/20 hover:shadow-lg"
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className="bg-yellow-400 text-black py-3 px-6 rounded font-medium transition relative overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]"
+              className="bg-transparent text-white border-2 border-yellow-400 py-3 px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-yellow-300 hover:bg-yellow-400/20 hover:shadow-lg"
             >
               Contact Me
             </a>
