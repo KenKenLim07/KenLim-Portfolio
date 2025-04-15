@@ -60,15 +60,15 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
           onClick={() => setMenuOpen(prev => !prev)}
         >
           <span
-            className={`h-[4px] w-8 bg-white rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)] 
+            className={`h-[4px] w-8 bg-yellow-500 rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)] 
               ${menuOpen ? 'rotate-45 translate-y-[10px]' : ''}`}
           />
           <span
-            className={`h-[3px] w-7 bg-white rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)] 
+            className={`h-[3px] w-7 bg-yellow-500 rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)] 
               ${menuOpen ? 'opacity-0' : ''}`}
           />
           <span
-            className={`h-[2px] w-6 bg-white rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)] 
+            className={`h-[2px] w-6 bg-yellow-500 rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)] 
               ${menuOpen ? '-rotate-45 -translate-y-[5px]' : ''}`}
           />
         </div>

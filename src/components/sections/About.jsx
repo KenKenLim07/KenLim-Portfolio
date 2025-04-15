@@ -59,13 +59,13 @@ export const About = () => {
             {/* Skills */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Frontend Skills */}
-              <div className="rounded-xl p-6 hover:-translate-y-1 transition-all border-2 border-transparent hover:border-cyan-500">
+              <div className="rounded-xl p-6 hover:-translate-y-1 transition-all border-2 border-transparent hover:border-yellow-500">
                 <h3 className="text-xl font-bold mb-4 text-white">Frontend</h3>
                 <div className="flex justify-center flex-wrap gap-2">
                   {frontendSkills.map((tech, key) => (
                     <span
                       key={key}
-                      className="bg-transparent text-white border-2 border-cyan-500 py-1 px-3 rounded-full text-sm hover:bg-cyan-500/20 hover:shadow-lg hover:text-black transition duration-300"
+                      className="bg-transparent text-white border-2 border-cyan-500 py-1 px-3 rounded-full text-sm hover:bg-cyan-500 hover:shadow-lg hover:text-white-500 transition duration-300"
                     >
                       {tech}
                     </span>
@@ -74,13 +74,13 @@ export const About = () => {
               </div>
 
               {/* Backend Skills */}
-              <div className="rounded-xl p-6 hover:-translate-y-1 transition-all border-2 border-transparent hover:border-cyan-500">
+              <div className="rounded-xl p-6 hover:-translate-y-1 transition-all border-2 border-transparent hover:border-yellow-500">
                 <h3 className="text-xl font-bold mb-4 text-white">Backend</h3>
                 <div className="flex justify-center flex-wrap gap-2">
                   {backendSkills.map((tech, key) => (
                     <span
                       key={key}
-                      className="bg-transparent text-white border-2 border-cyan-500 py-1 px-3 rounded-full text-sm hover:bg-cyan-500/20 hover:shadow-lg hover:text-black transition duration-300"
+                      className="bg-transparent text-white border-2 border-cyan-500 py-1 px-3 rounded-full text-sm hover:bg-cyan-500 hover:shadow-lg hover:text-white-500 transition duration-300"
                     >
                       {tech}
                     </span>
