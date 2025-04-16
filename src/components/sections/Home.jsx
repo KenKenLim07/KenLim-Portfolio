@@ -15,7 +15,8 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
             Hi, I'm Jose Marie Lim
           </h1>
 
-          <p className="text-gray-300 text-lg mb-8">
+          <p className="p-8 rounded-xl border-2 border-white/20 hover:border-cyan-500 hover:-translate-y-1 transition-all">
+
             A driven tech enthusiast with a strong focus on coding,
             cybersecurity, operating system development, and web app
             development. Currently pursuing a Computer Science degree, I'm
@@ -24,11 +25,12 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
             problems, optimizing systems, and building secure and efficient
             applications. Constantly pushing myself to innovate, learn, and
             grow.
+
           </p>
         </RevealOnScroll>
 
         <RevealOnScroll>
-          <div className="flex justify-center space-x-4">
+          <div className="flex justify-center space-x-2 text-xs scale-80">
             <a
               href="#projects"
               className="bg-transparent text-white border-2 border-cyan-500 py-3 px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300 hover:bg-cyan-500/20 hover:shadow-lg rounded-4xl text-sm"
@@ -44,7 +46,7 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
             
             <a
             href="https://drive.google.com/file/d/14YnWNfobuUFlAlLK7O4cdCA5Sa9OZ-qU/view?usp=sharing/JOSE MARIE LIM.pdf"
-               className="bg-transparent text-white border-2 border-yellow-400 py-3 px-6 rounded font-medium transition-all duration-300 hover:translate-y-1 hover:border-yellow-300 hover:bg-yellow-300/20 hover:shadow-lg rounded-4xl text-sm"
+               className="bg-transparent text-white border-2 border-yellow-400 py-3 px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-yellow-300 hover:bg-yellow-300/20 hover:shadow-lg rounded-4xl text-sm"
             >
               Download CV
             </a>
