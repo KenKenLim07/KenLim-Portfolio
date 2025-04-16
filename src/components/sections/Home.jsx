@@ -6,7 +6,7 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
       id="home"
       className="min-h-screen flex items-center justify-center py-20 bg-gradient-to-r from-black to-gray-800"
     >
-      <div className="text-center z-10 px-4 max-w-xl mx-auto">
+      <div className="text-center z-10 px-8 max-w-xl mx-auto">
         <RevealOnScroll>
           <h1
             className={`text-4xl font-bold mb-3 text-white leading-tight transition-all duration-300 ease-in-out
@@ -15,7 +15,7 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
             Hi, I'm Jose Marie Lim
           </h1>
 
-          <p className="p-8 rounded-xl border-2 border-white/20 hover:border-yellow-500 hover:-translate-y-1 transition-all">
+          <p className="p-12 rounded-xl border-2 border-white/20 hover:border-yellow-500 hover:-translate-y-1 transition-all">
 
             A driven tech enthusiast with a strong focus on coding,
             cybersecurity, operating system development, and web app
@@ -30,23 +30,23 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
         </RevealOnScroll>
 
         <RevealOnScroll>
-          <div className="flex justify-center space-x-3 text-sm scale-75">
+          <div className=" justify-center space-x-2 text-sm scale-80 mt-5 ">
             <a
               href="#projects"
-              className="whitespace-nowrap bg-transparent text-white border-2 border-yellow-400 py-6 px-6 sm:px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-yellow-300 hover:bg-yellow-300/20 hover:shadow-lg rounded-4xl text-sm"
+              className="whitespace-nowrap bg-transparent text-white border-2 border-yellow-400 py-3 px-6 sm:px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-yellow-300 hover:bg-yellow-300/20 hover:shadow-lg rounded-4xl text-sm"
               >
               View Projects
             </a>
             <a
               href="#contact"
-              className="whitespace-nowrap bg-transparent text-white border-2 border-cyan-400 py-6 px-6 sm:px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300 hover:bg-cyan-300/20 hover:shadow-lg rounded-4xl text-sm"
+              className="whitespace-nowrap bg-transparent text-white border-2 border-cyan-400 py-3 px-6 sm:px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300 hover:bg-cyan-300/20 hover:shadow-lg rounded-4xl text-sm"
               >
               Contact Me
             </a>
             
             <a
             href="https://drive.google.com/file/d/14YnWNfobuUFlAlLK7O4cdCA5Sa9OZ-qU/view?usp=sharing/JOSE MARIE LIM.pdf"
-               className="whitespace-nowrap bg-transparent text-white border-2 border-pink-400 py-6 px-6 sm:px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-pink-300 hover:bg-pink-300/20 hover:shadow-lg rounded-4xl text-sm"
+               className="whitespace-nowrap bg-transparent text-white border-2 border-pink-400 py-3 px-6 sm:px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-pink-300 hover:bg-pink-300/20 hover:shadow-lg rounded-4xl text-sm "
             >
               Download CV
             </a>
