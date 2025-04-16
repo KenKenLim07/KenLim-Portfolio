@@ -15,7 +15,7 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
             Hi, I'm Jose Marie Lim
           </h1>
 
-          <p className="rounded-xl p-8 border-2 border-white/20 hover:border-cyan-500 hover:-translate-y-1 transition-all mb-8 text-center bg-white-500/10 backdrop-blur-md text-sm sm:text-base">
+          <p className="rounded-xl p-10 overflow-hidden border-2 border-white/20 hover:border-cyan-500 hover:-translate-y-1 transition-all mb-8 text-center bg-white-500/10 backdrop-blur-md text-sm sm:text-base">
 
             A driven tech enthusiast with a strong focus on coding,
             cybersecurity, operating system development, and web app
