@@ -9,7 +9,7 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
       <div className="text-center z-10 px-4 max-w-xl mx-auto">
         <RevealOnScroll>
           <h1
-            className={`font-bold mb-3 text-white leading-tight transition-all duration-300 ease-in-out text-2xl ${
+            className={`font-bold mb-3 text-white leading-tight transition-all duration-300 ease-in-out text-1xl ${
               showTypewriter ? "typewriter" : ""
             }`}
           >
@@ -29,7 +29,7 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
         </RevealOnScroll>
 
         <RevealOnScroll>
-          <div className="flex flex-wrap justify-center space-x-2 text-sm mt-4">
+          <div className="flex flex-wrap justify-center space-x-3 text-sm mt-4">
             <a
               href="#projects"
               className="whitespace-nowrap bg-transparent text-white border-3 border-yellow-400 py-2 px-5 rounded-4xl font-medium transition-all duration-300 hover:-translate-y-1 hover:border-yellow-300 hover:bg-yellow-300/20 hover:shadow-lg"
