@@ -30,23 +30,23 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
         </RevealOnScroll>
 
         <RevealOnScroll>
-          <div className="flex justify-center space-x-3 text-sm scale-65">
+          <div className="flex justify-center space-x-3 text-sm scale-75">
             <a
               href="#projects"
-              className="whitespace-nowrap bg-transparent text-white border-2 border-cyan-500 py-3 px-4 sm:px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300 hover:bg-cyan-500/20 hover:shadow-lg rounded-4xl text-2xl"
-            >
+              className="whitespace-nowrap bg-transparent text-white border-2 border-yellow-400 py-6 px-6 sm:px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-yellow-300 hover:bg-yellow-300/20 hover:shadow-lg rounded-4xl text-sm"
+              >
               View Projects
             </a>
             <a
               href="#contact"
-              className="whitespace-nowrap bg-transparent text-white border-2 border-pink-400 py-3 px-4 sm:px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-pink-300 hover:bg-yellow-400/20 hover:shadow-lg rounded-4xl text-2xl"
-            >
+              className="whitespace-nowrap bg-transparent text-white border-2 border-cyan-400 py-6 px-6 sm:px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300 hover:bg-cyan-300/20 hover:shadow-lg rounded-4xl text-sm"
+              >
               Contact Me
             </a>
             
             <a
             href="https://drive.google.com/file/d/14YnWNfobuUFlAlLK7O4cdCA5Sa9OZ-qU/view?usp=sharing/JOSE MARIE LIM.pdf"
-               className="whitespace-nowrap bg-transparent text-white border-2 border-yellow-400 py-3 px-4 sm:px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-yellow-300 hover:bg-yellow-300/20 hover:shadow-lg rounded-4xl text-2xl"
+               className="whitespace-nowrap bg-transparent text-white border-2 border-pink-400 py-6 px-6 sm:px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-pink-300 hover:bg-pink-300/20 hover:shadow-lg rounded-4xl text-sm"
             >
               Download CV
             </a>
