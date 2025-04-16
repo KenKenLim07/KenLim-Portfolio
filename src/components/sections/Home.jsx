@@ -9,13 +9,13 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
       <div className="text-center z-10 px-8 max-w-xl mx-auto">
         <RevealOnScroll>
           <h1
-            className={`text-4xl font-bold mb-3 text-white leading-tight transition-all duration-300 ease-in-out
+            className={`text-center font-bold mb-3 text-white leading-tight transition-all duration-300 ease-in-out
               ${showTypewriter ? "typewriter" : ""}`}
           >
             Hi, I'm Jose Marie Lim
           </h1>
 
-          <p className="rounded-xl p-8 border-2 border-white/20 hover:border-cyan-500 hover:-translate-y-1 transition-all mb-8 text-center bg-white-500/10 backdrop-blur-md">
+          <p className="rounded-xl p-8 border-2 border-white/20 hover:border-cyan-500 hover:-translate-y-1 transition-all mb-8 text-center bg-white-500/10 backdrop-blur-md text-sm sm:text-base">
 
             A driven tech enthusiast with a strong focus on coding,
             cybersecurity, operating system development, and web app
