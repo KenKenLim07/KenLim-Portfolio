@@ -111,13 +111,13 @@ body {
   }
   to {
     opacity: 1;
-    transform: translateY(-3px);
+    transform: translateY(1px);
   }
 }
 
 /* Class to trigger the slideDown animation */
 .animate-slideDown {
-  animation: slideDown .2s ease-in forwards;
+  animation: slideDown .3s ease-in forwards;
 }
 
 @keyframes fadeSlideUp {

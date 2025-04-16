@@ -15,7 +15,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
         {/* Signature Branding */}
         <a
           href="#home"
-          className="text-2xl tracking-wide select-none flex space-x-1"
+          className="text-1xl tracking-wide select-none flex space-x-0"
         >
           <span
             key={animationKey + "-ken"}
@@ -56,6 +56,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
 
         {/* Mobile Burger Icon */}
         <div 
+        
           className="md:hidden flex flex-col justify-center items-end w-8 h-6 gap-[5px] cursor-pointer z-50"
           onClick={() => setMenuOpen(prev => !prev)}
         >
