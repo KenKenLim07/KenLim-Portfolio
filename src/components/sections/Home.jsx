@@ -15,7 +15,7 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
             Hi, I'm Jose Marie Lim
           </h1>
 
-          <p className="p-8 rounded-xl border-2 border-white/20 hover:border-cyan-500 hover:-translate-y-1 transition-all">
+          <p className="p-8 rounded-xl border-2 border-white/20 hover:border-yellow-500 hover:-translate-y-1 transition-all">
 
             A driven tech enthusiast with a strong focus on coding,
             cybersecurity, operating system development, and web app
@@ -30,7 +30,7 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
         </RevealOnScroll>
 
         <RevealOnScroll>
-          <div className="flex justify-center space-x-2 text-xs scale-80">
+          <div className="flex justify-center space-x-2 text-xs scale-65">
             <a
               href="#projects"
               className="bg-transparent text-white border-2 border-cyan-500 py-3 px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300 hover:bg-cyan-500/20 hover:shadow-lg rounded-4xl text-sm"

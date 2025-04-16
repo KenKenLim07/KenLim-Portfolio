@@ -20,7 +20,7 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
         key={i}
         href={`#${section}`}
         onClick={() => setMenuOpen(false)}
-        className={`text-xl font-medium text-white my-4 !bg-transparent
+        className={`text-base sm:text-sm md:text-base font-medium text-white my-4 !bg-transparent
         transform transition-all duration-300 ease-in-out
         opacity-0 
         ${menuOpen ? `opacity-100 animate-slideDown delay-${i * 100}` : ""} 
