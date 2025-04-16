@@ -30,7 +30,7 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
         </RevealOnScroll>
 
         <RevealOnScroll>
-          <div className="flex justify-center space-x-5 text-xs scale-65">
+          <div className="flex justify-center space-x-2 text-xs scale-65">
             <a
               href="#projects"
               className="whitespace-nowrap bg-transparent text-white border-2 border-cyan-500 py-3 px-4 sm:px-6 rounded font-medium transition-all duration-300 hover:-translate-y-1 hover:border-cyan-300 hover:bg-cyan-500/20 hover:shadow-lg rounded-4xl text-sm"
