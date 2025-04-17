@@ -117,7 +117,7 @@ body {
 
 /* Class to trigger the slideDown animation */
 .animate-slideDown {
-  animation: slideDown .3s ease-in forwards;
+  animation: slideDown .5s ease-in forwards;
 }
 
 @keyframes fadeSlideUp {
@@ -148,6 +148,7 @@ body {
 .animate-slideInLeft {
   animation: slideInLeft 0.7s ease-out backwards;
 }
+
 
 
 }
