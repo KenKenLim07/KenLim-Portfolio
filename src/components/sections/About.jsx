@@ -99,7 +99,8 @@ export const About = () => {
                 <li>
                   <strong>B.S. in Computer Science</strong> - GUIMARAS University (2022-2026)
                 </li>
-                <li>Relevant Coursework: Data Structures, Web Development, Cyber Security.</li>
+                <li>
+                  <strong>Relevant Coursework :</strong> Data Mining, Data Structures, Web Development, Cyber Security.</li>
               </ul>
             </div>
 
