@@ -16,7 +16,7 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein,showMotion }) => {
     className="font-bold mb-3 text-white leading-tight text-2xl"
   >
     <span className="text-xl opacity-50">Hi, I'm </span>
-    <span className="text-5xl">Jose Marie Lim</span>
+    <span className="text-6xl">Jose Marie Lim</span>
   </motion.h1>
 )}
 
