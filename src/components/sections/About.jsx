@@ -1,5 +1,5 @@
 import { RevealOnScroll } from "../RevealOnScroll";
-
+import { zoomIn } from "../../animations/motionVariants";
 export const About = () => {
   const frontendSkills = ["React", "Vue", "TypeScript", "TailwindCSS", "Svelte"];
   const backendSkills = ["Firebase", "Node.js", "Python", "C++", "Java", "REST APIs"];
@@ -39,13 +39,12 @@ export const About = () => {
 
   return (
     <section id="about" className="min-h-screen flex items-center justify-center py-20 bg-gradient-to-r from-black to-gray-800">
-      <RevealOnScroll>
-        <div className="max-w-3xl mx-auto px-4">
+<RevealOnScroll variants={zoomIn}>
+<div className="max-w-3xl mx-auto px-4">
           {/* Section Title */}
           <h2 className="text-3xl font-bold mb-8 text-white text-center leading-tight transition-all duration-300 ease-in-out">
             About Me
           </h2>
-
           {/* Summary */}
           <div className="rounded-xl p-8 border-2 border-white/20 hover:border-cyan-500 hover:-translate-y-1 transition-all mb-8 text-center bg-white-500/10 backdrop-blur-md">
             <p className="text-gray-300 mb-6">

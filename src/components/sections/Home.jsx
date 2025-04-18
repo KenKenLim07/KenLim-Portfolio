@@ -15,15 +15,25 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein,showMotion }) => {
     transition={{ duration: 0.8, ease: "easeOut" }}
     className="font-bold mb-3 text-white leading-tight text-2xl"
   >
-    <span className="text-xl opacity-50">Hi, I'm </span>
+    <span className="text-1xl opacity-50">Hi, I'm </span>
     <span className="text-6xl">Jose Marie Lim</span>
   </motion.h1>
 )}
-
-
-          <p className="rounded-4xl p-4 border-4 border-white/70 hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)] transition-all mb-4 text-center">
-            Driven tech enthusiast pursuing a Computer Science degree with a focus on coding, cybersecurity, OS development, and web apps. Passionate about solving complex problems, building secure systems, and constantly pushing boundaries to innovate and grow.
-          </p>
+<RevealOnScroll
+  start={showMotion}
+  variants={{
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  }}
+>
+  <p className="rounded-4xl p-4 border-4 border-white/70 hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)] transition-all mb-4 text-center">
+    Driven tech enthusiast pursuing a Computer Science degree with a focus on coding, cybersecurity, OS development, and web apps. Passionate about solving complex problems, building secure systems, and constantly pushing boundaries to innovate and grow.
+  </p>
+</RevealOnScroll>
 
         
 
