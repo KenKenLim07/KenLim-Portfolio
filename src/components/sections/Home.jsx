@@ -1,30 +1,33 @@
+import { motion } from "framer-motion";
 import { RevealOnScroll } from "../RevealOnScroll";
 
-export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
+export const Home = ({ showTypewriter, showFadeUp, showfadein,showMotion }) => {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-r from-black to-gray-800 overflow-hidden"
+      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-black to-gray-800 overflow-hidden"
     >
       <div className="text-center z-10 px-4 max-w-xl mx-auto">
-        <RevealOnScroll>
-        <h1
-  className={`font-bold mb-3 text-white leading-tight transition-all duration-300 ease-in-out text-2xl ${
-    showTypewriter ? "typewriter" : ""
-  }`}
->
-  <span className="text-xl opacity-50">Hi, I'm </span>
-  
-  <span className="text-4xl ">Jose Marie Lim</span>
-</h1>
+      {showMotion && (
+  <motion.h1
+    initial={{ opacity: 0, y: -50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+    className="font-bold mb-3 text-white leading-tight text-2xl"
+  >
+    <span className="text-xl opacity-50">Hi, I'm </span>
+    <span className="text-6xl">Jose Marie Lim</span>
+  </motion.h1>
+)}
 
 
-          <p className="rounded-xl p-4 border- border-white/20 hover:border-cyan-500 hover:-translate-y-1 transition-all mb-8 text-center" >
-          Driven tech enthusiast pursuing a Computer Science degree with a focus on coding, cybersecurity, OS development, and web apps. Passionate about solving complex problems, building secure systems, and constantly pushing boundaries to innovate and grow.
+        <RevealOnScroll start={showTypewriter}>
+          <p className="rounded-4xl p-4 border-4 border-white/70 hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(255,255,255,0.1)] transition-all mb-4 text-center">
+            Driven tech enthusiast pursuing a Computer Science degree with a focus on coding, cybersecurity, OS development, and web apps. Passionate about solving complex problems, building secure systems, and constantly pushing boundaries to innovate and grow.
           </p>
         </RevealOnScroll>
 
-        <RevealOnScroll>
+        <RevealOnScroll start={showTypewriter}>
           <div className="flex flex-wrap justify-center space-x-2 text-sm mt-4 gap-3">
             <a
               href="#projects"
@@ -50,6 +53,11 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein }) => {
             </a>
           </div>
         </RevealOnScroll>
+
+        
+        
+        
+        
       </div>
     </section>
   );

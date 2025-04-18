@@ -15,6 +15,7 @@ function App() {
   const [showTypewriter, setShowTypewriter] = useState(false);
   const [showFadeUp, setShowFadeUp] = useState(false);
   const [showfadein, setShowfadein] = useState(false);
+  const [showMotion, setMotion] = useState(false);
   useEffect(() => {
     if (isLoaded) {
       const timer = setTimeout(() => {
@@ -25,6 +26,10 @@ function App() {
         setShowFadeUp(true);
       }, 500); // Start fade-up after typewriter finishes
   
+      const motionTimer = setTimeout(() => {
+        setMotion(true);
+      }, 100);
+
       const fadeInTimer = setTimeout(() => {
         setShowfadein(true);
       }, 100); // Fade-in comes last after all animations
@@ -33,6 +38,7 @@ function App() {
         clearTimeout(timer);
         clearTimeout(fadeUpTimer);
         clearTimeout(fadeInTimer);
+        clearTimeout(motionTimer);
       };
     }
   }, [isLoaded]);
@@ -57,6 +63,7 @@ function App() {
           showTypewriter={showTypewriter} 
           showFadeUp={showFadeUp} 
            showfadein={showfadein} 
+           showMotion ={showMotion}
         />
         
         <About />

@@ -1,35 +1,39 @@
-import { useEffect, useRef, useState } from "react";
+// RevealOnScroll.jsx
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { useInView } from "framer-motion";
 
-export const RevealOnScroll = ({ children, animationClass = "translate-y-8" }) => {
+export const RevealOnScroll = ({
+  children,
+  animationClass = "",
+  duration = 0.7,
+  delay = 0.1,
+  yOffset = 32,
+  start = true, // NEW PROP
+}) => {
   const ref = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -50px 0px" });
+  const controls = useAnimation();
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && ref.current) {
-          setIsVisible(true);
-          observer.unobserve(ref.current); // only run once
-        }
-      },
-      {
-        threshold: 0.2,
-        rootMargin: "0px 0px -50px 0px",
-      }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
+    if (isInView && start) {
+      controls.start("visible");
+    }
+  }, [isInView, start, controls]);
 
   return (
-    <div
+    <motion.div
       ref={ref}
-      className={`opacity-0 transition-all duration-700 ease-out transform ${
-        isVisible ? `opacity-100 ${animationClass}` : ""
-      }`}
+      initial="hidden"
+      animate={controls}
+      transition={{ duration, delay, ease: "easeOut" }}
+      variants={{
+        hidden: { opacity: 0, y: yOffset },
+        visible: { opacity: 1, y: 0 },
+      }}
+      className={`${animationClass}`}
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
