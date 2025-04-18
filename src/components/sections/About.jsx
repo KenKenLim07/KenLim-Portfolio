@@ -46,7 +46,7 @@ export const About = () => {
             About Me
           </h2>
           {/* Summary */}
-          <div className="rounded-xl p-8 border-2 border-white/20 hover:border-cyan-500 hover:-translate-y-1 transition-all mb-8 text-center bg-white-500/10 backdrop-blur-md">
+          <div className="rounded-4xl p-4 border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all mb-8 text-center bg-white-500/10 backdrop-blur-md">
             <p className="text-gray-300 mb-6">
               I’m someone who thrives on challenges because I believe they drive growth. With a strong passion for
               cybersecurity and web development, I focus on creating innovative, secure, and scalable solutions. I’m driven
@@ -92,7 +92,7 @@ export const About = () => {
           {/* Education & Experience */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Education */}
-            <div className="p-6 rounded-xl border-2 border-white/20 hover:border-cyan-500 hover:-translate-y-1 transition-all">
+            <div className="p-4 rounded-4xl border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all">
               <h3 className="text-xl font-bold mb-4 text-white">🏫 Education</h3>
               <ul className="list-disc list-inside text-gray-300 space-y-2">
                 <li>
@@ -104,7 +104,7 @@ export const About = () => {
             </div>
 
             {/* Work Experience */}
-            <div className="p-6 rounded-xl border-2 border-white/20 hover:border-cyan-500 hover:-translate-y-1 transition-all">
+            <div className="p-4 rounded-4xl border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all">
               <h3 className="text-xl font-bold mb-4 text-white">💼 Work Experience</h3>
               <div className="space-y-4 text-gray-300">
                 {workExperience.map((experience, index) => (
