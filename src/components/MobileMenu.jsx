@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { motion } from "framer-motion";
+import { popIn, slideFromRight } from "../animations/motionVariants"; // Assuming you have this variant set up
 
 export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
   // Lock scroll when menu is open
@@ -7,35 +9,40 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
   }, [menuOpen]);
 
   return (
-    <div
-      className={`fixed top-14.5 right-0 w-[15rem] h-[20rem] z-40 rounded-4xl
-      bg-[rgba(10,10,10,0.8)] backdrop-blur-lg border-2 border-white/20 hover:border-yellow-500
-      flex flex-col items-center justify-center
-      transform transition-all duration-300 ease-in-out
-      ${menuOpen ? "opacity-100 translate-x-0 pointer-events-auto visible" : "opacity-0 translate-x-full pointer-events-none invisible"}`}
+    <motion.div
+      variants={popIn} // Apply popIn animation for the menu container
+      initial="hidden"
+      animate={menuOpen ? "visible" : "hidden"}
+      transition={{ type: "tween", duration: 0.4 }} // Smooth transition for the popIn effect
+      className={`
+        fixed top-14.5 right-0 w-[15rem] h-[20rem] z-40 rounded-4xl
+        bg-[rgba(10,10,10,0.8)] backdrop-blur-lg border-4 border-white/70 hover:border-yellow-500
+        flex flex-col items-center justify-center
+        pointer-events-${menuOpen ? "auto" : "none"} 
+      `}
     >
       {["home", "about", "projects", "contact"].map((section, i) => (
-        <a
-          key={i}
+        <motion.a
+          key={menuOpen ? `open-${i}` : `closed-${i}`} // Unique key based on menuOpen state
           href={`#${section}`}
           onClick={() => setMenuOpen(false)}
-          className={`
-            text-base sm:text-xs md:text-base font-small text-white my-2 !bg-transparent
-            px-8 py-2 border border-cyan-600 rounded-2xl
-            transform transition-all duration-300 ease-in-out
-            hover:text-cyan-300 hover:tracking-wider hover:border-cyan-300s 
-            ${menuOpen ? "animate-slideDown" : ""}
-          `}
-          style={{
-            animationDelay: `${i * 50}ms`,
-            animationFillMode: "forwards",
-            opacity: 0, // Let animation reveal it
+          variants={{
+            hidden: { opacity: 0, y: 50 },  // Start position (offscreen)
+            visible: { opacity: 1, y: 0 },  // End position (onscreen)
           }}
+          initial="hidden"
+          animate={menuOpen ? "visible" : "hidden"}
+          transition={{
+            delay: 0.4 + i * 0.2, // Delay the pill animation further after popIn
+            duration: 0.3,
+          }}
+          className="text-base sm:text-xs md:text-base font-small text-white my-2 !bg-transparent
+            px-8 py-2 border border-cyan-600 rounded-2xl
+            hover:text-cyan-300 hover:tracking-wider hover:border-cyan-300"
         >
           {section.charAt(0).toUpperCase() + section.slice(1)}
-        </a>
+        </motion.a>
       ))}
-    </div>
+    </motion.div>
   );
 };
-

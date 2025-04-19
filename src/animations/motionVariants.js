@@ -15,5 +15,46 @@ export const fadeUp = {
     visible: { opacity: 1, x: 0 },
   };
   
-  // Add more variants as needed...
+  export const slideFromRight = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { opacity: 1, x: 0 },
+  };
+  
+  export const slideFromBottom = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0 },
+  };
+  
+  export const popIn = {
+    hidden: { opacity: 0, scale: 0.5 },
+    visible: { opacity: 1, scale: 1 },
+  };
+  
+  export const rotateFade = {
+    hidden: { opacity: 0, rotate: -15 },
+    visible: { opacity: 1, rotate: 0 },
+  };
+  
+  // Great for cards
+  export const cardFlip = {
+    hidden: {
+      rotateY: 180,
+      opacity: 0,
+    },
+    visible: {
+      rotateY: 0,
+      opacity: 1,
+      transition: { duration: 0.6 },
+    },
+  };
+  
+  // Great for a staggered parent
+  export const staggerContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
   
