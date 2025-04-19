@@ -102,7 +102,7 @@ export const About = () => {
         {/* Education & Experience */}
 
         <RevealOnScroll variants={zoomIn}>
-  <div className="p-4 rounded-4xl border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all">
+  <div className="p-4 rounded-4xl border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all -mt-4">
     <h3 className="text-xl font-bold mb-4 text-white">🏫 Education</h3>
     <ul className="list-disc list-inside text-gray-300 space-y-2">
       <li>
@@ -116,7 +116,7 @@ export const About = () => {
 </RevealOnScroll>
 
 <RevealOnScroll variants={zoomIn}>
-  <div className="p-4 rounded-4xl border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all">
+  <div className="p-4 rounded-4xl border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all mt-4">
     <h3 className="text-xl font-bold mb-4 text-white">💼 Work Experience</h3>
     <div className="space-y-4 text-gray-300">
       {workExperience.map((experience, index) => (
