@@ -1,5 +1,6 @@
 import { RevealOnScroll } from "../RevealOnScroll";
 import { zoomIn } from "../../animations/motionVariants";
+
 export const About = () => {
   const frontendSkills = ["React", "Vue", "TypeScript", "TailwindCSS", "Svelte"];
   const backendSkills = ["Firebase", "Node.js", "Python", "C++", "Java", "REST APIs"];
@@ -38,14 +39,22 @@ export const About = () => {
   ];
 
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center py-20 bg-gradient-to-r from-black to-gray-800">
-<RevealOnScroll variants={zoomIn}>
-<div className="max-w-3xl mx-auto px-4">
-          {/* Section Title */}
-          <h2 className="text-3xl font-bold mb-8 text-white text-center leading-tight transition-all duration-300 ease-in-out">
-            About Me
-          </h2>
-          {/* Summary */}
+    <section
+      id="about"
+      className="min-h-screen flex items-center justify-center py-20 bg-gradient-to-r from-black to-gray-800"
+    >
+      
+      <div className="max-w-3xl mx-auto px-4">
+      <RevealOnScroll variants={zoomIn}>
+
+        {/* Section Title */}
+        <h2 className="text-3xl font-bold mb-8 text-white text-center leading-tight transition-all duration-300 ease-in-out">
+          About Me
+        </h2>
+        </RevealOnScroll>
+
+        {/* About & Skills */}
+        <RevealOnScroll variants={zoomIn}>
           <div className="rounded-4xl p-4 border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all mb-8 text-center bg-white-500/10 backdrop-blur-md">
             <p className="text-gray-300 mb-6">
               I’m someone who thrives on challenges because I believe they drive growth. With a strong passion for
@@ -88,40 +97,45 @@ export const About = () => {
               </div>
             </div>
           </div>
+        </RevealOnScroll>
 
-          {/* Education & Experience */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Education */}
-            <div className="p-4 rounded-4xl border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all">
-              <h3 className="text-xl font-bold mb-4 text-white">🏫 Education</h3>
-              <ul className="list-disc list-inside text-gray-300 space-y-2">
-                <li>
-                  <strong>B.S. in Computer Science</strong> - GUIMARAS University (2022-2026)
-                </li>
-                <li>
-                  <strong>Relevant Coursework :</strong> Data Mining, Data Structures, Web Development, Cyber Security.</li>
-              </ul>
-            </div>
+        {/* Education & Experience */}
 
-            {/* Work Experience */}
-            <div className="p-4 rounded-4xl border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all">
-              <h3 className="text-xl font-bold mb-4 text-white">💼 Work Experience</h3>
-              <div className="space-y-4 text-gray-300">
-                {workExperience.map((experience, index) => (
-                  <div key={index}>
-                    <h4 className="font-semibold text-white">{experience.position} – {experience.company} ({experience.year})</h4>
-                    <ul className="list-disc list-inside space-y-1">
-                      {experience.responsibilities.map((task, i) => (
-                        <li key={i}>{task}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+        <RevealOnScroll variants={zoomIn}>
+  <div className="p-4 rounded-4xl border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all">
+    <h3 className="text-xl font-bold mb-4 text-white">🏫 Education</h3>
+    <ul className="list-disc list-inside text-gray-300 space-y-2">
+      <li>
+        <strong>B.S. in Computer Science</strong> - GUIMARAS University (2022–2026)
+      </li>
+      <li>
+        <strong>Relevant Coursework:</strong> Data Mining, Data Structures, Web Development, Cyber Security.
+      </li>
+    </ul>
+  </div>
+</RevealOnScroll>
+
+<RevealOnScroll variants={zoomIn}>
+  <div className="p-4 rounded-4xl border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all">
+    <h3 className="text-xl font-bold mb-4 text-white">💼 Work Experience</h3>
+    <div className="space-y-4 text-gray-300">
+      {workExperience.map((experience, index) => (
+        <div key={index}>
+          <h4 className="font-semibold text-white">
+            {experience.position} – {experience.company} ({experience.year})
+          </h4>
+          <ul className="list-disc list-inside space-y-1">
+            {experience.responsibilities.map((task, i) => (
+              <li key={i}>{task}</li>
+            ))}
+          </ul>
         </div>
-      </RevealOnScroll>
+      ))}
+    </div>
+  </div>
+</RevealOnScroll>
+
+      </div>
     </section>
   );
 };
