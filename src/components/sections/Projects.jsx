@@ -55,11 +55,11 @@ export const Projects = () => {
           <div className="p-4 rounded-4xl border-4 border-white/70 hover:border-cyan-500/30 hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)] transition-all bg-white-500/10 backdrop-blur-md mt-4">
             <h3 className="text-xl font-bold mb-2 text-white">🔎📦 Lost & Found Web App</h3>
             <p className="text-gray-300 mb-4 text-sm leading-relaxed">
-              A campus-focused platform that makes it easy for students to report lost belongings or share items they've found. By posting descriptions and item statuses, users help reconnect lost items with their rightful owners, fostering a more responsible and supportive school community.
+              A campus-focused platform that makes it easy for students to report lost belongings or share items they've found. By posting picturs, descriptions and item statuses, users help reconnect lost items with their rightful owners, fostering a more responsible and supportive school community.
             </p>
 
             <div className="flex flex-wrap gap-2 mb-4">
-              {["Firebase", "React", "Node.js", "TailwindCSS", "Vite"].map((tech, key) => (
+              {["Supabase", "React", "JavaScript", "TailwindCSS", "Vite"].map((tech, key) => (
                 <span
                   key={key}
                   className="bg-blue-cyan/10 text-white border-2 border-cyan-500 py-1 px-3 rounded-full text-sm hover:bg-cyan-500 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all"
@@ -69,14 +69,19 @@ export const Projects = () => {
               ))}
             </div>
 
-            <div className="flex justify-between items-center">
+            <div className="flex  items-center gap-x-4 mt-2">
               <a
-                href="#"
-                className="inline-block mt-2 text-cyan-400 hover:underline text-sm"
+                href="https://kenkenlim07.github.io/lost-and-found/#"
+                className="inline-block mt-2 text-cyan-400 underline text-sm"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                View Project (Coming Soon)
+                👉View Project
+              </a>
+              <a href="https://github.com/kenkenlim07/lost-and-found" 
+              className="inline-block mt-2 text-cyan-400 underline text-sm"
+              >
+               👉View GitHub Repo
               </a>
             </div>
           </div>
