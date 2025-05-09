@@ -33,8 +33,8 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
           initial="hidden"
           animate={menuOpen ? "visible" : "hidden"}
           transition={{
-            delay: 0.4 + i * 0.2, // Delay the pill animation further after popIn
-            duration: 0.3,
+            delay: 0.4 + i * 0.1, // Delay the pill animation further after popIn
+            duration: 0.4,
           }}
           className="text-base sm:text-xs md:text-base font-small text-white my-2 !bg-transparent
             px-8 py-2 border border-cyan-600 rounded-2xl
