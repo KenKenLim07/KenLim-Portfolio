@@ -59,7 +59,7 @@ export const Home = ({ showTypewriter, showFadeUp, showfadein,showMotion }) => {
     </a>
 
     <a
-      href="https://drive.google.com/file/d/14YnWNfobuUFlAlLK7O4cdCA5Sa9OZ-qU/view?usp=sharing"
+      href="https://drive.google.com/file/d/1Om-3H7yRrYMFV68aSDm7YGeccWEHH-Ko/view?usp=drive_link"
       target="_blank"
       rel="noopener noreferrer"
       className="whitespace-nowrap bg-transparent text-white border-2 border-pink-400 py-2 px-5 rounded-2xl font-medium transition-all duration-300 hover:-translate-y-1 hover:border-pink-300 hover:bg-pink-300/20 hover:shadow-lg"
