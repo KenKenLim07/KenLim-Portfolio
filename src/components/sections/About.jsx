@@ -2,8 +2,8 @@ import { RevealOnScroll } from "../RevealOnScroll";
 import { zoomIn } from "../../animations/motionVariants";
 
 export const About = () => {
-  const frontendSkills = ["React", "Vue", "TypeScript", "TailwindCSS", "Svelte"];
-  const backendSkills = ["Firebase", "Node.js", "Python", "C++", "Java", "REST APIs"];
+  const frontendSkills = ["React", "Vue", "Vite", "TailwindCSS", "Frammer Motion"];
+  const backendSkills = ["Supabase", "Javascript", "Python", "C++", "Java", "Firebase"];
 
   const workExperience = [
     {
