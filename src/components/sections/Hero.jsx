@@ -3,31 +3,22 @@ import { motion } from 'framer-motion';
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6, ease: "easeInOut" }
+  transition: { duration: 0.6 }
 };
 
 const staggerContainer = {
   animate: {
     transition: {
-      staggerChildren: 0.25
+      staggerChildren: 0.2
     }
   }
 };
 
 export const Hero = () => {
   return (
-    <section id="home" className="min-h-[90vh] flex items-center justify-center py-20 relative bg-white">
-      
-      {/* Optional subtle animated background blob */}
+    <section id="home" className="min-h-[90vh] flex items-center justify-center py-20">
       <motion.div
-        className="absolute top-10 right-10 w-72 h-72 bg-gradient-to-r from-purple-300 via-pink-300 to-red-300 rounded-full opacity-10 filter blur-3xl"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-        aria-hidden="true"
-      />
-
-      <motion.div
-        className="text-center space-y-8 max-w-3xl mx-auto px-4 z-10"
+        className="text-center space-y-8 max-w-3xl mx-auto px-4"
         variants={staggerContainer}
         initial="initial"
         animate="animate"
@@ -36,18 +27,14 @@ export const Hero = () => {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="font-extrabold mb-3 text-gray-900 leading-tight text-3xl md:text-5xl tracking-tight"
+          className="font-bold mb-3 text-gray-900 leading-tight text-2xl"
         >
-          <span className="text-xl opacity-60 tracking-wide">Hi, I'm </span>
-          <span 
-            className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 drop-shadow-md"
-          >
-            Jose Marie Lim
-          </span>
+          <span className="text-xl opacity-60">Hi, I'm </span>
+          <span className="text-4xl">Jose Marie Lim</span>
         </motion.h1>
 
         <motion.p 
-          className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-xl mx-auto"
+          className="text-lg md:text-xl text-gray-700 leading-relaxed"
           variants={fadeInUp}
         >
           I like building things that matter. Not just code, but systems that push boundaries and challenge the status quo. 
@@ -55,59 +42,47 @@ export const Hero = () => {
         </motion.p>
 
         <motion.div 
-          className="flex gap-6 justify-center"
+          className="flex gap-4 justify-center"
           variants={fadeInUp}
         >
           <motion.a
             href="#projects"
-            className="relative px-8 py-3 rounded-full bg-gradient-to-r from-purple-700 via-pink-600 to-red-500 text-white font-semibold shadow-lg shadow-pink-400/30 transition-all duration-300 overflow-hidden group flex items-center gap-2"
-            whileHover={{ scale: 1.07, boxShadow: "0 8px 15px rgba(237, 70, 140, 0.5)" }}
-            whileTap={{ scale: 0.95 }}
-          >
-            View Projects
-            <motion.svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              fill="none" viewBox="0 0 24 24" stroke="currentColor" 
-              className="w-5 h-5 stroke-white"
-              animate={{ x: [0, 6, 0] }}
-              transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </motion.svg>
-          </motion.a>
-
-          <motion.a
-            href="#contact"
-            className="px-8 py-3 rounded-full border-2 border-gray-900 text-gray-900 font-medium transition-all duration-300 relative overflow-hidden group hover:bg-gray-900 hover:text-white"
+            className="px-8 py-3 rounded-full bg-gray-900 text-white font-medium transition-all duration-300 relative overflow-hidden group"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Get in Touch
+            <span className="relative z-10">View Projects</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </motion.a>
+          <motion.a
+            href="#contact"
+            className="px-8 py-3 rounded-full border-2 border-gray-900 text-gray-900 font-medium transition-all duration-300 relative overflow-hidden group"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="relative z-10">Get in Touch</span>
           </motion.a>
         </motion.div>
 
         <motion.div 
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-gray-600 select-none"
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
           variants={fadeInUp}
         >
-          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center relative overflow-hidden">
+          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
             <motion.div
               className="w-1.5 h-3 bg-gray-400 rounded-full mt-2"
               animate={{
                 y: [0, 12, 0],
-                opacity: [1, 0.6, 1]
               }}
               transition={{
                 duration: 1.5,
                 repeat: Infinity,
                 repeatType: "loop",
-                ease: "easeInOut"
               }}
             />
           </div>
-          <span className="mt-2 text-sm font-light tracking-wide">Scroll Down</span>
         </motion.div>
       </motion.div>
     </section>
   );
-};
+}; 
