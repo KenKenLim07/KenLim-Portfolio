@@ -1,15 +1,59 @@
 import { motion } from 'framer-motion';
 
-const fadeInUp = {
+const fadeIn = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 0.5 }
+};
+
+const slideUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 }
+  transition: { duration: 0.5 }
 };
 
 const staggerContainer = {
   animate: {
     transition: {
-      staggerChildren: 0.2
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const educationItem = {
+  initial: { opacity: 0, scale: 0.95 },
+  animate: { 
+    opacity: 1, 
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15
+    }
+  }
+};
+
+const timelineDot = {
+  initial: { scale: 0 },
+  animate: { 
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 200,
+      damping: 20
+    }
+  }
+};
+
+const contentReveal = {
+  initial: { opacity: 0, y: 20 },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 20
     }
   }
 };
@@ -17,80 +61,156 @@ const staggerContainer = {
 export const About = () => {
   return (
     <section id="about" className="py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="space-y-8"
+          className="space-y-12"
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
         >
-          <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white"
-            variants={fadeInUp}
-          >
-            About Me
-          </motion.h2>
-
           <motion.div 
-            className="prose prose-lg dark:prose-invert max-w-none"
-            variants={fadeInUp}
+            variants={slideUp} 
+            className="text-center"
           >
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-            As a 3rd year Computer Science student, I've found my passion at the intersection of cybersecurity, web development, and artificial intelligence. My journey began with a simple curiosity about how things work, which quickly evolved into a deep dive into the world of technology.
-
-What drives me is the constant pursuit of growth and knowledge. Whether it's analyzing the intricacies of the Pegasus spyware or building data mining tools for Spotify, I push myself to understand the underlying principles and create meaningful solutions.
-            </p>
-            
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
-              My journey isn't just about coding — it's about pushing boundaries. While I often work independently, I believe in the power of community and knowledge sharing. I actively participate in tech discussions, contribute to open-source projects, and mentor others who are starting their journey in tech.
-            </p>
-
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-4 font-medium">
-              "I believe in building, not blending in."
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          About Me
+        </h2>
+            <p className="mt-4 text-lg text-gray-700">
+              A passionate developer focused on creating meaningful solutions
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg"
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
+            variants={slideUp}
+          >
+            <motion.div 
+              className="space-y-6"
+              variants={staggerContainer}
             >
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-                Education
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                BSc in Computer Science<br />
-                Focus: Cybersecurity & AI<br />
-                Expected Graduation: 2025
-              </p>
+              {[
+                "I'm a developer who believes in the power of technology to solve real-world problems. My journey in tech has been driven by curiosity and a desire to create solutions that make a difference.",
+                "With a strong foundation in web development and a growing interest in AI and cybersecurity, I'm constantly exploring new technologies and methodologies to enhance my skills.",
+                "When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing my knowledge with the developer community."
+              ].map((text, index) => (
+                <motion.p 
+                  key={index}
+                  className="text-gray-700 leading-relaxed"
+                  variants={fadeIn}
+                >
+                  {text}
+                </motion.p>
+              ))}
             </motion.div>
 
-           
-          </div>
+            <motion.div 
+              className="grid grid-cols-2 gap-4"
+              variants={staggerContainer}
+            >
+              {[
+                { title: "Web Development", desc: "Building responsive and user-friendly web applications" },
+                { title: "AI & ML", desc: "Exploring the frontiers of artificial intelligence" },
+                { title: "Cybersecurity", desc: "Ensuring digital safety and security" },
+                { title: "Open Source", desc: "Contributing to the global developer community" }
+              ].map((item, index) => (
+                <motion.div 
+                  key={index}
+                  className="p-6 bg-gray-50 rounded-2xl"
+                  variants={fadeIn}
+                  whileHover={{ y: -5 }}
+                >
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h3>
+                  <p className="text-gray-700">{item.desc}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
 
+          {/* Education Section */}
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12"
-            variants={fadeInUp}
+            className="mt-20 max-w-3xl mx-auto"
+            variants={slideUp}
           >
-            <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Cybersecurity</h3>
-              <p className="text-gray-700 dark:text-gray-300 mt-2">Deep dive into security systems</p>
-            </div>
-            <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Web Dev</h3>
-              <p className="text-gray-700 dark:text-gray-300 mt-2">Building modern web experiences</p>
-            </div>
-            <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">AI/ML</h3>
-              <p className="text-gray-700 dark:text-gray-300 mt-2">Exploring intelligent systems</p>
-            </div>
-            <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Calisthenics</h3>
-              <p className="text-gray-700 dark:text-gray-300 mt-2">Training mind and body</p>
+            <h3 className="text-2xl font-bold text-gray-900 mb-12 text-center">
+              Education
+            </h3>
+            
+            <div className="space-y-8">
+              {[
+                {
+                  degree: "Bachelor of Science in Computer Science",
+                  year: "2018 - 2022",
+                  school: "University of Technology",
+                  details: "First Class Honors • Software Engineering"
+                },
+                {
+                  degree: "Professional Certifications",
+                  items: [
+                    {
+                      title: "AWS Certified Developer",
+                      org: "Amazon Web Services",
+                      year: "2023"
+                    },
+                    {
+                      title: "Google Cloud Professional",
+                      org: "Google Cloud Platform",
+                      year: "2022"
+                    },
+                    {
+                      title: "Certified Ethical Hacker",
+                      org: "EC-Council",
+                      year: "2021"
+                    }
+                  ]
+                }
+              ].map((edu, index) => (
+                <motion.div 
+                  key={index}
+                  className="relative pl-8 border-l-2 border-gray-200"
+                  variants={fadeIn}
+                >
+                  <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-gray-900" />
+                  <div className="space-y-2">
+                    <h4 className="text-xl font-semibold text-gray-900">
+                      {edu.degree}
+                    </h4>
+                    {edu.year && (
+                      <p className="text-sm text-gray-500">
+                        {edu.year}
+                      </p>
+                    )}
+                    {edu.school && (
+                      <p className="text-gray-600">
+                        {edu.school}
+                      </p>
+                    )}
+                    {edu.details && (
+                      <p className="text-gray-700 mt-2">
+                        {edu.details}
+                      </p>
+                    )}
+                    {edu.items && (
+                      <div className="space-y-4 mt-4">
+                        {edu.items.map((item, idx) => (
+                          <motion.div 
+                            key={idx}
+                            className="flex items-center justify-between"
+                            variants={fadeIn}
+                            whileHover={{ x: 5 }}
+                          >
+                            <div>
+                              <p className="text-gray-900">{item.title}</p>
+                              <p className="text-sm text-gray-500">{item.org}</p>
+                            </div>
+                            <span className="text-sm text-gray-500">{item.year}</span>
+                          </motion.div>
+                  ))}
+                </div>
+                    )}
+              </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </motion.div>

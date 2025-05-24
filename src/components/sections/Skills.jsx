@@ -67,13 +67,13 @@ export const Skills = () => {
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div variants={fadeInUp} className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
               Skills & Expertise
             </h2>
-            <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">
+            <p className="mt-4 text-lg text-gray-700">
               Technologies and tools I work with
             </p>
           </motion.div>
@@ -85,26 +85,31 @@ export const Skills = () => {
             {skillCategories.map((category, index) => (
               <motion.div
                 key={index}
-                className="bg-white dark:bg-gray-700 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300"
+                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300"
                 whileHover={{ y: -5 }}
+                variants={fadeInUp}
               >
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">{category.icon}</span>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  <h3 className="text-xl font-semibold text-gray-900">
                     {category.title}
                   </h3>
                 </div>
 
                 <div className="space-y-4">
                   {category.skills.map((skill, i) => (
-                    <div key={i} className="flex justify-between items-center">
-                      <span className="text-gray-700 dark:text-gray-300">
+                    <motion.div 
+                      key={i} 
+                      className="flex justify-between items-center"
+                      variants={fadeInUp}
+                    >
+                      <span className="text-gray-700">
                         {skill.name}
                       </span>
-                      <span className="text-sm px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300">
+                      <span className="text-sm px-2 py-1 rounded-full bg-gray-100 text-gray-700">
                         {skill.level}
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>

@@ -3,12 +3,12 @@
 
 @layer base {
   :root {
-    --text-color: #000000;
+    --text-color: #1f2937;
     --bg-color: #ffffff;
   }
 
   :root[class~="dark"] {
-    --text-color: #ffffff;
+    --text-color: #000000;
     --bg-color: #1a1a1a;
   }
 }
@@ -22,21 +22,27 @@ body {
   color: var(--text-color);
 }
 
-/* Force text colors in both modes */
-.text-gray-600,
-.text-gray-700,
+/* Base text colors */
+.text-gray-600 {
+  color: #4b5563;
+}
+
+.text-gray-700 {
+  color: #374151;
+}
+
 .text-gray-900 {
-  @apply text-black dark:text-white;
+  color: #111827;
 }
 
 /* Ensure headings are visible */
 h1, h2, h3, h4, h5, h6 {
-  @apply text-black dark:text-white;
+  color: #111827;
 }
 
 /* Ensure paragraphs are visible */
 p {
-  @apply text-black dark:text-white;
+  color: #374151;
 }
 
 @layer utilities {
@@ -128,53 +134,53 @@ p {
     white-space: nowrap;
     width: 0;
     animation: typewriter 2s steps(50, end) forwards;
-    color: white;
-    font-weight: 500; /* minimalist look */
+    color: #111827;
+    font-weight: 500;
   }
 
   /* Define the slideDown animation */
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-40px);
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-}
 
-/* Class to trigger the slideDown animation */
-.animate-slideDown {
-  animation: slideDown .5s ease-in forwards;
-}
+  .animate-slideDown {
+    animation: slideDown .5s ease-in forwards;
+  }
 
-@keyframes fadeSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(50px);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(50px);
-  }
-}
-.animate-fadeSlideUp {
-  animation: fadeSlideUp 1.4s ease-out forwards;
-}
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(100px);
+  .animate-fadeSlideUp {
+    animation: fadeSlideUp 1.4s ease-out forwards;
   }
-  to {
-    opacity: 1;
-    transform: translateX(100px);
-  }
-}
 
-.animate-slideInLeft {
-  animation: slideInLeft 0.7s ease-out backwards;
-}
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(100px);
+    }
+  }
+
+  .animate-slideInLeft {
+    animation: slideInLeft 0.7s ease-out backwards;
+  }
 }

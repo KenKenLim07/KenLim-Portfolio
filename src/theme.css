@@ -1,26 +1,20 @@
 :root {
     --bg-color: #ffffff;
-    --text-color: #1f2937;
-    --muted-text: #6b7280;
-    --accent-color: #3b82f6;
-    --accent-hover: #2563eb;
+    --text-color: #000000;
+    --muted-text: #666666;
     --card-bg: #ffffff;
-    --border-color: #e5e7eb;
-    --hover-bg: #f3f4f6;
+    --border-color: #cccccc;
+    --hover-bg: #f0f0f0;
     --font-main: "Inter", sans-serif;
     --font-heading: "Poppins", sans-serif;
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
 }
 
 .dark {
-    --bg-color: #111827;
-    --text-color: #f3f4f6;
-    --muted-text: #9ca3af;
-    --accent-color: #3b82f6;
-    --accent-hover: #2563eb;
-    --card-bg: #1f2937;
-    --border-color: #374151;
-    --hover-bg: #374151;
-    --shadow-sm: 0 1px 3px rgba(255, 255, 255, 0.1);
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --muted-text: #999999;
+    --card-bg: #111111;
+    --border-color: #333333;
+    --hover-bg: #1a1a1a;
 }
