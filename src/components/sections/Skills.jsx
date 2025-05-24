@@ -1,18 +1,13 @@
 import { motion } from 'framer-motion';
+import { fadeIn, staggerContainer } from '../../animations/motionVariants';
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 }
-};
-
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-};
+const SectionWrapper = ({ children, className = "" }) => (
+  <section className={`py-8 ${className}`}>
+    <div className="max-w-3xl mx-auto px-4">
+      {children}
+    </div>
+  </section>
+);
 
 const skillCategories = [
   {
@@ -23,7 +18,10 @@ const skillCategories = [
       { name: "JavaScript", level: "Advanced" },
       { name: "Tailwind CSS", level: "Advanced" },
       { name: "Vite", level: "Intermediate" },
-      { name: "Node.js", level: "Intermediate" }
+      { name: "Node.js", level: "Intermediate" },
+      { name: "Framer Motion", level: "Advanced" },
+      { name: "Firebase", level: "Intermediate" },
+      { name: "Supabase", level: "Intermediate" }
     ]
   },
   {
@@ -60,53 +58,46 @@ const skillCategories = [
 
 export const Skills = () => {
   return (
-    <section id="skills" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="space-y-12"
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          <motion.div variants={fadeInUp} className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-              Skills & Expertise
-            </h2>
-            <p className="mt-4 text-lg text-gray-700">
-              Technologies and tools I work with
-            </p>
-          </motion.div>
+    <SectionWrapper>
+      <motion.div
+        id="skills"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-100px" }}
+        className="space-y-4"
+      >
+        <motion.div variants={fadeIn} className="border border-neutral-400 rounded-xl bg-white p-6">
+          <h2 className="text-lg font-semibold text-neutral-900 mb-2">Skills & Expertise</h2>
+          <p className="text-sm text-neutral-600 leading-relaxed mb-6">
+            Technologies and tools I work with
+          </p>
 
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-            variants={fadeInUp}
-          >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {skillCategories.map((category, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300"
-                whileHover={{ y: -5 }}
-                variants={fadeInUp}
+                variants={fadeIn}
+                className="border border-neutral-400 rounded-xl bg-white p-4"
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="text-3xl">{category.icon}</span>
-                  <h3 className="text-xl font-semibold text-gray-900">
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="text-xl">{category.icon}</span>
+                  <h3 className="text-sm font-medium text-neutral-900">
                     {category.title}
                   </h3>
                 </div>
 
-                <div className="space-y-4">
+                <div className="space-y-2">
                   {category.skills.map((skill, i) => (
                     <motion.div 
                       key={i} 
                       className="flex justify-between items-center"
-                      variants={fadeInUp}
+                      variants={fadeIn}
                     >
-                      <span className="text-gray-700">
+                      <span className="text-xs text-neutral-600">
                         {skill.name}
                       </span>
-                      <span className="text-sm px-2 py-1 rounded-full bg-gray-100 text-gray-700">
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-neutral-50 text-neutral-600">
                         {skill.level}
                       </span>
                     </motion.div>
@@ -114,9 +105,9 @@ export const Skills = () => {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </motion.div>
-      </div>
-    </section>
+      </motion.div>
+    </SectionWrapper>
   );
 }; 
