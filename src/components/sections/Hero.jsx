@@ -65,12 +65,12 @@ export const Hero = () => {
         </motion.div>
 
         <motion.div 
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center"
           variants={fadeInUp}
         >
-          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
+          <div className="w-6 h-10 border-2 border-zinc-400 rounded-full flex justify-center">
             <motion.div
-              className="w-1.5 h-3 bg-gray-400 rounded-full mt-2"
+              className="w-1.5 h-3 bg-zinc-400 rounded-full mt-2"
               animate={{
                 y: [0, 12, 0],
               }}
@@ -81,6 +81,7 @@ export const Hero = () => {
               }}
             />
           </div>
+          <span className="text-xs text-zinc-500 mt-2">Scroll Down</span>
         </motion.div>
       </motion.div>
     </section>
