@@ -1,17 +1,26 @@
 :root {
-    --bg-color: #000000; /* Main background color (black) */
-    --text-color: #f3f4f6; /* Light text color for high contrast */
-    --muted-text: #9ca3af; /* Muted gray for less prominent text */
-    --accent-color: #3b82f6; /* Accent color (blue) for interactive elements */
-    --accent-hover: #2563eb; /* Slightly darker blue for hover effects */
-    
-    --card-bg: #1a1a1a; /* Dark gray card background to stand out from black */
-    --border-color: #2d2d2d; /* Darker gray borders for soft contrast */
-    --hover-bg: #333333; /* Slightly lighter black/gray for hover effect */
-  
-    --font-main: "Inter", sans-serif; /* Main font */
-    --font-heading: "Poppins", sans-serif; /* Font for headings */
-  
-    --shadow-sm: 0 1px 3px rgba(255, 255, 255, 0.1); /* Soft white shadow for depth */
-    --transition: all 0.3s ease; /* Smooth transitions for animations */
+    --bg-color: #ffffff;
+    --text-color: #1f2937;
+    --muted-text: #6b7280;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    --card-bg: #ffffff;
+    --border-color: #e5e7eb;
+    --hover-bg: #f3f4f6;
+    --font-main: "Inter", sans-serif;
+    --font-heading: "Poppins", sans-serif;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+.dark {
+    --bg-color: #111827;
+    --text-color: #f3f4f6;
+    --muted-text: #9ca3af;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    --card-bg: #1f2937;
+    --border-color: #374151;
+    --hover-bg: #374151;
+    --shadow-sm: 0 1px 3px rgba(255, 255, 255, 0.1);
 }

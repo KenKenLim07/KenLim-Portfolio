@@ -1,140 +1,99 @@
-import { RevealOnScroll } from "../RevealOnScroll";
-import { zoomIn } from "../../animations/motionVariants";
+import { motion } from 'framer-motion';
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 }
+};
+
+const staggerContainer = {
+  animate: {
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
 
 export const About = () => {
-  const frontendSkills = ["React", "Vue", "Vite", "TailwindCSS", "Frammer Motion"];
-  const backendSkills = ["Supabase", "Javascript", "Python", "C++", "Java", "Firebase"];
-
-  const workExperience = [
-    {
-      company: "INSPIRO",
-      position: "Customer Service",
-      year: "2024",
-      responsibilities: [
-        "Handled customer inquiries via phone, email, and chat support.",
-        "Resolved technical and account-related issues efficiently.",
-        "Maintained accurate records and provided product/service information.",
-      ],
-    },
-    {
-      company: "TRANSFER IT",
-      position: "Custom Printing Associate",
-      year: "Jan 2022 – Aug 2023",
-      responsibilities: [
-        "Operated and maintained printing equipment for custom designs.",
-        "Assisted customers with product selection and order fulfillment.",
-        "Ensured quality control and timely production of orders.",
-      ],
-    },
-    {
-      company: "GOTAN'S FOOD CORP",
-      position: "Service Crew",
-      year: "Dec 2018 – Apr 2019",
-      responsibilities: [
-        "Provided customer service and assisted with order handling.",
-        "Managed transactions and maintained store cleanliness.",
-        "Helped in food preparation and quality control.",
-      ],
-    },
-  ];
-
   return (
-    <section
-      id="about"
-      className="min-h-screen flex items-center justify-center py-20 bg-gradient-to-r from-black to-gray-800"
-    >
-      
-      <div className="max-w-3xl mx-auto px-4">
-      <RevealOnScroll variants={zoomIn}>
+    <section id="about" className="py-20">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="space-y-8"
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white"
+            variants={fadeInUp}
+          >
+            About Me
+          </motion.h2>
 
-        {/* Section Title */}
-        <h2 className="text-3xl font-bold mb-8 text-white text-center leading-tight transition-all duration-300 ease-in-out">
-          About Me
-        </h2>
-        </RevealOnScroll>
+          <motion.div 
+            className="prose prose-lg dark:prose-invert max-w-none"
+            variants={fadeInUp}
+          >
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+            As a 3rd year Computer Science student, I've found my passion at the intersection of cybersecurity, web development, and artificial intelligence. My journey began with a simple curiosity about how things work, which quickly evolved into a deep dive into the world of technology.
 
-        {/* About & Skills */}
-        <RevealOnScroll variants={zoomIn}>
-          <div className="rounded-4xl p-4 border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all mb-8 text-center bg-white-500/10 backdrop-blur-md">
-            <p className="text-gray-300 mb-6">
-              I’m someone who thrives on challenges because I believe they drive growth. With a strong passion for
-              cybersecurity and web development, I focus on creating innovative, secure, and scalable solutions. I’m driven
-              by a constant desire to improve and push my limits, whether it's in coding, problem-solving, or mastering new
-              tools. My ability to connect concepts to real-world applications fuels my work, and I’m always looking to expand
-              my expertise, particularly in ethical hacking and penetration testing.
+What drives me is the constant pursuit of growth and knowledge. Whether it's analyzing the intricacies of the Pegasus spyware or building data mining tools for Spotify, I push myself to understand the underlying principles and create meaningful solutions.
+            </p>
+            
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-4">
+              My journey isn't just about coding — it's about pushing boundaries. While I often work independently, I believe in the power of community and knowledge sharing. I actively participate in tech discussions, contribute to open-source projects, and mentor others who are starting their journey in tech.
             </p>
 
-            {/* Skills */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Frontend Skills */}
-              <div className="rounded-xl p-6 hover:-translate-y-1 transition-all border-2 border-transparent hover:border-yellow-500">
-                <h3 className="text-xl font-bold mb-4 text-white">Frontend</h3>
-                <div className="flex justify-center flex-wrap gap-2">
-                  {frontendSkills.map((tech, key) => (
-                    <span
-                      key={key}
-                      className="bg-transparent text-white border-2 border-cyan-500 py-1 px-3 rounded-full text-sm hover:bg-cyan-500 hover:shadow-lg hover:text-white-500 transition duration-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed mt-4 font-medium">
+              "I believe in building, not blending in."
+            </p>
+          </motion.div>
 
-              {/* Backend Skills */}
-              <div className="rounded-xl p-6 hover:-translate-y-1 transition-all border-2 border-transparent hover:border-yellow-500">
-                <h3 className="text-xl font-bold mb-4 text-white">Backend</h3>
-                <div className="flex justify-center flex-wrap gap-2">
-                  {backendSkills.map((tech, key) => (
-                    <span
-                      key={key}
-                      className="bg-transparent text-white border-2 border-cyan-500 py-1 px-3 rounded-full text-sm hover:bg-cyan-500 hover:shadow-lg hover:text-white-500 transition duration-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-lg"
+            >
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
+                Education
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                BSc in Computer Science<br />
+                Focus: Cybersecurity & AI<br />
+                Expected Graduation: 2025
+              </p>
+            </motion.div>
+
+           
           </div>
-        </RevealOnScroll>
 
-        {/* Education & Experience */}
-
-        <RevealOnScroll variants={zoomIn}>
-  <div className="p-4 rounded-4xl border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all -mt-4">
-    <h3 className="text-xl font-bold mb-4 text-white">🏫 Education</h3>
-    <ul className="list-disc list-inside text-gray-300 space-y-2">
-      <li>
-        <strong>B.S. in Computer Science</strong> - GUIMARAS University (2022–2026)
-      </li>
-      <li>
-        <strong>Relevant Coursework:</strong> Data Mining, Data Structures, Web Development, Cyber Security.
-      </li>
-    </ul>
-  </div>
-</RevealOnScroll>
-
-<RevealOnScroll variants={zoomIn}>
-  <div className="p-4 rounded-4xl border-4 border-white/70 hover:border-cyan-500 hover:-translate-y-1 transition-all mt-4">
-    <h3 className="text-xl font-bold mb-4 text-white">💼 Work Experience</h3>
-    <div className="space-y-4 text-gray-300">
-      {workExperience.map((experience, index) => (
-        <div key={index}>
-          <h4 className="font-semibold text-white">
-            {experience.position} – {experience.company} ({experience.year})
-          </h4>
-          <ul className="list-disc list-inside space-y-1">
-            {experience.responsibilities.map((task, i) => (
-              <li key={i}>{task}</li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-  </div>
-</RevealOnScroll>
-
+          <motion.div 
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12"
+            variants={fadeInUp}
+          >
+            <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Cybersecurity</h3>
+              <p className="text-gray-700 dark:text-gray-300 mt-2">Deep dive into security systems</p>
+            </div>
+            <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Web Dev</h3>
+              <p className="text-gray-700 dark:text-gray-300 mt-2">Building modern web experiences</p>
+            </div>
+            <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">AI/ML</h3>
+              <p className="text-gray-700 dark:text-gray-300 mt-2">Exploring intelligent systems</p>
+            </div>
+            <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-700 shadow-sm hover:shadow-md transition-shadow duration-300">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Calisthenics</h3>
+              <p className="text-gray-700 dark:text-gray-300 mt-2">Training mind and body</p>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

@@ -6,89 +6,133 @@ import {
   slideFromRight,
 } from "../animations/motionVariants";
 
-export const Navbar = ({ menuOpen, setMenuOpen }) => {
+const sections = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'contact', label: 'Contact' }
+];
+
+export const Navbar = ({ isDarkMode, setIsDarkMode, menuOpen, setMenuOpen }) => {
   const [animationKey, setAnimationKey] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setAnimationKey((prev) => prev + 1); // retrigger animation on mount and menuOpen
     document.body.style.overflow = menuOpen ? "hidden" : "";
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [menuOpen]);
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-black/50 border-b border-white/10 shadow-sm">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Signature Branding */}
-        <a
-          href="#home"
-          className="text-1xl tracking-wide select-none flex space-x-0"
-        >
-          <motion.span
-            key={`ken-${animationKey}`}
-            variants={slideFromLeft}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="text-cyan-400 inline-block"
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-sm'
+          : 'bg-gray-900/80 dark:bg-gray-900/80 backdrop-blur-md'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <button
+            onClick={() => scrollToSection('home')}
+            className="text-xl font-bold text-white hover:text-gray-300 transition-colors"
           >
-            ken
-          </motion.span>
+            KL
+          </button>
 
-          <motion.span
-            key={`dot-${animationKey}`}
-            variants={zoomIn}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.3, duration: 0.4 }}
-            className="text-white inline-block"
-          >
-            .
-          </motion.span>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                onClick={() => scrollToSection(section.id)}
+                className="text-white hover:text-gray-300 transition-colors"
+              >
+                {section.label}
+              </button>
+            ))}
+          </div>
 
-          <motion.span
-            key={`lim-${animationKey}`}
-            variants={slideFromRight}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="text-pink-400 inline-block"
-          >
-            lim
-          </motion.span>
-        </a>
-
-        {/* Desktop Nav */}
-        <div className="hidden md:flex space-x-8 text-sm font-medium">
-          {["home", "about", "projects", "contact"].map((item, index) => (
-            <a
-              key={index}
-              href={`#${item}`}
-              className="relative text-gray-300 hover:text-white transition-colors duration-300"
+          {/* Right Side Actions */}
+          <div className="flex items-center space-x-4">
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={() => setIsDarkMode(!isDarkMode)}
+              className="p-2 text-white hover:text-gray-300 transition-colors"
+              aria-label="Toggle dark mode"
             >
-              <span className="capitalize">{item}</span>
-              <span className="absolute left-0 -bottom-1 w-full h-[1px] bg-white scale-x-0 hover:scale-x-100 transition-transform origin-left duration-300" />
-            </a>
-          ))}
-        </div>
+              {isDarkMode ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                  />
+                </svg>
+              )}
+            </button>
 
-        {/* Mobile Burger Icon */}
-        <div
-          className="md:hidden flex flex-col justify-center items-end w-8 h-6 gap-[5px] cursor-pointer z-50"
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
-          <span
-            className={`h-[4px] w-8 bg-yellow-500 rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)] 
-              ${menuOpen ? "rotate-45 translate-y-[10px]" : ""}`}
-          />
-          <span
-            className={`h-[3px] w-7 bg-yellow-500 rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)] 
-              ${menuOpen ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`h-[2px] w-6 bg-yellow-500 rounded transition-all duration-300 ease-[cubic-bezier(0.77,0,0.175,1)] 
-              ${menuOpen ? "-rotate-45 -translate-y-[5px]" : ""}`}
-          />
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="md:hidden p-2 text-white hover:text-gray-300 transition-colors"
+              aria-label="Toggle menu"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
+
+const NavLink = ({ href, children }) => (
+  <motion.a
+    href={href}
+    className="text-white hover:text-gray-300 transition-colors duration-300"
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+  >
+    {children}
+  </motion.a>
+);
