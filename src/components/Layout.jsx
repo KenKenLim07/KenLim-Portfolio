@@ -2,20 +2,18 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from './Navbar';
 import { MobileMenu } from './MobileMenu';
-import { Notification } from './Notification';
 
 export const Layout = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
-  const [isNotificationVisible, setIsNotificationVisible] = useState(false);
-
-  useEffect(() => {
-    // Check system preference for dark mode
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setIsDarkMode(true);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Check localStorage first
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode !== null) {
+      return JSON.parse(savedMode);
     }
-  }, []);
+    // Fall back to system preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     // Apply dark mode class to document
@@ -24,27 +22,29 @@ export const Layout = ({ children }) => {
     } else {
       document.documentElement.classList.remove('dark');
     }
+    // Save preference to localStorage
+    localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
   }, [isDarkMode]);
 
-  const handleThemeToggle = () => {
-    // Show notification
-    setShowNotification(true);
-    setIsNotificationVisible(true);
+  // Listen for system preference changes
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e) => {
+      // Only update if user hasn't set a preference
+      if (localStorage.getItem('darkMode') === null) {
+        setIsDarkMode(e.matches);
+      }
+    };
 
-    // Hide notification after 3 seconds
-    setTimeout(() => {
-      setIsNotificationVisible(false);
-      setTimeout(() => {
-        setShowNotification(false);
-      }, 300); // Wait for exit animation
-    }, 3000);
-  };
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   return (
     <div className="min-h-screen transition-colors duration-300">
       <Navbar 
         isDarkMode={isDarkMode} 
-        setIsDarkMode={handleThemeToggle}
+        setIsDarkMode={setIsDarkMode}
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
       />
@@ -56,7 +56,7 @@ export const Layout = ({ children }) => {
 
       {/* Dark mode toggle button */}
       <button
-        onClick={handleThemeToggle}
+        onClick={() => setIsDarkMode(!isDarkMode)}
         className="fixed bottom-8 right-8 p-3 rounded-full bg-gray-200 dark:bg-gray-700 shadow-lg hover:shadow-xl transition-all duration-300"
         aria-label="Toggle dark mode"
       >
@@ -70,14 +70,6 @@ export const Layout = ({ children }) => {
           </svg>
         )}
       </button>
-
-      {showNotification && (
-        <Notification
-          message="Sorry, dark mode toggle is a work in progress. Stay tuned for the full experience soon."
-          isVisible={isNotificationVisible}
-          onClose={() => setIsNotificationVisible(false)}
-        />
-      )}
     </div>
   );
 }; 

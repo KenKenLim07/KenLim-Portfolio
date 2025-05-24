@@ -15,16 +15,16 @@ function App() {
           <Hero />
         </section>
         <section id="about">
-          <About />
+        <About />
         </section>
         <section id="projects">
-          <Projects />
+        <Projects />
         </section>
         <section id="skills">
           <Skills />
         </section>
         <section id="contact">
-          <Contact />
+        <Contact />
         </section>
       </main>
       <ScrollToTop />
