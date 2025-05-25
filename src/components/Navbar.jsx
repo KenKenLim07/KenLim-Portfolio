@@ -54,9 +54,9 @@ export const MobileMenu = ({ isOpen, onClose }) => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80; // match the desktop offset
+      const offset = 80; // Navbar height + some padding
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - offset;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
 
       window.scrollTo({
         top: offsetPosition,
@@ -107,6 +107,21 @@ export const Navbar = () => {
   const { isDarkMode } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80; // Navbar height + some padding
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+      setIsMenuOpen(false);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -164,6 +179,10 @@ export const Navbar = () => {
                 <motion.a
                   key={section.id}
                   href={`#${section.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(section.id);
+                  }}
                   className={`text-sm font-medium ${
                     isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
                   } transition-colors`}
@@ -243,6 +262,10 @@ export const Navbar = () => {
                       <motion.a
                         key={section.id}
                         href={`#${section.id}`}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          scrollToSection(section.id);
+                        }}
                         className={`block py-3 px-4 rounded-lg text-sm font-medium ${
                           isDarkMode 
                             ? 'text-gray-300 hover:text-white hover:bg-neutral-900' 
@@ -255,7 +278,6 @@ export const Navbar = () => {
                           duration: 0.3,
                           ease: "easeOut"
                         }}
-                        onClick={toggleMenu}
                       >
                         {section.label}
                       </motion.a>
