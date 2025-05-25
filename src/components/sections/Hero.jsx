@@ -110,11 +110,10 @@ export const Hero = () => {
         {/* Original large blobs */}
         <motion.div 
           className="absolute top-[10%] -left-[15%] md:-left-[10%] w-48 md:w-72 h-48 md:h-72 bg-purple-300/60 rounded-full mix-blend-soft-light filter blur-xl"
-          initial={{ scale: 0.8, opacity: 0, y: 20, borderRadius: "50%" }}
+          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
           animate={{ 
             scale: 1, 
             opacity: 1, 
-            y: 0, 
             borderRadius: "50%",
             x: [0, 15, 0],
             y: [0, -20, 0]
@@ -143,11 +142,10 @@ export const Hero = () => {
         />
         <motion.div 
           className="absolute top-[15%] -right-[15%] md:-right-[10%] w-48 md:w-72 h-48 md:h-72 bg-yellow-300/60 rounded-full mix-blend-soft-light filter blur-xl"
-          initial={{ scale: 0.8, opacity: 0, y: 20, borderRadius: "50%" }}
+          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
           animate={{ 
             scale: 1, 
             opacity: 1, 
-            y: 0, 
             borderRadius: "50%",
             x: [0, -20, 0],
             y: [0, 15, 0]
@@ -176,11 +174,10 @@ export const Hero = () => {
         />
         <motion.div 
           className="absolute -bottom-[5%] right-[-10%] md:right-[-5%] w-40 md:w-72 h-40 md:h-72 bg-pink-300/60 rounded-full mix-blend-soft-light filter blur-xl"
-          initial={{ scale: 0.8, opacity: 0, y: 20, borderRadius: "50%" }}
+          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
           animate={{ 
             scale: 1, 
             opacity: 1, 
-            y: 0,
             borderRadius: "50%",
             x: [0, -15, 0],
             y: [0, -15, 0]
@@ -209,11 +206,10 @@ export const Hero = () => {
         />
         <motion.div 
           className="absolute top-[45%] -left-[5%] md:-left-[2%] w-32 md:w-48 h-32 md:h-48 bg-cyan-300/30 rounded-full mix-blend-soft-light filter blur-xl"
-          initial={{ scale: 0.8, opacity: 0, y: 20, borderRadius: "50%" }}
+          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
           animate={{ 
             scale: 1, 
             opacity: 1, 
-            y: 0, 
             borderRadius: "50%",
             x: [0, 20, 0],
             y: [0, 10, 0]
@@ -244,11 +240,10 @@ export const Hero = () => {
         {/* New smaller blobs with floating animations */}
         <motion.div 
           className="absolute top-[30%] left-[20%] w-16 h-16 bg-indigo-300/40 rounded-full mix-blend-soft-light filter blur-lg"
-          initial={{ scale: 0.8, opacity: 0, y: 20, borderRadius: "50%" }}
+          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
           animate={{ 
             scale: 1, 
             opacity: 1, 
-            y: 0, 
             borderRadius: "50%",
             x: [0, 10, 0],
             y: [0, -15, 0]
@@ -277,11 +272,10 @@ export const Hero = () => {
         />
         <motion.div 
           className="absolute top-[60%] right-[25%] w-20 h-20 bg-orange-300/40 rounded-full mix-blend-soft-light filter blur-lg"
-          initial={{ scale: 0.8, opacity: 0, y: 20, borderRadius: "50%" }}
+          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
           animate={{ 
             scale: 1, 
             opacity: 1, 
-            y: 0, 
             borderRadius: "50%",
             x: [0, -12, 0],
             y: [0, 12, 0]
@@ -310,11 +304,10 @@ export const Hero = () => {
         />
         <motion.div 
           className="absolute bottom-[20%] left-[30%] w-12 h-12 bg-teal-300/40 rounded-full mix-blend-soft-light filter blur-lg"
-          initial={{ scale: 0.8, opacity: 0, y: 20, borderRadius: "50%" }}
+          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
           animate={{ 
             scale: 1, 
             opacity: 1, 
-            y: 0, 
             borderRadius: "50%",
             x: [0, 15, 0],
             y: [0, -10, 0]
@@ -343,11 +336,10 @@ export const Hero = () => {
         />
         <motion.div 
           className="absolute top-[25%] right-[15%] w-14 h-14 bg-rose-300/40 rounded-full mix-blend-soft-light filter blur-lg"
-          initial={{ scale: 0.8, opacity: 0, y: 20, borderRadius: "50%" }}
+          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
           animate={{ 
             scale: 1, 
             opacity: 1, 
-            y: 0, 
             borderRadius: "50%",
             x: [0, -8, 0],
             y: [0, 8, 0]
@@ -376,11 +368,10 @@ export const Hero = () => {
         />
         <motion.div 
           className="absolute bottom-[35%] right-[10%] w-10 h-10 bg-violet-300/40 rounded-full mix-blend-soft-light filter blur-lg"
-          initial={{ scale: 0.8, opacity: 0, y: 20, borderRadius: "50%" }}
+          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
           animate={{ 
             scale: 1, 
             opacity: 1, 
-            y: 0, 
             borderRadius: "50%",
             x: [0, 10, 0],
             y: [0, -12, 0]
@@ -436,7 +427,7 @@ export const Hero = () => {
             Jose Marie Lim
           </motion.h1>
           <motion.div
-            className="h-1 w-20 bg-gray-900 mx-auto"
+            className={`h-1 w-20 mx-auto ${isDarkMode ? 'bg-white' : 'bg-gray-900'}`}
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ delay: 0.6, duration: 0.6 }}
