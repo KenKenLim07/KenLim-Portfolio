@@ -119,9 +119,23 @@ export const Hero = () => {
         />
         <motion.div 
           className="absolute -bottom-[5%] right-[-10%] md:right-[-5%] w-40 md:w-72 h-40 md:h-72 bg-pink-300/60 rounded-full mix-blend-soft-light filter blur-xl"
-          initial={{ scale: 0.8, opacity: 0, y: 20 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+          initial={{ scale: 0.8, opacity: 0, y: 20, borderRadius: "50%" }}
+          animate={{ 
+            scale: 1, 
+            opacity: 1, 
+            y: 0,
+            borderRadius: "50%"
+          }}
+          transition={{ 
+            duration: 1, 
+            delay: 0.6, 
+            ease: "easeOut",
+            borderRadius: { duration: 0 }
+          }}
+          style={{ 
+            transformOrigin: "center",
+            willChange: "transform, opacity, border-radius"
+          }}
         />
         <motion.div 
           className="absolute top-[45%] -left-[5%] md:-left-[2%] w-32 md:w-48 h-32 md:h-48 bg-cyan-300/30 rounded-full mix-blend-soft-light filter blur-xl"

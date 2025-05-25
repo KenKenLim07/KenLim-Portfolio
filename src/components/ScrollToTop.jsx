@@ -13,21 +13,28 @@ export const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isScrollingUp, setIsScrollingUp] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
       const currentScrollY = window.pageYOffset;
       const scrollDirection = currentScrollY < lastScrollY;
+      setIsScrollingUp(scrollDirection);
       
-      // Add buffer zone for smoother transitions
-      const bufferZone = 50;
-      
-      if (currentScrollY > 300) {
-        // Show when scrolling down past 300px
-        setIsVisible(true);
-      } else if (currentScrollY < 100 && scrollDirection) {
-        // Only hide when scrolling up and in the buffer zone
-        setIsVisible(false);
+      // Get About section element
+      const aboutSection = document.getElementById('about');
+      if (aboutSection) {
+        const aboutRect = aboutSection.getBoundingClientRect();
+        const aboutMiddle = aboutRect.top + (aboutRect.height / 2);
+        
+        // Show when scrolling past About section's middle
+        if (aboutMiddle < 0) {
+          setIsVisible(true);
+        } 
+        // Hide when scrolling back up to About section's middle
+        else if (aboutMiddle >= 0 && scrollDirection) {
+          setIsVisible(false);
+        }
       }
       
       setLastScrollY(currentScrollY);
@@ -97,7 +104,7 @@ export const ScrollToTop = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             onClick={scrollToTop}
             className="fixed bottom-8 right-8 p-3 rounded-full bg-gray-900 text-white shadow-lg hover:shadow-xl transition-all duration-300 z-50 hover:bg-gray-800"
             aria-label="Scroll to top"
