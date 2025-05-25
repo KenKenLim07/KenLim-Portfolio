@@ -136,7 +136,7 @@ export const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled 
             ? isDarkMode 
               ? 'bg-dark-card/95 backdrop-blur-md shadow-[0_1px_2px_-1px_rgba(0,0,0,0.1)]' 
@@ -212,7 +212,7 @@ export const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[45] md:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 md:hidden"
               onClick={toggleMenu}
             />
             
@@ -222,11 +222,21 @@ export const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className={`fixed top-0 right-0 w-64 h-full z-[50] md:hidden ${
+              className={`fixed top-0 right-0 w-64 h-full z-[60] md:hidden ${
                 isDarkMode ? 'bg-black' : 'bg-white'
               } shadow-xl`}
             >
               <div className="p-6 h-full flex flex-col">
+                <button
+                  onClick={toggleMenu}
+                  className={`absolute top-4 right-4 p-2 rounded-lg z-[70] ${
+                    isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
+                  }`}
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
                 <nav className="flex-1">
                   <div className="space-y-1">
                     {sections.map((section, index) => (
@@ -241,7 +251,7 @@ export const Navbar = () => {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ 
-                          delay: 0.3 + (index * 0.1),
+                          delay: 0.4 + (index * 0.1),
                           duration: 0.3,
                           ease: "easeOut"
                         }}
