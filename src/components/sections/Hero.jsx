@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -63,9 +63,20 @@ const scrollIndicatorVariants = {
 
 export const Hero = () => {
   const { scrollY } = useScroll();
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const heroRef = useRef(null);
   const aboutRef = useRef(null);
-  const isAboutInView = useInView(aboutRef, { margin: "-100px" });
+  
+  // Calculate scroll progress for smoother transitions
+  const heroHeight = 1000; // Approximate hero section height
+  const fadeStart = 300; // Start fading at this scroll position
+  const fadeEnd = 600; // Complete fade at this position
+  
+  const blobOpacity = useTransform(
+    scrollY,
+    [fadeStart, fadeEnd],
+    [1, 0],
+    { clamp: true }
+  );
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -82,20 +93,56 @@ export const Hero = () => {
   };
 
   return (
-    <section id="home" className="min-h-[100vh] flex items-center justify-center py-20 relative">
+    <section ref={heroRef} id="home" className="min-h-[100vh] flex items-center justify-center py-20 relative">
       {/* Background gradient blobs */}
       <motion.div
-        className="absolute inset-0"
+        className="fixed inset-0 pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         style={{ 
-          opacity: isAboutInView ? 0 : 1,
-          transition: "opacity 0.5s ease-in-out"
+          opacity: blobOpacity,
+          transition: "opacity 0.3s ease-out"
         }}
       >
-        <div className="absolute top-1/4 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
-        <div className="absolute top-1/3 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
-        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
+        <motion.div 
+          className="absolute top-1/4 -left-[10%] md:-left-[5%] w-48 md:w-72 h-48 md:h-72 bg-purple-300/60 rounded-full mix-blend-soft-light filter blur-xl"
+          animate={{
+            x: [0, 30, 0],
+            y: [0, -20, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute top-1/3 -right-[10%] md:-right-[5%] w-48 md:w-72 h-48 md:h-72 bg-yellow-300/60 rounded-full mix-blend-soft-light filter blur-xl"
+          animate={{
+            x: [0, -40, 0],
+            y: [0, 30, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div 
+          className="absolute -bottom-[5%] left-[10%] md:left-[20%] w-48 md:w-72 h-48 md:h-72 bg-pink-300/60 rounded-full mix-blend-soft-light filter blur-xl"
+          animate={{
+            x: [0, 20, 0],
+            y: [0, -30, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 9,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
       </motion.div>
 
       <motion.div
