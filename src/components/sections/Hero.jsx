@@ -15,6 +15,20 @@ const staggerContainer = {
 };
 
 export const Hero = () => {
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80; // adjust based on navbar height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <section id="home" className="min-h-[90vh] flex items-center justify-center py-20">
       <motion.div
@@ -45,24 +59,24 @@ export const Hero = () => {
           className="flex gap-4 justify-center"
           variants={fadeInUp}
         >
-          <motion.a
-  href="#projects"
-  className="px-8 py-3 rounded-full bg-gray-900 text-white font-medium transition-all duration-300 relative overflow-hidden group flex items-center justify-center"
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
->
-  <span className="relative z-10">View Projects</span>
-  <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-</motion.a>
+          <motion.button
+            onClick={() => scrollToSection("projects")}
+            className="px-8 py-3 rounded-full bg-gray-900 text-white font-medium transition-all duration-300 relative overflow-hidden group flex items-center justify-center"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className="relative z-10">View Projects</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </motion.button>
 
-          <motion.a
-            href="#contact"
+          <motion.button
+            onClick={() => scrollToSection("contact")}
             className="px-8 py-3 rounded-full border-2 border-gray-900 text-gray-900 font-medium transition-all duration-300 relative overflow-hidden group"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <span className="relative z-10">Get in Touch</span>
-          </motion.a>
+          </motion.button>
         </motion.div>
 
         <motion.div 
