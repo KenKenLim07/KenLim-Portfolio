@@ -189,22 +189,22 @@ export const Hero = () => {
         </motion.p>
 
         <motion.div 
-          className="flex gap-4 justify-center"
+          className="flex gap-3 md:gap-4 justify-center"
           variants={buttonVariants}
         >
           <motion.button
             onClick={() => scrollToSection("projects")}
-            className={`px-8 py-3 rounded-lg border ${
+            className={`px-4 md:px-8 py-2 md:py-3 rounded-lg border ${
               isDarkMode 
                 ? 'bg-white text-black border-neutral-200 hover:border-neutral-300' 
                 : 'bg-gray-900 text-white border-transparent'
-            } font-medium transition-all duration-300 relative overflow-hidden group hover:shadow-lg`}
+            } font-medium transition-all duration-300 relative overflow-hidden group hover:shadow-lg text-sm md:text-base`}
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
           >
-            <span className="relative z-10 flex items-center gap-2">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <span className="relative z-10 flex items-center gap-1.5 md:gap-2">
+              <svg className="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
               View Projects
@@ -213,17 +213,17 @@ export const Hero = () => {
 
           <motion.button
             onClick={() => scrollToSection("contact")}
-            className={`px-8 py-3 rounded-lg border ${
+            className={`px-4 md:px-8 py-2 md:py-3 rounded-lg border ${
               isDarkMode 
                 ? 'border-neutral-600 hover:border-neutral-500' 
                 : 'border-neutral-400 hover:border-neutral-500'
-            } text-gray-900 font-medium transition-all duration-300 relative overflow-hidden group hover:shadow-lg`}
+            } text-gray-900 font-medium transition-all duration-300 relative overflow-hidden group hover:shadow-lg text-sm md:text-base`}
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
           >
-            <span className="relative z-10 flex items-center gap-2">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <span className="relative z-10 flex items-center gap-1.5 md:gap-2">
+              <svg className="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               Get in Touch
