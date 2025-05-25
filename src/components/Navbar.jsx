@@ -149,16 +149,14 @@ export const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center h-16">
-            <motion.a
-              href="#"
-              className={`text-lg font-semibold ${
-                isDarkMode ? 'text-dark-text' : 'text-neutral-900'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+            <motion.div
+              className="text-xs font-bold"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
             >
-              Ken Lim
-            </motion.a>
+              Welcome
+            </motion.div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
