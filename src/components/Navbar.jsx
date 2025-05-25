@@ -104,20 +104,30 @@ export const MobileMenu = ({ isOpen, onClose }) => {
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const currentScrollY = window.scrollY;
+      
+      // Only update isScrolled when scrolling down or when we're not at the top
+      if (currentScrollY > 20 || currentScrollY > lastScrollY) {
+        setIsScrolled(true);
+      } else if (currentScrollY === 0) {
+        setIsScrolled(false);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80; // adjust based on navbar height
+      const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - offset;
 
@@ -136,6 +146,10 @@ export const Navbar = () => {
         className={`fixed w-full z-50 transition-all duration-300 ${
           isScrolled ? "bg-white shadow-md py-4" : "bg-transparent py-6"
         }`}
+        style={{
+          backdropFilter: isScrolled ? 'blur(8px)' : 'none',
+          backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.9)' : 'transparent'
+        }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <motion.button
