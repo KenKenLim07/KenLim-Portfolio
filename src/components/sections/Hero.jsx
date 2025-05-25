@@ -105,48 +105,27 @@ export const Hero = () => {
         }}
       >
         <motion.div 
-          className="absolute top-1/4 -left-[10%] md:-left-[5%] w-48 md:w-72 h-48 md:h-72 bg-purple-300/60 rounded-full mix-blend-soft-light filter blur-xl"
-          animate={{
-            x: [0, 30, 0],
-            y: [0, -20, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+          className="absolute top-[10%] -left-[15%] md:-left-[10%] w-48 md:w-72 h-48 md:h-72 bg-purple-300/60 rounded-full mix-blend-soft-light filter blur-xl animate-blob"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
         />
         <motion.div 
-          className="absolute top-1/3 -right-[10%] md:-right-[5%] w-48 md:w-72 h-48 md:h-72 bg-yellow-300/60 rounded-full mix-blend-soft-light filter blur-xl"
-          animate={{
-            x: [0, -40, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+          className="absolute top-[15%] -right-[15%] md:-right-[10%] w-48 md:w-72 h-48 md:h-72 bg-yellow-300/60 rounded-full mix-blend-soft-light filter blur-xl animate-blob animation-delay-2000"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
         />
         <motion.div 
-          className="absolute -bottom-[5%] left-[10%] md:left-[20%] w-48 md:w-72 h-48 md:h-72 bg-pink-300/60 rounded-full mix-blend-soft-light filter blur-xl"
-          animate={{
-            x: [0, 20, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 9,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+          className="absolute -bottom-[10%] left-[5%] md:left-[15%] w-48 md:w-72 h-48 md:h-72 bg-pink-300/60 rounded-full mix-blend-soft-light filter blur-xl animate-blob animation-delay-4000"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
         />
       </motion.div>
 
       <motion.div
-        className="text-center space-y-8 max-w-3xl mx-auto px-4"
+        className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-10"
         variants={staggerContainer}
         initial="initial"
         animate="animate"
