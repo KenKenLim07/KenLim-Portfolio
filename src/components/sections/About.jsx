@@ -25,10 +25,24 @@ export const About = () => {
           variants={fadeIn}
           className="border border-neutral-400 rounded-xl bg-white p-6"
         >
-          <h2 className="text-lg font-semibold text-neutral-900 mb-2">About Me</h2>
-          <p className="text-sm text-neutral-600 leading-relaxed">
-            I'm a passionate software engineer with a strong foundation in web development and a keen interest in emerging technologies. My journey in tech has been driven by a constant desire to learn and create meaningful solutions.
-          </p>
+          <h2 className="text-lg font-semibold text-neutral-900 mb-4">About Me</h2>
+          <div className="space-y-4 text-sm text-neutral-600 leading-relaxed">
+            <p>
+              As a 3rd year Computer Science student, I've found my passion at the crossroads of cybersecurity, web development, and artificial intelligence. What started as a simple "how does this even work?" moment turned into an ongoing obsession with breaking systems down and building them back smarter.
+            </p>
+            
+            <p>
+              I adapt fast. Whether I'm switching between debugging a web app, exploring AI models, or hunting down security flaws, I thrive in fast-paced, ever-changing environments. Throw me into something unfamiliar—I'll figure it out, tweak it, and probably optimize it just for fun.
+            </p>
+            
+            <p>
+              Outside the keyboard? I do calisthenics. You'll find me doing pull-ups between compile times and pushing to failure like I'm training for both the Olympics and a CTF challenge. It's like DevOps, but for your body: automate progress, monitor form, eliminate bugs (aka bad reps).
+            </p>
+            
+            <p>
+              I also like sharing knowledge—not just in tech, but in life. I genuinely enjoy lifting others up, whether it's through meaningful conversations, sharing what I've learned, or simply being there when someone needs support. In this journey, I've learned that growth isn't just about personal wins—it's about helping others rise with you. We don't just level up alone—we elevate together.
+            </p>
+          </div>
         </motion.div>
 
         {/* Education Section */}

@@ -14,11 +14,57 @@ const staggerContainer = {
   }
 };
 
+const textVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.6, -0.05, 0.01, 0.99]
+    }
+  }
+};
+
+const buttonVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  },
+  hover: {
+    scale: 1.05,
+    transition: {
+      duration: 0.2
+    }
+  },
+  tap: {
+    scale: 0.95
+  }
+};
+
+const scrollIndicatorVariants = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 1.2,
+      duration: 0.8,
+      ease: [0.6, -0.05, 0.01, 0.99]
+    }
+  }
+};
+
 export const Hero = () => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80; // adjust based on navbar height
+      const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - offset;
 
@@ -30,74 +76,130 @@ export const Hero = () => {
   };
 
   return (
-    <section id="home" className="min-h-[90vh] flex items-center justify-center py-20">
+    <section id="home" className="min-h-[90vh] flex items-center justify-center py-20 relative overflow-hidden">
+      {/* Background gradient blobs */}
       <motion.div
-        className="text-center space-y-8 max-w-3xl mx-auto px-4"
+        className="absolute inset-0 -z-10"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <div className="absolute top-1/4 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
+        <div className="absolute top-1/3 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000" />
+      </motion.div>
+
+      <motion.div
+        className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-10"
         variants={staggerContainer}
         initial="initial"
         animate="animate"
       >
-        <motion.h1
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="font-bold mb-3 text-gray-900 leading-tight text-2xl"
+        <motion.div
+          variants={textVariants}
+          className="space-y-4"
         >
-          <span className="text-xl opacity-60">Hi, I'm </span>
-          <span className="text-4xl">Jose Marie Lim</span>
-        </motion.h1>
+          <motion.span
+            className="text-xl text-gray-600 block"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            Hi, I'm
+          </motion.span>
+          <motion.h1
+            className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            Jose Marie Lim
+          </motion.h1>
+          <motion.div
+            className="h-1 w-20 bg-gray-900 mx-auto"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+          />
+        </motion.div>
 
         <motion.p 
-          className="text-lg md:text-xl text-gray-700 leading-relaxed"
-          variants={fadeInUp}
+          className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto"
+          variants={textVariants}
         >
-          I like building things that matter. Not just code, but systems that push boundaries and challenge the status quo. 
-          Currently diving deep into AI, web development, and cybersecurity.
+          I like Building secure, scalable solutions while pushing the boundaries of what's possible in tech. Currently diving deep into AI, web development, and cybersecurity.
         </motion.p>
 
         <motion.div 
           className="flex gap-4 justify-center"
-          variants={fadeInUp}
+          variants={buttonVariants}
         >
           <motion.button
             onClick={() => scrollToSection("projects")}
-            className="px-8 py-3 rounded-full bg-gray-900 text-white font-medium transition-all duration-300 relative overflow-hidden group flex items-center justify-center"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="px-8 py-3 rounded-full bg-gray-900 text-white font-medium transition-all duration-300 relative overflow-hidden group"
+            variants={buttonVariants}
+            whileHover="hover"
+            whileTap="tap"
           >
             <span className="relative z-10">View Projects</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              initial={{ x: "-100%" }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.3 }}
+            />
           </motion.button>
 
           <motion.button
             onClick={() => scrollToSection("contact")}
             className="px-8 py-3 rounded-full border-2 border-gray-900 text-gray-900 font-medium transition-all duration-300 relative overflow-hidden group"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            variants={buttonVariants}
+            whileHover="hover"
+            whileTap="tap"
           >
             <span className="relative z-10">Get in Touch</span>
+            <motion.div
+              className="absolute inset-0 bg-gray-900 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
+              initial={{ x: "-100%" }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.3 }}
+            />
           </motion.button>
         </motion.div>
+      </motion.div>
 
-        <motion.div 
-          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center"
-          variants={fadeInUp}
+      {/* Scroll Down Indicator */}
+      <motion.div 
+        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center"
+        variants={scrollIndicatorVariants}
+        initial="initial"
+        animate="animate"
+      >
+        <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
+          <motion.div
+            className="w-1.5 h-3 bg-gray-400 rounded-full mt-2"
+            animate={{
+              y: [0, 12, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: "loop",
+              delay: 1.2
+            }}
+          />
+        </div>
+        <motion.span 
+          className="text-xs text-gray-500 mt-2"
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ 
+            duration: 1.5, 
+            repeat: Infinity,
+            delay: 1.2
+          }}
         >
-          <div className="w-6 h-10 border-2 border-zinc-400 rounded-full flex justify-center">
-            <motion.div
-              className="w-1.5 h-3 bg-zinc-400 rounded-full mt-2"
-              animate={{
-                y: [0, 12, 0],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "loop",
-              }}
-            />
-          </div>
-          <span className="text-xs text-zinc-500 mt-2">Scroll Down</span>
-        </motion.div>
+          Scroll Down
+        </motion.span>
       </motion.div>
     </section>
   );
