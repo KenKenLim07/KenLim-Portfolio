@@ -17,13 +17,16 @@ export const ScrollToTop = () => {
   useEffect(() => {
     const toggleVisibility = () => {
       const currentScrollY = window.pageYOffset;
+      const scrollDirection = currentScrollY < lastScrollY;
       
-      // Show button when scrolling down past 300px
+      // Add buffer zone for smoother transitions
+      const bufferZone = 50;
+      
       if (currentScrollY > 300) {
+        // Show when scrolling down past 300px
         setIsVisible(true);
-      }
-      // Only hide when scrolling up and near the top
-      else if (currentScrollY < 100 && currentScrollY < lastScrollY) {
+      } else if (currentScrollY < 100 && scrollDirection) {
+        // Only hide when scrolling up and in the buffer zone
         setIsVisible(false);
       }
       
@@ -31,7 +34,8 @@ export const ScrollToTop = () => {
     };
 
     const handleScroll = () => {
-      toggleVisibility();
+      // Debounce scroll handling
+      requestAnimationFrame(toggleVisibility);
       
       // Update active section based on scroll position
       const scrollPosition = window.scrollY + window.innerHeight / 3;

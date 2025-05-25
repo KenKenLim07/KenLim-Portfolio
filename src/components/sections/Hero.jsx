@@ -118,7 +118,7 @@ export const Hero = () => {
           transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
         />
         <motion.div 
-          className="absolute -bottom-[5%] left-[75%] md:left-[85%] w-48 md:w-72 h-48 md:h-72 bg-pink-300/60 rounded-full mix-blend-soft-light filter blur-xl"
+          className="absolute -bottom-[5%] right-[-10%] md:right-[-5%] w-40 md:w-72 h-40 md:h-72 bg-pink-300/60 rounded-full mix-blend-soft-light filter blur-xl"
           initial={{ scale: 0.8, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
