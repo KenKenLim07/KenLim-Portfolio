@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Custom color palette
+        // Light mode colors
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
@@ -21,6 +21,22 @@ export default {
           800: '#075985',
           900: '#0c4a6e',
         },
+        // Dark mode colors
+        dark: {
+          bg: '#0e0e0e',
+          text: '#f1f1f1',
+          accent: '#00ffc8',
+          card: '#1a1a1a',
+          border: '#2a2a2a',
+          hover: '#2a2a2a',
+        }
+      },
+      backgroundColor: {
+        'dark-bg': '#0e0e0e',
+        'dark-card': '#1a1a1a',
+      },
+      textColor: {
+        'dark-text': '#f1f1f1',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -48,6 +64,7 @@ export default {
       boxShadow: {
         'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
         'hover': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
+        'dark': '0 2px 15px -3px rgba(0, 255, 200, 0.1), 0 10px 20px -2px rgba(0, 255, 200, 0.05)',
       },
       typography: {
         DEFAULT: {

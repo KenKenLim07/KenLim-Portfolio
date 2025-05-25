@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ThemeToggle } from './ThemeToggle';
+import { useTheme } from '../context/ThemeContext';
 
 const sections = [
   { id: "home", label: "Home" },
@@ -102,119 +104,122 @@ export const MobileMenu = ({ isOpen, onClose }) => {
 };
 
 export const Navbar = () => {
+  const { isDarkMode } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      // Only update isScrolled when scrolling down or when we're not at the top
-      if (currentScrollY > 20 || currentScrollY > lastScrollY) {
-        setIsScrolled(true);
-      } else if (currentScrollY === 0) {
-        setIsScrolled(false);
-      }
-      
-      setLastScrollY(currentScrollY);
+      setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`fixed w-full z-50 transition-all duration-300 ${
-          isScrolled ? "bg-white shadow-md py-4" : "bg-transparent py-6"
-        }`}
-        style={{
-          backdropFilter: isScrolled ? 'blur(8px)' : 'none',
-          backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.9)' : 'transparent'
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-          <motion.button
-            onClick={() => scrollToSection("home")}
-            className="text-2xl font-bold text-gray-900"
+    <motion.nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? isDarkMode 
+            ? 'bg-dark-card/80 backdrop-blur-sm shadow-[0_1px_2px_-1px_rgba(0,0,0,0.1)]' 
+            : 'bg-white/80 backdrop-blur-sm shadow-[0_1px_2px_-1px_rgba(0,0,0,0.05)]'
+          : 'bg-transparent'
+      }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          <motion.a
+            href="#"
+            className={`text-lg font-semibold ${
+              isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+            }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            JM
-          </motion.button>
+            Ken Lim
+          </motion.a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex items-center space-x-8">
             {sections.map((section) => (
-              <motion.button
+              <motion.a
                 key={section.id}
-                onClick={() => scrollToSection(section.id)}
-                className="text-gray-700 hover:text-gray-900 transition-colors"
+                href={`#${section.id}`}
+                className={`text-sm font-medium ${
+                  isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
+                } transition-colors`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 {section.label}
-              </motion.button>
+              </motion.a>
             ))}
+            <ThemeToggle />
           </div>
 
           {/* Mobile Menu Button */}
-          <motion.button
-            className="md:hidden text-gray-700 hover:text-gray-900"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div className="md:hidden flex items-center space-x-4">
+            <ThemeToggle />
+            <motion.button
+              onClick={toggleMenu}
+              className={`p-2 rounded-lg ${
+                isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {isMobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
+              {isMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
               ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
               )}
-            </svg>
-          </motion.button>
+            </motion.button>
+          </div>
         </div>
-      </motion.nav>
+      </div>
 
       {/* Mobile Menu */}
-      <MobileMenu
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-      />
-    </>
+      <motion.div
+        className={`md:hidden ${
+          isDarkMode ? 'bg-dark-card' : 'bg-white'
+        } border-t ${
+          isDarkMode ? 'border-neutral-800' : 'border-neutral-200'
+        }`}
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ 
+          opacity: isMenuOpen ? 1 : 0,
+          height: isMenuOpen ? 'auto' : 0
+        }}
+        transition={{ duration: 0.3 }}
+      >
+        <div className="px-4 py-2 space-y-1">
+          {sections.map((section) => (
+            <motion.a
+              key={section.id}
+              href={`#${section.id}`}
+              className={`block py-2 text-sm font-medium ${
+                isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
+              } transition-colors`}
+              whileHover={{ x: 4 }}
+              onClick={toggleMenu}
+            >
+              {section.label}
+            </motion.a>
+          ))}
+        </div>
+      </motion.div>
+    </motion.nav>
   );
 };

@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useCallback } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 const sections = [
   { id: 'home', label: 'Home' },
@@ -10,63 +11,58 @@ const sections = [
 ];
 
 export const ScrollToTop = () => {
+  const { isDarkMode } = useTheme();
   const [isVisible, setIsVisible] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
-  const [scrollTimeout, setScrollTimeout] = useState(null);
 
   const updateVisibility = useCallback(() => {
-    const aboutSection = document.getElementById('about');
-    if (!aboutSection) return;
-
-    const aboutRect = aboutSection.getBoundingClientRect();
-    const isInAboutSection = aboutRect.top <= window.innerHeight / 2 && aboutRect.bottom >= window.innerHeight / 2;
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
     
-    setIsVisible(isInAboutSection);
+    // Show button when scrolled past 20% of the page height
+    const shouldBeVisible = scrollY > (documentHeight * 0.2);
+    setIsVisible(shouldBeVisible);
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Clear any existing timeout
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-      }
+    let ticking = false;
 
-      // Set a new timeout
-      const timeout = setTimeout(() => {
-        const currentScrollY = window.pageYOffset;
-        const scrollDirection = currentScrollY < lastScrollY;
-        setIsScrollingUp(scrollDirection);
-        setLastScrollY(currentScrollY);
-        
-        updateVisibility();
-        
-        // Update active section
-        const scrollPosition = window.scrollY + window.innerHeight / 3;
-        for (const section of sections) {
-          const element = document.getElementById(section.id);
-          if (element) {
-            const { offsetTop, offsetHeight } = element;
-            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-              setActiveSection(section.id);
-              break;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const scrollDirection = currentScrollY < lastScrollY;
+          setIsScrollingUp(scrollDirection);
+          setLastScrollY(currentScrollY);
+          
+          updateVisibility();
+          
+          // Update active section
+          const scrollPosition = window.scrollY + window.innerHeight / 3;
+          for (const section of sections) {
+            const element = document.getElementById(section.id);
+            if (element) {
+              const { offsetTop, offsetHeight } = element;
+              if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                setActiveSection(section.id);
+                break;
+              }
             }
           }
-        }
-      }, 50); // 50ms debounce
-
-      setScrollTimeout(timeout);
+          
+          ticking = false;
+        });
+        
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-      }
-    };
-  }, [lastScrollY, scrollTimeout, updateVisibility]);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY, updateVisibility]);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -111,7 +107,11 @@ export const ScrollToTop = () => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 p-3 rounded-full bg-gray-900 text-white shadow-lg hover:shadow-xl transition-all duration-300 z-50 hover:bg-gray-800"
+            className={`fixed bottom-8 right-8 p-3 rounded-full ${
+              isDarkMode 
+                ? 'bg-white text-black hover:bg-gray-100' 
+                : 'bg-gray-900 text-white hover:bg-gray-800'
+            } shadow-lg hover:shadow-xl transition-all duration-300 z-50`}
             aria-label="Scroll to top"
           >
             <svg

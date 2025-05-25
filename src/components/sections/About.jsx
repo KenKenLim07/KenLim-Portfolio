@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { fadeIn, staggerContainer } from '../../animations/motionVariants';
+import { useTheme } from '../../context/ThemeContext';
 
 const SectionWrapper = ({ children, className = "" }) => (
   <section className={`py-8 ${className}`}>
@@ -10,10 +11,12 @@ const SectionWrapper = ({ children, className = "" }) => (
 );
 
 export const About = () => {
+  const { isDarkMode } = useTheme();
+
   return (
     <SectionWrapper>
       <motion.div
-      id="about"
+        id="about"
         variants={staggerContainer}
         initial="hidden"
         whileInView="show"
@@ -23,10 +26,16 @@ export const About = () => {
         {/* About Me Section */}
         <motion.div 
           variants={fadeIn}
-          className="border border-neutral-400 rounded-xl bg-white p-6"
+          className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
+            isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
+          }`}
         >
-          <h2 className="text-lg font-semibold text-neutral-900 mb-4">About Me</h2>
-          <div className="space-y-4 text-sm text-neutral-600 leading-relaxed">
+          <h2 className={`text-lg font-semibold mb-4 ${
+            isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+          }`}>About Me</h2>
+          <div className={`space-y-4 text-sm leading-relaxed ${
+            isDarkMode ? 'text-gray-300' : 'text-neutral-600'
+          }`}>
             <p>
               As a 3rd year Computer Science student, I've found my passion at the crossroads of cybersecurity, web development, and artificial intelligence. What started as a simple "how does this even work?" moment turned into an ongoing obsession with breaking systems down and building them back smarter.
             </p>
@@ -38,25 +47,38 @@ export const About = () => {
             <p>
               Outside the keyboard? I do calisthenics. You'll find me doing pull-ups between compile times and pushing to failure like I'm training for both the Olympics and a CTF challenge. It's like DevOps, but for your body: automate progress, monitor form, eliminate bugs (aka bad reps).
             </p>
-            
-                </div>
+          </div>
         </motion.div>
 
         {/* Education Section */}
         <motion.div 
           variants={fadeIn}
-          className="border border-neutral-400 rounded-xl bg-white p-6"
+          className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
+            isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
+          }`}
         >
-          <h2 className="text-lg font-semibold text-neutral-900 mb-2">Education</h2>
+          <h2 className={`text-lg font-semibold mb-2 ${
+            isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+          }`}>Education</h2>
           <div className="space-y-4">
             <div>
-              <h3 className="text-sm font-medium text-neutral-900">Bachelor of Science in Computer Science</h3>
-              <p className="text-sm text-neutral-600">Guimaras State University • 2025</p>
-              <p className="text-sm text-neutral-600">First Class Honors</p>
-                </div>
+              <h3 className={`text-sm font-medium ${
+                isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+              }`}>Bachelor of Science in Computer Science</h3>
+              <p className={`text-sm ${
+                isDarkMode ? 'text-gray-300' : 'text-neutral-600'
+              }`}>Guimaras State University • 2025</p>
+              <p className={`text-sm ${
+                isDarkMode ? 'text-gray-300' : 'text-neutral-600'
+              }`}>First Class Honors</p>
+            </div>
             <div>
-              <h3 className="text-sm font-medium text-neutral-900">Relevant Courses</h3>
-              <ul className="text-sm text-neutral-600 space-y-1">
+              <h3 className={`text-sm font-medium ${
+                isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+              }`}>Relevant Courses</h3>
+              <ul className={`text-sm space-y-1 ${
+                isDarkMode ? 'text-gray-300' : 'text-neutral-600'
+              }`}>
                 <li>Data Structures and Algorithms</li>
                 <li>Object-Oriented Programming</li>
                 <li>Cybersecurity</li>
@@ -68,9 +90,13 @@ export const About = () => {
         {/* Interests Grid */}
         <motion.div 
           variants={fadeIn}
-          className="border border-neutral-400 rounded-xl bg-white p-6"
+          className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
+            isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
+          }`}
         >
-          <h2 className="text-lg font-semibold text-neutral-900 mb-2">Areas of Interest</h2>
+          <h2 className={`text-lg font-semibold mb-2 ${
+            isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+          }`}>Areas of Interest</h2>
           <div className="grid grid-cols-2 gap-4">
             {[
               { title: "Web Development", desc: "Building responsive and user-friendly web applications" },
@@ -80,15 +106,23 @@ export const About = () => {
             ].map((item, index) => (
               <motion.div 
                 key={index}
-                className="p-4 bg-neutral-50 rounded-lg"
+                className={`p-4 rounded-lg transition-colors duration-300 ${
+                  isDarkMode 
+                    ? 'bg-dark-hover text-dark-text' 
+                    : 'bg-neutral-50 text-neutral-900'
+                }`}
                 variants={fadeIn}
                 whileHover={{ y: -2 }}
               >
-                <h3 className="text-sm font-medium text-neutral-900 mb-1">{item.title}</h3>
-                <p className="text-xs text-neutral-600">{item.desc}</p>
+                <h3 className={`text-sm font-medium mb-1 ${
+                  isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+                }`}>{item.title}</h3>
+                <p className={`text-xs ${
+                  isDarkMode ? 'text-gray-300' : 'text-neutral-600'
+                }`}>{item.desc}</p>
               </motion.div>
             ))}
-        </div>
+          </div>
         </motion.div>
       </motion.div>
     </SectionWrapper>

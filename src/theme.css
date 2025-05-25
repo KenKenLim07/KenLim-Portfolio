@@ -1,20 +1,7 @@
 :root {
-    --bg-color: #ffffff;
-    --text-color: #000000;
-    --muted-text: #666666;
-    --card-bg: #ffffff;
-    --border-color: #cccccc;
-    --hover-bg: #f0f0f0;
     --font-main: "Inter", sans-serif;
     --font-heading: "Poppins", sans-serif;
     --transition: all 0.3s ease;
 }
 
-.dark {
-    --bg-color: #000000;
-    --text-color: #ffffff;
-    --muted-text: #999999;
-    --card-bg: #111111;
-    --border-color: #333333;
-    --hover-bg: #1a1a1a;
-}
+/* Remove all other CSS variables as they're now handled by Tailwind */

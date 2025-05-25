@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
+import { useTheme } from '../../context/ThemeContext';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -65,6 +66,7 @@ export const Hero = () => {
   const { scrollY } = useScroll();
   const heroRef = useRef(null);
   const aboutRef = useRef(null);
+  const { isDarkMode } = useTheme();
   
   // Calculate scroll progress for smoother transitions
   const heroHeight = 1000; // Approximate hero section height
@@ -192,34 +194,40 @@ export const Hero = () => {
         >
           <motion.button
             onClick={() => scrollToSection("projects")}
-            className="px-8 py-3 rounded-full bg-gray-900 text-white font-medium transition-all duration-300 relative overflow-hidden group"
+            className={`px-8 py-3 rounded-lg border ${
+              isDarkMode 
+                ? 'bg-white text-black border-neutral-200 hover:border-neutral-300' 
+                : 'bg-gray-900 text-white border-transparent'
+            } font-medium transition-all duration-300 relative overflow-hidden group hover:shadow-lg`}
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
           >
-            <span className="relative z-10">View Projects</span>
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              initial={{ x: "-100%" }}
-              whileHover={{ x: 0 }}
-              transition={{ duration: 0.3 }}
-            />
+            <span className="relative z-10 flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+              View Projects
+            </span>
           </motion.button>
 
           <motion.button
             onClick={() => scrollToSection("contact")}
-            className="px-8 py-3 rounded-full border-2 border-gray-900 text-gray-900 font-medium transition-all duration-300 relative overflow-hidden group"
+            className={`px-8 py-3 rounded-lg border ${
+              isDarkMode 
+                ? 'border-neutral-600 hover:border-neutral-500' 
+                : 'border-neutral-400 hover:border-neutral-500'
+            } text-gray-900 font-medium transition-all duration-300 relative overflow-hidden group hover:shadow-lg`}
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
           >
-            <span className="relative z-10">Get in Touch</span>
-            <motion.div
-              className="absolute inset-0 bg-gray-900 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-              initial={{ x: "-100%" }}
-              whileHover={{ x: 0 }}
-              transition={{ duration: 0.3 }}
-            />
+            <span className="relative z-10 flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Get in Touch
+            </span>
           </motion.button>
         </motion.div>
       </motion.div>

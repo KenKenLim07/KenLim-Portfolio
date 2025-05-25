@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { fadeIn, staggerContainer } from '../../animations/motionVariants';
+import { useTheme } from '../../context/ThemeContext';
 
 const SectionWrapper = ({ children, className = "" }) => (
   <section className={`py-6 ${className}`}>
@@ -63,6 +64,7 @@ const skillCategories = [
 ];
 
 export const Skills = () => {
+  const { isDarkMode } = useTheme();
   const [showAll, setShowAll] = useState(false);
   const displayedCategories = showAll ? skillCategories : skillCategories.slice(0, 3);
 
@@ -82,20 +84,28 @@ export const Skills = () => {
       >
         <motion.div
           variants={fadeIn}
-          className="border border-neutral-400 rounded-xl bg-white p-6"
+          className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
+            isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
+          }`}
         >
           <div className="flex justify-between items-center mb-3">
             <div>
-              <h2 className="text-base font-semibold text-neutral-900">
+              <h2 className={`text-base font-semibold mb-1 ${
+                isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+              }`}>
                 Tech Stack
               </h2>
-              <p className="text-xs text-neutral-600 leading-relaxed">
+              <p className={`text-xs leading-relaxed mb-4 ${
+                isDarkMode ? 'text-gray-300' : 'text-neutral-600'
+              }`}>
                 Technologies and tools I work with
               </p>
             </div>
             <motion.button
               onClick={toggleShowAll}
-              className="text-xs font-medium text-neutral-900 hover:text-neutral-700 transition-colors"
+              className={`text-xs font-medium ${
+                isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-900 hover:text-neutral-700'
+              } transition-colors`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -110,9 +120,15 @@ export const Skills = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="space-y-1.5"
+                className={`border border-neutral-400 rounded-xl p-4 transition-colors duration-300 ${
+                  isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
+                }`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
-                <h3 className="text-xs font-semibold text-neutral-800">
+                <h3 className={`text-xs font-semibold mb-2 ${
+                  isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+                }`}>
                   {category.title}
                 </h3>
 
@@ -123,7 +139,11 @@ export const Skills = () => {
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.2, delay: i * 0.05 }}
-                      className="px-2 py-1 rounded-md border border-neutral-400 bg-white text-xs text-neutral-700 hover:border-neutral-500 hover:bg-neutral-50 transition-all duration-300"
+                      className={`text-xs px-2 py-1 rounded-md border ${
+                        isDarkMode 
+                          ? 'border-neutral-600 bg-dark-hover text-gray-300' 
+                          : 'border-neutral-400 bg-neutral-50 text-neutral-700'
+                      }`}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
