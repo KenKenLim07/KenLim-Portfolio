@@ -106,11 +106,11 @@ export const About = () => {
             ].map((item, index) => (
               <motion.div 
                 key={index}
-                className={`p-4 rounded-lg transition-colors duration-300 ${
+                className={`p-4 rounded-lg border ${
                   isDarkMode 
-                    ? 'bg-dark-hover text-dark-text' 
-                    : 'bg-neutral-50 text-neutral-900'
-                }`}
+                    ? 'border-neutral-600 bg-dark-hover text-dark-text' 
+                    : 'border-neutral-400 bg-neutral-50 text-neutral-900'
+                } transition-colors duration-300`}
                 variants={fadeIn}
                 whileHover={{ y: -2 }}
               >
