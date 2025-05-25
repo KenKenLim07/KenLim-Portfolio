@@ -48,9 +48,22 @@ const menuItemVariants = {
   },
 };
 
-
-
 export const MobileMenu = ({ isOpen, onClose }) => {
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 80; // match the desktop offset
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+      onClose();
+    }
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -72,13 +85,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
             {sections.map(({ id, label }) => (
               <motion.button
                 key={id}
-                onClick={() => {
-                  onClose();
-                  const element = document.getElementById(id);
-                  if (element) {
-                    element.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
+                onClick={() => scrollToSection(id)}
                 variants={menuItemVariants}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -112,7 +119,7 @@ export const Navbar = () => {
     if (element) {
       const offset = 80; // adjust based on navbar height
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      const offsetPosition = elementPosition + window.scrollY - offset;
 
       window.scrollTo({
         top: offsetPosition,

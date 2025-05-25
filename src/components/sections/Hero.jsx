@@ -46,14 +46,15 @@ export const Hero = () => {
           variants={fadeInUp}
         >
           <motion.a
-            href="#projects"
-            className="px-8 py-3 rounded-full bg-gray-900 text-white font-medium transition-all duration-300 relative overflow-hidden group"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span className="relative z-10">View Projects</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </motion.a>
+  href="#projects"
+  className="px-8 py-3 rounded-full bg-gray-900 text-white font-medium transition-all duration-300 relative overflow-hidden group flex items-center justify-center"
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+>
+  <span className="relative z-10">View Projects</span>
+  <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+</motion.a>
+
           <motion.a
             href="#contact"
             className="px-8 py-3 rounded-full border-2 border-gray-900 text-gray-900 font-medium transition-all duration-300 relative overflow-hidden group"
