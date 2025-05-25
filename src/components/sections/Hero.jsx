@@ -68,8 +68,8 @@ export const Hero = () => {
   
   // Calculate scroll progress for smoother transitions
   const heroHeight = 1000; // Approximate hero section height
-  const fadeStart = 300; // Start fading at this scroll position
-  const fadeEnd = 600; // Complete fade at this position
+  const fadeStart = 100; // Start fading even earlier
+  const fadeEnd = 300; // Complete fade earlier
   
   const blobOpacity = useTransform(
     scrollY,
@@ -99,28 +99,35 @@ export const Hero = () => {
         className="fixed inset-0 pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
         style={{ 
           opacity: blobOpacity,
           transition: "opacity 0.3s ease-out"
         }}
       >
         <motion.div 
-          className="absolute top-[10%] -left-[15%] md:-left-[10%] w-48 md:w-72 h-48 md:h-72 bg-purple-300/60 rounded-full mix-blend-soft-light filter blur-xl animate-blob"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          className="absolute top-[10%] -left-[15%] md:-left-[10%] w-48 md:w-72 h-48 md:h-72 bg-purple-300/60 rounded-full mix-blend-soft-light filter blur-xl"
+          initial={{ scale: 0.8, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
         />
         <motion.div 
-          className="absolute top-[15%] -right-[15%] md:-right-[10%] w-48 md:w-72 h-48 md:h-72 bg-yellow-300/60 rounded-full mix-blend-soft-light filter blur-xl animate-blob animation-delay-2000"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          className="absolute top-[15%] -right-[15%] md:-right-[10%] w-48 md:w-72 h-48 md:h-72 bg-yellow-300/60 rounded-full mix-blend-soft-light filter blur-xl"
+          initial={{ scale: 0.8, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
         />
         <motion.div 
-          className="absolute -bottom-[10%] left-[5%] md:left-[15%] w-48 md:w-72 h-48 md:h-72 bg-pink-300/60 rounded-full mix-blend-soft-light filter blur-xl animate-blob animation-delay-4000"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
+          className="absolute -bottom-[5%] left-[75%] md:left-[85%] w-48 md:w-72 h-48 md:h-72 bg-pink-300/60 rounded-full mix-blend-soft-light filter blur-xl"
+          initial={{ scale: 0.8, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
+        />
+        <motion.div 
+          className="absolute top-[45%] -left-[5%] md:-left-[2%] w-32 md:w-48 h-32 md:h-48 bg-cyan-300/30 rounded-full mix-blend-soft-light filter blur-xl"
+          initial={{ scale: 0.8, opacity: 0, y: 20 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
         />
       </motion.div>
 

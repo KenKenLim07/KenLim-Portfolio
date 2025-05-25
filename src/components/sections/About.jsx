@@ -39,9 +39,6 @@ export const About = () => {
               Outside the keyboard? I do calisthenics. You'll find me doing pull-ups between compile times and pushing to failure like I'm training for both the Olympics and a CTF challenge. It's like DevOps, but for your body: automate progress, monitor form, eliminate bugs (aka bad reps).
             </p>
             
-            <p>
-              I also like sharing knowledge—not just in tech, but in life. I genuinely enjoy lifting others up, whether it's through meaningful conversations, sharing what I've learned, or simply being there when someone needs support. In this journey, I've learned that growth isn't just about personal wins—it's about helping others rise with you. We don't just level up alone—we elevate together.
-            </p>
                 </div>
         </motion.div>
 
