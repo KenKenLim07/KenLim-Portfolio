@@ -19,7 +19,7 @@ function App() {
         <Contact />
       </main>
       <ScrollToTop />
-    </div>
+      </div>
   );
 }
 

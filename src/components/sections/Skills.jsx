@@ -139,3 +139,4 @@ export const Skills = () => {
     </SectionWrapper>
   );
 };
+ 

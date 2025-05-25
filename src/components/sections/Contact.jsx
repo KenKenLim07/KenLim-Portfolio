@@ -52,7 +52,7 @@ export const Contact = () => {
   return (
     <SectionWrapper>
       <motion.div
-        id="contact"
+      id="contact"
         variants={staggerContainer}
         initial="hidden"
         whileInView="show"
@@ -121,47 +121,47 @@ export const Contact = () => {
                   <label htmlFor="name" className="text-xs font-medium text-neutral-900 block mb-1">
                     Name
                   </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
+              <input
+                type="text"
+                id="name"
+                name="name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-3 py-2 text-sm border border-neutral-400 rounded-lg bg-white text-neutral-900 focus:outline-none focus:border-neutral-500 transition-colors duration-200"
-                    required
+                required
                     disabled={isSubmitting}
-                  />
-                </div>
+              />
+            </div>
                 <div>
                   <label htmlFor="email" className="text-xs font-medium text-neutral-900 block mb-1">
                     Email
                   </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
+              <input
+                type="email"
+                id="email"
+                name="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-3 py-2 text-sm border border-neutral-400 rounded-lg bg-white text-neutral-900 focus:outline-none focus:border-neutral-500 transition-colors duration-200"
-                    required
+                required
                     disabled={isSubmitting}
-                  />
-                </div>
+              />
+            </div>
                 <div>
                   <label htmlFor="message" className="text-xs font-medium text-neutral-900 block mb-1">
                     Message
                   </label>
-                  <textarea
-                    id="message"
-                    name="message"
+              <textarea
+                id="message"
+                name="message"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={4}
                     className="w-full px-3 py-2 text-sm border border-neutral-400 rounded-lg bg-white text-neutral-900 focus:outline-none focus:border-neutral-500 transition-colors duration-200"
-                    required
+                required
                     disabled={isSubmitting}
-                  />
-                </div>
+              />
+            </div>
                 {status.message && (
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }}
@@ -177,7 +177,7 @@ export const Contact = () => {
                   </motion.div>
                 )}
                 <motion.button
-                  type="submit"
+              type="submit"
                   className="w-full px-4 py-2 text-sm border border-neutral-400 rounded-lg bg-white text-neutral-900 hover:bg-neutral-50 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.01 }}
@@ -186,9 +186,9 @@ export const Contact = () => {
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </motion.button>
-              </form>
+          </form>
             </motion.div>
-          </div>
+        </div>
         </motion.div>
       </motion.div>
     </SectionWrapper>

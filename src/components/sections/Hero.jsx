@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -61,6 +62,11 @@ const scrollIndicatorVariants = {
 };
 
 export const Hero = () => {
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const aboutRef = useRef(null);
+  const isAboutInView = useInView(aboutRef, { margin: "-100px" });
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -76,13 +82,16 @@ export const Hero = () => {
   };
 
   return (
-    <section id="home" className="min-h-[90vh] flex items-center justify-center py-20 relative overflow-hidden">
+    <section id="home" className="min-h-[100vh] flex items-center justify-center py-20 relative">
       {/* Background gradient blobs */}
       <motion.div
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        style={{ 
+          opacity: isAboutInView ? 0 : 1,
+          transition: "opacity 0.5s ease-in-out"
+        }}
       >
         <div className="absolute top-1/4 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob" />
         <div className="absolute top-1/3 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000" />
@@ -90,7 +99,7 @@ export const Hero = () => {
       </motion.div>
 
       <motion.div
-        className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-10"
+        className="text-center space-y-8 max-w-3xl mx-auto px-4"
         variants={staggerContainer}
         initial="initial"
         animate="animate"
@@ -201,6 +210,9 @@ export const Hero = () => {
           Scroll Down
         </motion.span>
       </motion.div>
+
+      {/* Hidden element to detect About section */}
+      <div ref={aboutRef} className="absolute bottom-0 w-full h-1" />
     </section>
   );
 }; 

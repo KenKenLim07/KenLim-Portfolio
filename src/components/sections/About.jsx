@@ -13,7 +13,7 @@ export const About = () => {
   return (
     <SectionWrapper>
       <motion.div
-        id="about"
+      id="about"
         variants={staggerContainer}
         initial="hidden"
         whileInView="show"
@@ -34,7 +34,7 @@ export const About = () => {
             <p>
               I adapt fast. Whether I'm switching between debugging a web app, exploring AI models, or hunting down security flaws, I thrive in fast-paced, ever-changing environments. Throw me into something unfamiliar—I'll figure it out, tweak it, and probably optimize it just for fun.
             </p>
-            
+
             <p>
               Outside the keyboard? I do calisthenics. You'll find me doing pull-ups between compile times and pushing to failure like I'm training for both the Olympics and a CTF challenge. It's like DevOps, but for your body: automate progress, monitor form, eliminate bugs (aka bad reps).
             </p>
@@ -42,7 +42,7 @@ export const About = () => {
             <p>
               I also like sharing knowledge—not just in tech, but in life. I genuinely enjoy lifting others up, whether it's through meaningful conversations, sharing what I've learned, or simply being there when someone needs support. In this journey, I've learned that growth isn't just about personal wins—it's about helping others rise with you. We don't just level up alone—we elevate together.
             </p>
-          </div>
+                </div>
         </motion.div>
 
         {/* Education Section */}
@@ -56,7 +56,7 @@ export const About = () => {
               <h3 className="text-sm font-medium text-neutral-900">Bachelor of Science in Computer Science</h3>
               <p className="text-sm text-neutral-600">Guimaras State University • 2025</p>
               <p className="text-sm text-neutral-600">First Class Honors</p>
-            </div>
+                </div>
             <div>
               <h3 className="text-sm font-medium text-neutral-900">Relevant Courses</h3>
               <ul className="text-sm text-neutral-600 space-y-1">
@@ -91,7 +91,7 @@ export const About = () => {
                 <p className="text-xs text-neutral-600">{item.desc}</p>
               </motion.div>
             ))}
-          </div>
+        </div>
         </motion.div>
       </motion.div>
     </SectionWrapper>
