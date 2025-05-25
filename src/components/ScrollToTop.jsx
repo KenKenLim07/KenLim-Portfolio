@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const sections = [
   { id: 'home', label: 'Home' },
@@ -14,54 +14,59 @@ export const ScrollToTop = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isScrollingUp, setIsScrollingUp] = useState(false);
+  const [scrollTimeout, setScrollTimeout] = useState(null);
+
+  const updateVisibility = useCallback(() => {
+    const aboutSection = document.getElementById('about');
+    if (!aboutSection) return;
+
+    const aboutRect = aboutSection.getBoundingClientRect();
+    const isInAboutSection = aboutRect.top <= window.innerHeight / 2 && aboutRect.bottom >= window.innerHeight / 2;
+    
+    setIsVisible(isInAboutSection);
+  }, []);
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      const currentScrollY = window.pageYOffset;
-      const scrollDirection = currentScrollY < lastScrollY;
-      setIsScrollingUp(scrollDirection);
-      
-      // Get About section element
-      const aboutSection = document.getElementById('about');
-      if (aboutSection) {
-        const aboutRect = aboutSection.getBoundingClientRect();
-        const aboutMiddle = aboutRect.top + (aboutRect.height / 2);
-        
-        // Show when scrolling past About section's middle
-        if (aboutMiddle < 0) {
-          setIsVisible(true);
-        } 
-        // Hide when scrolling back up to About section's middle
-        else if (aboutMiddle >= 0 && scrollDirection) {
-          setIsVisible(false);
-        }
-      }
-      
-      setLastScrollY(currentScrollY);
-    };
-
     const handleScroll = () => {
-      // Debounce scroll handling
-      requestAnimationFrame(toggleVisibility);
-      
-      // Update active section based on scroll position
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
-      
-      for (const section of sections) {
-        const element = document.getElementById(section.id);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section.id);
-            break;
+      // Clear any existing timeout
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+
+      // Set a new timeout
+      const timeout = setTimeout(() => {
+        const currentScrollY = window.pageYOffset;
+        const scrollDirection = currentScrollY < lastScrollY;
+        setIsScrollingUp(scrollDirection);
+        setLastScrollY(currentScrollY);
+        
+        updateVisibility();
+        
+        // Update active section
+        const scrollPosition = window.scrollY + window.innerHeight / 3;
+        for (const section of sections) {
+          const element = document.getElementById(section.id);
+          if (element) {
+            const { offsetTop, offsetHeight } = element;
+            if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+              setActiveSection(section.id);
+              break;
+            }
           }
         }
-      }
+      }, 50); // 50ms debounce
+
+      setScrollTimeout(timeout);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+    };
+  }, [lastScrollY, scrollTimeout, updateVisibility]);
 
   const scrollToTop = () => {
     window.scrollTo({

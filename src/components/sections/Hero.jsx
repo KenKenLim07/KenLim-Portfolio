@@ -164,7 +164,7 @@ export const Hero = () => {
             Hi, I'm
           </motion.span>
           <motion.h1
-            className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight"
+            className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}

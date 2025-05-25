@@ -4,7 +4,7 @@ import { fadeIn, staggerContainer } from '../../animations/motionVariants';
 
 const SectionWrapper = ({ children, className = "" }) => (
   <section className={`py-6 ${className}`}>
-    <div className="max-w-4xl mx-auto px-4">
+    <div className="max-w-3xl mx-auto px-4">
       {children}
     </div>
   </section>
@@ -82,7 +82,7 @@ export const Skills = () => {
       >
         <motion.div
           variants={fadeIn}
-          className="border border-neutral-300 rounded-lg bg-white p-4"
+          className="border border-neutral-400 rounded-xl bg-white p-6"
         >
           <div className="flex justify-between items-center mb-3">
             <div>
@@ -123,7 +123,7 @@ export const Skills = () => {
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.2, delay: i * 0.05 }}
-                      className="px-2 py-1 rounded-md border border-neutral-200 bg-white text-xs text-neutral-700 hover:border-neutral-400 hover:bg-neutral-50 transition-all duration-300"
+                      className="px-2 py-1 rounded-md border border-neutral-400 bg-white text-xs text-neutral-700 hover:border-neutral-500 hover:bg-neutral-50 transition-all duration-300"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
