@@ -12,14 +12,22 @@ const sections = [
 export const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
+      const currentScrollY = window.pageYOffset;
+      
+      // Show button when scrolling down past 300px
+      if (currentScrollY > 300) {
         setIsVisible(true);
-      } else {
+      }
+      // Only hide when scrolling up and near the top
+      else if (currentScrollY < 100 && currentScrollY < lastScrollY) {
         setIsVisible(false);
       }
+      
+      setLastScrollY(currentScrollY);
     };
 
     const handleScroll = () => {
@@ -42,7 +50,7 @@ export const ScrollToTop = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -85,6 +93,7 @@ export const ScrollToTop = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
             onClick={scrollToTop}
             className="fixed bottom-8 right-8 p-3 rounded-full bg-gray-900 text-white shadow-lg hover:shadow-xl transition-all duration-300 z-50 hover:bg-gray-800"
             aria-label="Scroll to top"
