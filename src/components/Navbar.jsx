@@ -261,21 +261,8 @@ export const Navbar = () => {
                         {section.label}
                       </motion.button>
                     ))}
-                  </div>
-                </nav>
-                <motion.a
-                  href="#"
-                  className={`mt-auto mb-4 text-xs font-medium px-3 py-1.5 rounded-md inline-flex items-center justify-center ${
-                    isDarkMode 
-                      ? 'bg-neutral-200 text-neutral-800 hover:bg-neutral-300' 
-                      : 'bg-neutral-800 text-neutral-200 hover:bg-neutral-700'
-                  } transition-colors`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8, duration: 0.3 }}
-                >
-                  Download CV
-                </motion.a>
+      </div>
+    </nav>
               </div>
             </motion.div>
           </>
