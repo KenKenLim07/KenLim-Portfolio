@@ -256,7 +256,17 @@ export const Navbar = () => {
               } shadow-xl`}
             >
               <div className="p-6 h-full flex flex-col">
-                <nav className="flex-1 mt-8">
+                <button
+                  onClick={toggleMenu}
+                  className={`absolute top-4 right-4 p-2 rounded-lg z-[70] ${
+                    isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
+                  }`}
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+                <nav className="flex-1">
                   <div className="space-y-1">
                     {sections.map((section, index) => (
                       <motion.button
@@ -281,8 +291,8 @@ export const Navbar = () => {
                         {section.label}
                       </motion.button>
                     ))}
-      </div>
-    </nav>
+                  </div>
+                </nav>
               </div>
             </motion.div>
           </>
