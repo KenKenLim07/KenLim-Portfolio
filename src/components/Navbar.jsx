@@ -92,7 +92,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="text-gray-900 font-medium text-lg text-left"
-              >
+          >
                 {label}
               </motion.button>
             ))}
@@ -115,11 +115,12 @@ export const Navbar = () => {
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
+      setIsMenuOpen(false);
+
       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth"
       });
-      setIsMenuOpen(false);
     }
   };
 
@@ -132,18 +133,6 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Add scroll lock effect
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMenuOpen]);
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -151,7 +140,7 @@ export const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled 
             ? isDarkMode 
               ? 'bg-dark-card/95 backdrop-blur-md shadow-[0_1px_2px_-1px_rgba(0,0,0,0.1)]' 
@@ -169,7 +158,7 @@ export const Navbar = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-            >
+          >
               Welcome
             </motion.div>
 
@@ -191,9 +180,9 @@ export const Navbar = () => {
                 >
                   {section.label}
                 </motion.a>
-              ))}
+          ))}
               <ThemeToggle />
-            </div>
+        </div>
 
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center space-x-4">
@@ -204,16 +193,42 @@ export const Navbar = () => {
                   isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
                 }`}
                 whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileTap={{ 
+                  scale: 0.95,
+                  x: isMenuOpen ? 4 : -4,
+                  transition: { duration: 0.2 }
+                }}
+                animate={{
+                  rotate: isMenuOpen ? 180 : 0,
+                  transition: { duration: 0.3, ease: "easeInOut" }
+                }}
               >
                 {isMenuOpen ? (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <motion.svg 
+                    className="w-6 h-6" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    initial={{ opacity: 0, rotate: -90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: 90 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
+                  </motion.svg>
                 ) : (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <motion.svg 
+                    className="w-6 h-6" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    initial={{ opacity: 0, rotate: 90 }}
+                    animate={{ opacity: 1, rotate: 0 }}
+                    exit={{ opacity: 0, rotate: -90 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
+                  </motion.svg>
                 )}
               </motion.button>
             </div>
@@ -231,7 +246,7 @@ export const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 md:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
               onClick={toggleMenu}
             />
             
@@ -241,32 +256,18 @@ export const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className={`fixed top-0 right-0 w-64 h-full z-[60] md:hidden ${
+              className={`fixed top-0 right-0 w-64 h-full z-40 md:hidden ${
                 isDarkMode ? 'bg-black' : 'bg-white'
               } shadow-xl`}
             >
               <div className="p-6 h-full flex flex-col">
-                <button
-                  onClick={toggleMenu}
-                  className={`absolute top-4 right-4 p-2 rounded-lg z-[70] ${
-                    isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
-                  }`}
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-                <nav className="flex-1">
+                <nav className="flex-1 mt-8">
                   <div className="space-y-1">
                     {sections.map((section, index) => (
-                      <motion.a
+                      <motion.button
                         key={section.id}
-                        href={`#${section.id}`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          scrollToSection(section.id);
-                        }}
-                        className={`block py-3 px-4 rounded-lg text-sm font-medium ${
+                        onClick={() => scrollToSection(section.id)}
+                        className={`block w-full text-left py-3 px-4 rounded-lg text-sm font-medium ${
                           isDarkMode 
                             ? 'text-gray-300 hover:text-white hover:bg-neutral-900' 
                             : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
@@ -280,10 +281,40 @@ export const Navbar = () => {
                         }}
                       >
                         {section.label}
-                      </motion.a>
+                      </motion.button>
                     ))}
                   </div>
                 </nav>
+                
+                {/* CV Download Button */}
+                <motion.a
+                  href="#"
+                  className={`mt-auto mb-4 inline-flex items-center justify-center px-4 py-2 rounded-md text-xs font-medium ${
+                    isDarkMode 
+                      ? 'bg-transparent text-gray-300 hover:text-white border border-neutral-800 hover:border-neutral-700' 
+                      : 'bg-transparent text-neutral-600 hover:text-neutral-900 border border-neutral-200 hover:border-neutral-300'
+                  } transition-colors`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.3 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <svg 
+                    className="w-3 h-3 mr-1.5" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                    />
+                  </svg>
+                  Download CV
+                </motion.a>
               </div>
             </motion.div>
           </>
