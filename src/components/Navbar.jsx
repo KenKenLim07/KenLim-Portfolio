@@ -115,16 +115,21 @@ export const Navbar = () => {
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-      // Close menu first
-      setIsMenuOpen(false);
+      // Force scroll to top first to ensure consistent behavior
+      window.scrollTo({
+        top: 0,
+        behavior: "instant"
+      });
 
-      // Use requestAnimationFrame for smoother scrolling
-      requestAnimationFrame(() => {
+      // Then scroll to the target section
+      setTimeout(() => {
         window.scrollTo({
           top: offsetPosition,
           behavior: "smooth"
         });
-      });
+      }, 100);
+
+      setIsMenuOpen(false);
     }
   };
 
@@ -136,6 +141,18 @@ export const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Add scroll lock effect
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -244,7 +261,10 @@ export const Navbar = () => {
                     {sections.map((section, index) => (
                       <motion.button
                         key={section.id}
-                        onClick={() => scrollToSection(section.id)}
+                        onClick={() => {
+                          scrollToSection(section.id);
+                          toggleMenu();
+                        }}
                         className={`block w-full text-left py-3 px-4 rounded-lg text-sm font-medium ${
                           isDarkMode 
                             ? 'text-gray-300 hover:text-white hover:bg-neutral-900' 
