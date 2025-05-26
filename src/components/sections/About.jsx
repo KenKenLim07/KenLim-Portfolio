@@ -53,36 +53,57 @@ export const About = () => {
         {/* Education Section */}
         <motion.div 
           variants={fadeIn}
-          className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
+          className={`border border-neutral-400 rounded-xl p-4 transition-colors duration-300 ${
             isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
         >
-          <h2 className={`text-lg font-semibold mb-2 ${
+          <h2 className={`text-lg font-semibold mb-3 ${
             isDarkMode ? 'text-dark-text' : 'text-neutral-900'
           }`}>Education</h2>
-          <div className="space-y-4">
-            <div>
-              <h3 className={`text-sm font-medium ${
-                isDarkMode ? 'text-dark-text' : 'text-neutral-900'
-              }`}>Bachelor of Science in Computer Science</h3>
-              <p className={`text-sm ${
+          <div className="space-y-3">
+            <div className={`p-3 rounded-lg border ${
+              isDarkMode 
+                ? 'border-neutral-600 bg-dark-hover text-dark-text' 
+                : 'border-neutral-400 bg-neutral-50 text-neutral-900'
+            }`}>
+              <div className="flex items-center justify-between mb-1">
+                <h3 className={`text-sm font-medium ${
+                  isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+                }`}>Bachelor of Science in Computer Science</h3>
+                <span className={`text-xs px-2 py-0.5 rounded-md border ${
+                  isDarkMode 
+                    ? 'border-neutral-600 bg-neutral-800/90 text-gray-300' 
+                    : 'border-neutral-400 bg-neutral-50 text-neutral-700'
+                }`}>2025</span>
+              </div>
+              <p className={`text-xs ${
                 isDarkMode ? 'text-gray-300' : 'text-neutral-600'
-              }`}>Guimaras State University • 2025</p>
-              <p className={`text-sm ${
-                isDarkMode ? 'text-gray-300' : 'text-neutral-600'
-              }`}>First Class Honors</p>
+              }`}>Guimaras State University</p>
             </div>
-            <div>
-              <h3 className={`text-sm font-medium ${
+
+            <div className={`p-3 rounded-lg border ${
+              isDarkMode 
+                ? 'border-neutral-600 bg-dark-hover text-dark-text' 
+                : 'border-neutral-400 bg-neutral-50 text-neutral-900'
+            }`}>
+              <h3 className={`text-sm font-medium mb-2 ${
                 isDarkMode ? 'text-dark-text' : 'text-neutral-900'
               }`}>Relevant Courses</h3>
-              <ul className={`text-sm space-y-1 ${
-                isDarkMode ? 'text-gray-300' : 'text-neutral-600'
-              }`}>
-                <li>Data Structures and Algorithms</li>
-                <li>Object-Oriented Programming</li>
-                <li>Cybersecurity</li>
-              </ul>
+              <div className="flex flex-wrap gap-1.5">
+                {[
+                  "Data Structures and Algorithms",
+                  "Object-Oriented Programming",
+                  "Cybersecurity"
+                ].map((course, index) => (
+                  <span key={index} className={`text-xs px-2 py-0.5 rounded-md border ${
+                    isDarkMode 
+                      ? 'border-neutral-600 bg-neutral-800/90 text-gray-300' 
+                      : 'border-neutral-400 bg-neutral-50 text-neutral-700'
+                  }`}>
+                    {course}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </motion.div>
@@ -90,14 +111,14 @@ export const About = () => {
         {/* Interests Grid */}
         <motion.div 
           variants={fadeIn}
-          className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
+          className={`border border-neutral-400 rounded-xl p-4 transition-colors duration-300 ${
             isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
         >
           <h2 className={`text-lg font-semibold mb-2 ${
             isDarkMode ? 'text-dark-text' : 'text-neutral-900'
           }`}>Areas of Interest</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3">
             {[
               { title: "Web Development", desc: "Building responsive and user-friendly web applications" },
               { title: "AI & ML", desc: "Exploring the frontiers of artificial intelligence" },
@@ -106,15 +127,30 @@ export const About = () => {
             ].map((item, index) => (
               <motion.div 
                 key={index}
-                className={`p-4 rounded-lg border ${
+                className={`p-3 rounded-md border ${
                   isDarkMode 
                     ? 'border-neutral-600 bg-dark-hover text-dark-text' 
                     : 'border-neutral-400 bg-neutral-50 text-neutral-900'
                 } transition-colors duration-300`}
                 variants={fadeIn}
-                whileHover={{ y: -2 }}
+                animate={{
+                  y: [0, -12, 0, -6, 0],
+                  x: [0, 4, 0, -4, 0],
+                  transition: {
+                    duration: 4,
+                    repeat: Infinity,
+                    repeatType: "loop",
+                    ease: "easeInOut",
+                    delay: index * 0.4,
+                    times: [0, 0.25, 0.5, 0.75, 1]
+                  }
+                }}
+                whileHover={{ 
+                  scale: 1.02,
+                  transition: { duration: 0.2 }
+                }}
               >
-                <h3 className={`text-sm font-medium mb-1 ${
+                <h3 className={`text-sm font-medium mb-0.5 ${
                   isDarkMode ? 'text-dark-text' : 'text-neutral-900'
                 }`}>{item.title}</h3>
                 <p className={`text-xs ${

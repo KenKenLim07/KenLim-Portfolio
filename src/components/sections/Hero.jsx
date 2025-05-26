@@ -1,6 +1,7 @@
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 import { useTheme } from '../../context/ThemeContext';
+import { BackgroundBlobs } from '../animations/BackgroundBlobs';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -11,7 +12,8 @@ const fadeInUp = {
 const staggerContainer = {
   animate: {
     transition: {
-      staggerChildren: 0.2
+      staggerChildren: 0.15,
+      delayChildren: 0.2
     }
   }
 };
@@ -63,19 +65,15 @@ const scrollIndicatorVariants = {
 };
 
 export const Hero = () => {
-  const { scrollY } = useScroll();
   const heroRef = useRef(null);
   const aboutRef = useRef(null);
   const { isDarkMode } = useTheme();
-  
-  // Calculate scroll progress for smoother transitions
-  const heroHeight = 1000; // Approximate hero section height
-  const fadeStart = 100; // Start fading even earlier
-  const fadeEnd = 300; // Complete fade earlier
-  
-  const blobOpacity = useTransform(
+  const { scrollY } = useScroll();
+
+  // Calculate scroll progress for scroll indicator fade out
+  const scrollIndicatorOpacity = useTransform(
     scrollY,
-    [fadeStart, fadeEnd],
+    [0, 100],
     [1, 0],
     { clamp: true }
   );
@@ -96,309 +94,7 @@ export const Hero = () => {
 
   return (
     <section ref={heroRef} id="home" className="min-h-[100vh] flex items-center justify-center py-20 relative">
-      {/* Background gradient blobs */}
-      <motion.div
-        className="fixed inset-0 pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        style={{ 
-          opacity: blobOpacity,
-          transition: "opacity 0.3s ease-out"
-        }}
-      >
-        {/* Original large blobs */}
-        <motion.div 
-          className="absolute top-[10%] -left-[15%] md:-left-[10%] w-48 md:w-72 h-48 md:h-72 bg-purple-300/60 rounded-full mix-blend-soft-light filter blur-xl"
-          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
-          animate={{ 
-            scale: 1, 
-            opacity: 1, 
-            borderRadius: "50%",
-            x: [0, 15, 0],
-            y: [0, -20, 0]
-          }}
-          transition={{ 
-            duration: 1, 
-            delay: 0.2, 
-            ease: "easeOut",
-            y: {
-              duration: 8,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            },
-            x: {
-              duration: 6,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }
-          }}
-          style={{ 
-            transformOrigin: "center",
-            willChange: "transform, opacity, border-radius"
-          }}
-        />
-        <motion.div 
-          className="absolute top-[15%] -right-[15%] md:-right-[10%] w-48 md:w-72 h-48 md:h-72 bg-yellow-300/60 rounded-full mix-blend-soft-light filter blur-xl"
-          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
-          animate={{ 
-            scale: 1, 
-            opacity: 1, 
-            borderRadius: "50%",
-            x: [0, -20, 0],
-            y: [0, 15, 0]
-          }}
-          transition={{ 
-            duration: 1, 
-            delay: 0.4, 
-            ease: "easeOut",
-            y: {
-              duration: 7,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            },
-            x: {
-              duration: 9,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }
-          }}
-          style={{ 
-            transformOrigin: "center",
-            willChange: "transform, opacity, border-radius"
-          }}
-        />
-        <motion.div 
-          className="absolute -bottom-[5%] right-[-10%] md:right-[-5%] w-40 md:w-72 h-40 md:h-72 bg-pink-300/60 rounded-full mix-blend-soft-light filter blur-xl"
-          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
-          animate={{ 
-            scale: 1, 
-            opacity: 1, 
-            borderRadius: "50%",
-            x: [0, -15, 0],
-            y: [0, -15, 0]
-          }}
-          transition={{ 
-            duration: 1, 
-            delay: 0.6, 
-            ease: "easeOut",
-            y: {
-              duration: 10,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            },
-            x: {
-              duration: 8,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }
-          }}
-          style={{ 
-            transformOrigin: "center",
-            willChange: "transform, opacity, border-radius"
-          }}
-        />
-        <motion.div 
-          className="absolute top-[45%] -left-[5%] md:-left-[2%] w-32 md:w-48 h-32 md:h-48 bg-cyan-300/30 rounded-full mix-blend-soft-light filter blur-xl"
-          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
-          animate={{ 
-            scale: 1, 
-            opacity: 1, 
-            borderRadius: "50%",
-            x: [0, 20, 0],
-            y: [0, 10, 0]
-          }}
-          transition={{ 
-            duration: 1, 
-            delay: 0.8, 
-            ease: "easeOut",
-            y: {
-              duration: 9,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            },
-            x: {
-              duration: 7,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }
-          }}
-          style={{ 
-            transformOrigin: "center",
-            willChange: "transform, opacity, border-radius"
-          }}
-        />
-
-        {/* New smaller blobs with floating animations */}
-        <motion.div 
-          className="absolute top-[30%] left-[20%] w-16 h-16 bg-indigo-300/40 rounded-full mix-blend-soft-light filter blur-lg"
-          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
-          animate={{ 
-            scale: 1, 
-            opacity: 1, 
-            borderRadius: "50%",
-            x: [0, 10, 0],
-            y: [0, -15, 0]
-          }}
-          transition={{ 
-            duration: 1, 
-            delay: 0.3, 
-            ease: "easeOut",
-            y: {
-              duration: 6,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            },
-            x: {
-              duration: 8,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }
-          }}
-          style={{ 
-            transformOrigin: "center",
-            willChange: "transform, opacity, border-radius"
-          }}
-        />
-        <motion.div 
-          className="absolute top-[60%] right-[25%] w-20 h-20 bg-orange-300/40 rounded-full mix-blend-soft-light filter blur-lg"
-          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
-          animate={{ 
-            scale: 1, 
-            opacity: 1, 
-            borderRadius: "50%",
-            x: [0, -12, 0],
-            y: [0, 12, 0]
-          }}
-          transition={{ 
-            duration: 1, 
-            delay: 0.5, 
-            ease: "easeOut",
-            y: {
-              duration: 7,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            },
-            x: {
-              duration: 9,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }
-          }}
-          style={{ 
-            transformOrigin: "center",
-            willChange: "transform, opacity, border-radius"
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-[20%] left-[30%] w-12 h-12 bg-teal-300/40 rounded-full mix-blend-soft-light filter blur-lg"
-          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
-          animate={{ 
-            scale: 1, 
-            opacity: 1, 
-            borderRadius: "50%",
-            x: [0, 15, 0],
-            y: [0, -10, 0]
-          }}
-          transition={{ 
-            duration: 1, 
-            delay: 0.7, 
-            ease: "easeOut",
-            y: {
-              duration: 8,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            },
-            x: {
-              duration: 6,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }
-          }}
-          style={{ 
-            transformOrigin: "center",
-            willChange: "transform, opacity, border-radius"
-          }}
-        />
-        <motion.div 
-          className="absolute top-[25%] right-[15%] w-14 h-14 bg-rose-300/40 rounded-full mix-blend-soft-light filter blur-lg"
-          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
-          animate={{ 
-            scale: 1, 
-            opacity: 1, 
-            borderRadius: "50%",
-            x: [0, -8, 0],
-            y: [0, 8, 0]
-          }}
-          transition={{ 
-            duration: 1, 
-            delay: 0.9, 
-            ease: "easeOut",
-            y: {
-              duration: 9,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            },
-            x: {
-              duration: 7,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }
-          }}
-          style={{ 
-            transformOrigin: "center",
-            willChange: "transform, opacity, border-radius"
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-[35%] right-[10%] w-10 h-10 bg-violet-300/40 rounded-full mix-blend-soft-light filter blur-lg"
-          initial={{ scale: 0.8, opacity: 0, borderRadius: "50%" }}
-          animate={{ 
-            scale: 1, 
-            opacity: 1, 
-            borderRadius: "50%",
-            x: [0, 10, 0],
-            y: [0, -12, 0]
-          }}
-          transition={{ 
-            duration: 1, 
-            delay: 1.1, 
-            ease: "easeOut",
-            y: {
-              duration: 7,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            },
-            x: {
-              duration: 8,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut"
-            }
-          }}
-          style={{ 
-            transformOrigin: "center",
-            willChange: "transform, opacity, border-radius"
-          }}
-        />
-      </motion.div>
+      <BackgroundBlobs />
 
       <motion.div
         className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-10"
@@ -414,7 +110,7 @@ export const Hero = () => {
             className="text-xl text-gray-600 block"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
           >
             Hi, I'm
           </motion.span>
@@ -422,7 +118,7 @@ export const Hero = () => {
             className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
           >
             Jose Marie Lim
           </motion.h1>
@@ -436,14 +132,18 @@ export const Hero = () => {
 
         <motion.p 
           className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto"
-          variants={textVariants}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
         >
           I like Building secure, scalable solutions while pushing the boundaries of what's possible in tech. Currently diving deep into AI, web development, and cybersecurity.
         </motion.p>
 
         <motion.div 
           className="flex gap-3 md:gap-4 justify-center"
-          variants={buttonVariants}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.8 }}
         >
           <motion.button
             onClick={() => scrollToSection("projects")}
@@ -461,6 +161,21 @@ export const Hero = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
               View Projects
+              <motion.span
+                className="ml-1"
+                animate={{
+                  x: [0, 4, 0],
+                  opacity: [1, 0.5, 1]
+                }}
+                transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  ease: "easeInOut"
+                }}
+              >
+                →
+              </motion.span>
             </span>
           </motion.button>
 
@@ -487,27 +202,40 @@ export const Hero = () => {
 
       {/* Scroll Down Indicator */}
       <motion.div 
-        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center"
         variants={scrollIndicatorVariants}
         initial="initial"
         animate="animate"
+        style={{ opacity: scrollIndicatorOpacity }}
       >
-        <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-          <motion.div
-            className="w-1.5 h-3 bg-gray-400 rounded-full mt-2"
-            animate={{
-              y: [0, 12, 0],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              repeatType: "loop",
-              delay: 1.2
-            }}
-          />
-        </div>
+        <motion.div
+          className="w-6 h-6 flex items-center justify-center mb-2"
+          animate={{
+            y: [0, 8, 0],
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            repeatType: "loop",
+            delay: 1.2
+          }}
+        >
+          <svg 
+            className="w-5 h-5 text-gray-400" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={1.5} 
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
+          </svg>
+        </motion.div>
         <motion.span 
-          className="text-xs text-gray-500 mt-2"
+          className="text-xs text-gray-500 tracking-wide"
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ 
             duration: 1.5, 
@@ -515,7 +243,7 @@ export const Hero = () => {
             delay: 1.2
           }}
         >
-          Scroll Down
+          Scroll
         </motion.span>
       </motion.div>
 
