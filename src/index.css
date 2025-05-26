@@ -5,6 +5,8 @@
   :root {
     --text-color: #1f2937;
     --bg-color: #ffffff;
+    --background-light: #fafafa;
+    --background-dark: #171717;
   }
 
   :root[class~="dark"] {
@@ -19,6 +21,42 @@ body {
   padding: 0;
   font-family: "Inter", sans-serif;
   min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--background-light);
+  transition: background-color 0.3s ease;
+}
+
+body {
+  background-color: var(--background-light);
+  transition: background-color 0.3s ease;
+}
+
+.dark body {
+  background-color: var(--background-dark);
+}
+
+/* Prevent content shift on mobile */
+* {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure proper dark mode for all elements */
+.dark {
+  color-scheme: dark;
+}
+
+/* Prevent unwanted margins on mobile */
+@media (max-width: 768px) {
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    overflow-x: hidden;
+  }
 }
 
 /* Base text colors */
