@@ -115,20 +115,10 @@ export const Navbar = () => {
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-      // Force scroll to top first to ensure consistent behavior
       window.scrollTo({
-        top: 0,
-        behavior: "instant"
+        top: offsetPosition,
+        behavior: "smooth"
       });
-
-      // Then scroll to the target section
-      setTimeout(() => {
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth"
-        });
-      }, 100);
-
       setIsMenuOpen(false);
     }
   };
@@ -141,18 +131,6 @@ export const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Add scroll lock effect
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isMenuOpen]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -269,13 +247,14 @@ export const Navbar = () => {
                 <nav className="flex-1">
                   <div className="space-y-1">
                     {sections.map((section, index) => (
-                      <motion.button
+                      <motion.a
                         key={section.id}
-                        onClick={() => {
+                        href={`#${section.id}`}
+                        onClick={(e) => {
+                          e.preventDefault();
                           scrollToSection(section.id);
-                          toggleMenu();
                         }}
-                        className={`block w-full text-left py-3 px-4 rounded-lg text-sm font-medium ${
+                        className={`block py-3 px-4 rounded-lg text-sm font-medium ${
                           isDarkMode 
                             ? 'text-gray-300 hover:text-white hover:bg-neutral-900' 
                             : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
@@ -289,7 +268,7 @@ export const Navbar = () => {
                         }}
                       >
                         {section.label}
-                      </motion.button>
+                      </motion.a>
                     ))}
                   </div>
                 </nav>
