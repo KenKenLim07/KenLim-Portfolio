@@ -115,11 +115,15 @@ export const Navbar = () => {
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
+      // Close menu first
       setIsMenuOpen(false);
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
+      // Use requestAnimationFrame for smoother scrolling
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
       });
     }
   };
@@ -193,42 +197,16 @@ export const Navbar = () => {
                   isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
                 }`}
                 whileHover={{ scale: 1.05 }}
-                whileTap={{ 
-                  scale: 0.95,
-                  x: isMenuOpen ? 4 : -4,
-                  transition: { duration: 0.2 }
-                }}
-                animate={{
-                  rotate: isMenuOpen ? 180 : 0,
-                  transition: { duration: 0.3, ease: "easeInOut" }
-                }}
+                whileTap={{ scale: 0.95 }}
               >
                 {isMenuOpen ? (
-                  <motion.svg 
-                    className="w-6 h-6" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                    initial={{ opacity: 0, rotate: -90 }}
-                    animate={{ opacity: 1, rotate: 0 }}
-                    exit={{ opacity: 0, rotate: 90 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </motion.svg>
+                  </svg>
                 ) : (
-                  <motion.svg 
-                    className="w-6 h-6" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                    initial={{ opacity: 0, rotate: 90 }}
-                    animate={{ opacity: 1, rotate: 0 }}
-                    exit={{ opacity: 0, rotate: -90 }}
-                    transition={{ duration: 0.2 }}
-                  >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  </motion.svg>
+                  </svg>
                 )}
               </motion.button>
             </div>
@@ -285,34 +263,17 @@ export const Navbar = () => {
                     ))}
                   </div>
                 </nav>
-                
-                {/* CV Download Button */}
                 <motion.a
                   href="#"
-                  className={`mt-auto mb-4 inline-flex items-center justify-center px-4 py-2 rounded-md text-xs font-medium ${
+                  className={`mt-auto mb-4 text-xs font-medium px-3 py-1.5 rounded-md inline-flex items-center justify-center ${
                     isDarkMode 
-                      ? 'bg-transparent text-gray-300 hover:text-white border border-neutral-800 hover:border-neutral-700' 
-                      : 'bg-transparent text-neutral-600 hover:text-neutral-900 border border-neutral-200 hover:border-neutral-300'
+                      ? 'bg-neutral-200 text-neutral-800 hover:bg-neutral-300' 
+                      : 'bg-neutral-800 text-neutral-200 hover:bg-neutral-700'
                   } transition-colors`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8, duration: 0.3 }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
                 >
-                  <svg 
-                    className="w-3 h-3 mr-1.5" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth={2} 
-                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                    />
-                  </svg>
                   Download CV
                 </motion.a>
               </div>
