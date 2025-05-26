@@ -132,6 +132,18 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Add scroll lock effect
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -139,7 +151,7 @@ export const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled 
             ? isDarkMode 
               ? 'bg-dark-card/95 backdrop-blur-md shadow-[0_1px_2px_-1px_rgba(0,0,0,0.1)]' 
@@ -219,7 +231,7 @@ export const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 md:hidden"
               onClick={toggleMenu}
             />
             
@@ -229,7 +241,7 @@ export const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className={`fixed top-0 right-0 w-64 h-full z-40 md:hidden ${
+              className={`fixed top-0 right-0 w-64 h-full z-[60] md:hidden ${
                 isDarkMode ? 'bg-black' : 'bg-white'
               } shadow-xl`}
             >
@@ -270,8 +282,8 @@ export const Navbar = () => {
                         {section.label}
                       </motion.a>
                     ))}
-                  </div>
-                </nav>
+      </div>
+    </nav>
               </div>
             </motion.div>
           </>
