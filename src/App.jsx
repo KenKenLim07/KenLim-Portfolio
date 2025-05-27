@@ -9,11 +9,17 @@ import { ThemeProvider } from './context/ThemeContext';
 import { useTheme } from './context/ThemeContext';
 import "./index.css";
 
-const AppContent = () => {
+function AppContent() {
   const { isDarkMode } = useTheme();
-
+  
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'bg-neutral-900' : 'bg-neutral-50'}`}>
+    <div 
+      className="min-h-screen transition-colors duration-300"
+      style={{
+        backgroundColor: isDarkMode ? '#0e0e0e' : '#ffffff',
+        color: isDarkMode ? '#f1f1f1' : '#111827'
+      }}
+    >
       <div className="relative">
         <Navbar />
         <main className="relative z-0">
@@ -27,14 +33,14 @@ const AppContent = () => {
       </div>
     </div>
   );
-};
+}
 
-const App = () => {
+function App() {
   return (
     <ThemeProvider>
       <AppContent />
     </ThemeProvider>
   );
-};
+}
 
 export default App;

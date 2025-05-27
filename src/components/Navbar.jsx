@@ -92,7 +92,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="text-gray-900 font-medium text-lg text-left"
-          >
+              >
                 {label}
               </motion.button>
             ))}
@@ -169,7 +169,7 @@ export const Navbar = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
-          >
+            >
               Welcome
             </motion.div>
 
@@ -191,9 +191,9 @@ export const Navbar = () => {
                 >
                   {section.label}
                 </motion.a>
-          ))}
+              ))}
               <ThemeToggle />
-        </div>
+            </div>
 
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center space-x-4">
@@ -282,8 +282,8 @@ export const Navbar = () => {
                         {section.label}
                       </motion.a>
                     ))}
-      </div>
-    </nav>
+                  </div>
+                </nav>
               </div>
             </motion.div>
           </>
