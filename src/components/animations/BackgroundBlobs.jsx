@@ -61,7 +61,7 @@ export const BackgroundBlobs = () => {
 
   return (
     <motion.div
-      className="fixed inset-0 pointer-events-none"
+      className="fixed inset-0 pointer-events-none overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
@@ -88,7 +88,7 @@ export const BackgroundBlobs = () => {
         yDuration={7}
       />
       <Blob 
-        className="absolute -bottom-[5%] right-[-10%] md:right-[-5%] w-40 md:w-72 h-40 md:h-72 bg-pink-300/60 rounded-full mix-blend-soft-light filter blur-xl"
+        className="absolute -bottom-[5%] right-[-10%] md:right-[-5%] w-32 md:w-64 h-32 md:h-64 bg-emerald-300/60 rounded-full mix-blend-soft-light filter blur-xl"
         initialDelay={0.7}
         xAnimation={[0, -15, 0]}
         yAnimation={[0, -15, 0]}
