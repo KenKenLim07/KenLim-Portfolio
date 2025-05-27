@@ -151,7 +151,7 @@ export const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled 
             ? isDarkMode 
               ? 'bg-dark-card/95 backdrop-blur-md shadow-[0_1px_2px_-1px_rgba(0,0,0,0.1)]' 
@@ -206,15 +206,52 @@ export const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {isMenuOpen ? (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                ) : (
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                )}
+                <motion.div
+                  className="w-6 h-6 flex flex-col justify-center items-center relative"
+                  animate={isMenuOpen ? "open" : "closed"}
+                >
+                  <motion.span
+                    className="w-6 h-0.5 bg-current block origin-center absolute"
+                    variants={{
+                      closed: { rotate: 0, y: -6 },
+                      open: { 
+                        rotate: 45, 
+                        y: 0,
+                        transition: {
+                          duration: 0.4,
+                          ease: [0.34, 1.56, 0.64, 1]
+                        }
+                      }
+                    }}
+                  />
+                  <motion.span
+                    className="w-6 h-0.5 bg-current block absolute"
+                    variants={{
+                      closed: { opacity: 1, y: 0 },
+                      open: { 
+                        opacity: 0,
+                        transition: {
+                          duration: 0.2,
+                          ease: "easeInOut"
+                        }
+                      }
+                    }}
+                  />
+                  <motion.span
+                    className="w-6 h-0.5 bg-current block origin-center absolute"
+                    variants={{
+                      closed: { rotate: 0, y: 6 },
+                      open: { 
+                        rotate: -45, 
+                        y: 0,
+                        transition: {
+                          duration: 0.4,
+                          ease: [0.34, 1.56, 0.64, 1]
+                        }
+                      }
+                    }}
+                  />
+                </motion.div>
               </motion.button>
             </div>
           </div>
@@ -222,7 +259,7 @@ export const Navbar = () => {
       </motion.nav>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isMenuOpen && (
           <>
             {/* Backdrop */}
@@ -231,7 +268,7 @@ export const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 md:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
               onClick={toggleMenu}
             />
             
@@ -240,22 +277,17 @@ export const Navbar = () => {
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className={`fixed top-0 right-0 w-64 h-full z-[60] md:hidden ${
+              transition={{ 
+                type: "spring", 
+                damping: 25, 
+                stiffness: 200,
+                duration: 0.3
+              }}
+              className={`fixed top-0 right-0 w-64 h-full z-40 md:hidden ${
                 isDarkMode ? 'bg-black' : 'bg-white'
               } shadow-xl`}
             >
-              <div className="p-6 h-full flex flex-col">
-                <button
-                  onClick={toggleMenu}
-                  className={`absolute top-4 right-4 p-2 rounded-lg z-[70] ${
-                    isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
-                  }`}
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
+              <div className="p-6 h-full flex flex-col pt-20">
                 <nav className="flex-1">
                   <div className="space-y-1">
                     {sections.map((section, index) => (
@@ -272,11 +304,37 @@ export const Navbar = () => {
                             : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
                         } transition-colors`}
                         initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ 
-                          delay: 0.4 + (index * 0.1),
-                          duration: 0.3,
-                          ease: "easeOut"
+                        animate={{ 
+                          opacity: 1, 
+                          x: 0,
+                          transition: {
+                            duration: 0.4,
+                            delay: 0.3 + (index * 0.1),
+                            ease: [0.34, 1.56, 0.64, 1]
+                          }
+                        }}
+                        exit={{ 
+                          opacity: 0,
+                          x: 20,
+                          transition: {
+                            duration: 0.2,
+                            ease: "easeInOut",
+                            delay: (sections.length - 1 - index) * 0.05
+                          }
+                        }}
+                        whileHover={{ 
+                          scale: 1.02,
+                          transition: {
+                            duration: 0.2,
+                            ease: [0.34, 1.56, 0.64, 1]
+                          }
+                        }}
+                        whileTap={{ 
+                          scale: 0.98,
+                          transition: {
+                            duration: 0.1,
+                            ease: [0.34, 1.56, 0.64, 1]
+                          }
                         }}
                       >
                         {section.label}
@@ -284,6 +342,53 @@ export const Navbar = () => {
                     ))}
                   </div>
                 </nav>
+                
+                {/* Download CV Button */}
+                <motion.a
+                  href="#"
+                  className={`mt-4 text-xs font-medium px-4 py-2 rounded-lg border ${
+                    isDarkMode 
+                      ? 'border-neutral-700 text-gray-300 hover:bg-neutral-900 hover:text-white' 
+                      : 'border-neutral-300 text-neutral-600 hover:bg-neutral-50 hover:text-neutral-900'
+                  } transition-colors flex items-center justify-center gap-2`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ 
+                    opacity: 1, 
+                    y: 0,
+                    transition: {
+                      duration: 0.4,
+                      delay: 0.6,
+                      ease: [0.34, 1.56, 0.64, 1]
+                    }
+                  }}
+                  exit={{ 
+                    opacity: 0,
+                    y: 20,
+                    transition: {
+                      duration: 0.2,
+                      ease: "easeInOut"
+                    }
+                  }}
+                  whileHover={{ 
+                    scale: 1.02,
+                    transition: {
+                      duration: 0.2,
+                      ease: [0.34, 1.56, 0.64, 1]
+                    }
+                  }}
+                  whileTap={{ 
+                    scale: 0.98,
+                    transition: {
+                      duration: 0.1,
+                      ease: [0.34, 1.56, 0.64, 1]
+                    }
+                  }}
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  Download CV
+                </motion.a>
               </div>
             </motion.div>
           </>
