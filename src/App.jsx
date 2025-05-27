@@ -14,15 +14,15 @@ function AppContent() {
   
   return (
     <div 
-      className="min-h-screen transition-colors duration-300"
+      className="min-h-screen w-full transition-colors duration-300"
       style={{
         backgroundColor: isDarkMode ? '#0e0e0e' : '#ffffff',
         color: isDarkMode ? '#f1f1f1' : '#111827'
       }}
     >
-      <div className="relative">
+      <div className="relative w-full">
         <Navbar />
-        <main className="relative z-0">
+        <main className="relative z-0 w-full">
           <Hero />
           <About />
           <Projects />
