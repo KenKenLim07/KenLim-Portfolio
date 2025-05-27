@@ -145,6 +145,48 @@ export const BackgroundBlobs = () => {
         xDuration={8}
         yDuration={7}
       />
+
+      {/* Additional small blobs */}
+      <Blob 
+        className="absolute top-[15%] left-[35%] w-8 h-8 bg-emerald-300/30 rounded-full mix-blend-soft-light filter blur-md"
+        initialDelay={2.1}
+        xAnimation={[0, 8, 0]}
+        yAnimation={[0, -8, 0]}
+        xDuration={7}
+        yDuration={6}
+      />
+      <Blob 
+        className="absolute top-[75%] left-[15%] w-6 h-6 bg-amber-300/30 rounded-full mix-blend-soft-light filter blur-md"
+        initialDelay={2.3}
+        xAnimation={[0, -6, 0]}
+        yAnimation={[0, 6, 0]}
+        xDuration={6}
+        yDuration={8}
+      />
+      <Blob 
+        className="absolute top-[40%] right-[35%] w-9 h-9 bg-sky-300/30 rounded-full mix-blend-soft-light filter blur-md"
+        initialDelay={2.5}
+        xAnimation={[0, 7, 0]}
+        yAnimation={[0, -7, 0]}
+        xDuration={8}
+        yDuration={7}
+      />
+      <Blob 
+        className="absolute bottom-[25%] left-[40%] w-7 h-7 bg-fuchsia-300/30 rounded-full mix-blend-soft-light filter blur-md"
+        initialDelay={2.7}
+        xAnimation={[0, -5, 0]}
+        yAnimation={[0, 5, 0]}
+        xDuration={7}
+        yDuration={6}
+      />
+      <Blob 
+        className="absolute top-[85%] right-[30%] w-5 h-5 bg-lime-300/30 rounded-full mix-blend-soft-light filter blur-md"
+        initialDelay={2.9}
+        xAnimation={[0, 4, 0]}
+        yAnimation={[0, -4, 0]}
+        xDuration={6}
+        yDuration={7}
+      />
     </motion.div>
   );
 }; 
