@@ -39,7 +39,13 @@ const Blob = ({ className, initialDelay, xAnimation, yAnimation, xDuration, yDur
     }}
     style={{ 
       transformOrigin: "center",
-      willChange: "transform, opacity, border-radius"
+      willChange: "transform, opacity, border-radius",
+      backfaceVisibility: "hidden",
+      WebkitBackfaceVisibility: "hidden",
+      perspective: 1000,
+      WebkitPerspective: 1000,
+      transform: "translateZ(0)",
+      WebkitTransform: "translateZ(0)"
     }}
     {...props}
   />
@@ -67,7 +73,14 @@ export const BackgroundBlobs = () => {
       transition={{ duration: 0.8, ease: "easeOut" }}
       style={{ 
         opacity: blobOpacity,
-        transition: "opacity 0.3s ease-out"
+        transition: "opacity 0.3s ease-out",
+        willChange: "opacity",
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden",
+        perspective: 1000,
+        WebkitPerspective: 1000,
+        transform: "translateZ(0)",
+        WebkitTransform: "translateZ(0)"
       }}
     >
       {/* Large blobs */}
