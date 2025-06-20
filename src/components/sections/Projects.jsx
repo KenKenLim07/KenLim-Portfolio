@@ -17,6 +17,20 @@ export const Projects = () => {
 
   const projects = [
     {
+      title: "GSU Connect",
+      description: "GSU Connect is a centralized platform that aggregates and displays news, events, and announcements from various Guimaras State University campuses and official sources. I created it to solve the recurring problem of fragmented communication, where important updates were scattered across multiple Facebook pages and websites.",
+      image: "",
+      tech: [
+        "Frontend: React", "+ Vite", "+ Tailwind CSS", "+ Framer Motion", "+ shadcn/ui",
+        "Backend: Node.js", "+ Express", "+ Prisma",
+        "Authentication: Supabase Auth",
+        "Database: PostgreSQL (via Supabase or Railway)"
+      ],
+      github: "",
+      demo: "https://kenkenlim07.github.io/gsu-connect/",
+      category: "Full Stack"
+    },
+    {
       title: "Lost & Found Web",
       description: "A campus-focused platform that makes it easy for students to report lost belongings or share items they've found. By posting pictures, descriptions and item statuses, users help reconnect lost items with their rightful owners, fostering a more responsible and supportive school community.",
       image: lostImage,
@@ -67,14 +81,6 @@ export const Projects = () => {
                   isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
                 }`}
               >
-                <div className="aspect-w-16 aspect-h-9 bg-neutral-50 rounded-md mb-3">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="object-cover w-full h-full rounded-md"
-                  />
-                </div>
-
                 <div className="flex items-center justify-between mb-2">
                   <h3 className={`text-xs font-medium ${
                     isDarkMode ? 'text-dark-text' : 'text-neutral-900'
