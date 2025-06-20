@@ -21,10 +21,10 @@ export const Projects = () => {
       description: "GSU Connect is a centralized platform that aggregates and displays news, events, and announcements from various Guimaras State University campuses and official sources. I created it to solve the recurring problem of fragmented communication, where important updates were scattered across multiple Facebook pages and websites.",
       image: "",
       tech: [
-        "Frontend: React", "+ Vite", "+ Tailwind CSS", "+ Framer Motion", "+ shadcn/ui",
-        "Backend: Node.js", "+ Express", "+ Prisma",
-        "Authentication: Supabase Auth",
-        "Database: PostgreSQL (via Supabase or Railway)"
+        "React", "Vite", "Tailwind CSS", "Framer Motion", "React Query", "React Router", "Lucide/Heroicons", "Radix UI", "PostCSS",
+        "Node.js", "Express", "Supabase", "Cheerio", "node-fetch", "axios",
+        "GitHub",
+        "TypeScript"
       ],
       github: "",
       demo: "https://kenkenlim07.github.io/gsu-connect/",
