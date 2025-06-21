@@ -48,13 +48,10 @@ const Blob = ({ className, initialDelay, xAnimation, yAnimation, xDuration, yDur
 export const BackgroundBlobs = () => {
   const { scrollY } = useScroll();
   
-  // Calculate scroll progress for smoother transitions
-  const fadeStart = 100;
-  const fadeEnd = 300;
-  
+  // More stable scroll-based opacity with larger range
   const blobOpacity = useTransform(
     scrollY,
-    [fadeStart, fadeEnd],
+    [0, 400], // Start fading earlier and over a longer distance
     [1, 0],
     { clamp: true }
   );
@@ -66,12 +63,12 @@ export const BackgroundBlobs = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       style={{ 
-        opacity: blobOpacity,
-        transition: "opacity 0.3s ease-out",
         /* Mobile-specific fixes */
         willChange: "transform, opacity",
         transform: "translateZ(0)",
-        backfaceVisibility: "hidden"
+        backfaceVisibility: "hidden",
+        /* Smooth scroll-based opacity */
+        opacity: blobOpacity
       }}
     >
       {/* Large blobs */}
