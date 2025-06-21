@@ -22,12 +22,38 @@ body {
   width: 100%;
   overflow-x: hidden;
   background-color: var(--bg-color);
+  /* Mobile viewport fixes */
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  /* Prevent mobile browser address bar from causing layout shifts */
+  height: 100%;
+  position: fixed;
+  width: 100%;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
   background-color: var(--bg-color);
+  /* Mobile-specific fixes */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+}
+
+/* Mobile-specific viewport fixes */
+@media screen and (max-width: 768px) {
+  html, body {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+  }
+  
+  #root {
+    height: auto;
+    min-height: 100vh;
+  }
 }
 
 /* Base text colors */

@@ -61,13 +61,17 @@ export const BackgroundBlobs = () => {
 
   return (
     <motion.div
-      className="fixed inset-0 pointer-events-none"
+      className="fixed inset-0 pointer-events-none z-0"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       style={{ 
         opacity: blobOpacity,
-        transition: "opacity 0.3s ease-out"
+        transition: "opacity 0.3s ease-out",
+        /* Mobile-specific fixes */
+        willChange: "transform, opacity",
+        transform: "translateZ(0)",
+        backfaceVisibility: "hidden"
       }}
     >
       {/* Large blobs */}
@@ -88,14 +92,6 @@ export const BackgroundBlobs = () => {
         yDuration={7}
       />
       <Blob 
-        className="absolute -bottom-[5%] right-[-10%] md:right-[-5%] w-32 md:w-64 h-32 md:h-64 bg-emerald-300/60 rounded-full mix-blend-soft-light filter blur-xl"
-        initialDelay={0.7}
-        xAnimation={[0, -15, 0]}
-        yAnimation={[0, -15, 0]}
-        xDuration={8}
-        yDuration={10}
-      />
-      <Blob 
         className="absolute top-[45%] -left-[5%] md:-left-[2%] w-32 md:w-48 h-32 md:h-48 bg-cyan-300/30 rounded-full mix-blend-soft-light filter blur-xl"
         initialDelay={0.9}
         xAnimation={[0, 20, 0]}
@@ -104,7 +100,7 @@ export const BackgroundBlobs = () => {
         yDuration={9}
       />
 
-      {/* Small blobs */}
+      {/* Small blobs - Reduced for mobile performance */}
       <Blob 
         className="absolute top-[30%] left-[20%] w-16 h-16 bg-indigo-300/40 rounded-full mix-blend-soft-light filter blur-lg"
         initialDelay={1.1}
@@ -146,47 +142,49 @@ export const BackgroundBlobs = () => {
         yDuration={7}
       />
 
-      {/* Additional small blobs */}
-      <Blob 
-        className="absolute top-[15%] left-[35%] w-8 h-8 bg-emerald-300/30 rounded-full mix-blend-soft-light filter blur-md"
-        initialDelay={2.1}
-        xAnimation={[0, 8, 0]}
-        yAnimation={[0, -8, 0]}
-        xDuration={7}
-        yDuration={6}
-      />
-      <Blob 
-        className="absolute top-[75%] left-[15%] w-6 h-6 bg-amber-300/30 rounded-full mix-blend-soft-light filter blur-md"
-        initialDelay={2.3}
-        xAnimation={[0, -6, 0]}
-        yAnimation={[0, 6, 0]}
-        xDuration={6}
-        yDuration={8}
-      />
-      <Blob 
-        className="absolute top-[40%] right-[35%] w-9 h-9 bg-sky-300/30 rounded-full mix-blend-soft-light filter blur-md"
-        initialDelay={2.5}
-        xAnimation={[0, 7, 0]}
-        yAnimation={[0, -7, 0]}
-        xDuration={8}
-        yDuration={7}
-      />
-      <Blob 
-        className="absolute bottom-[25%] left-[40%] w-7 h-7 bg-fuchsia-300/30 rounded-full mix-blend-soft-light filter blur-md"
-        initialDelay={2.7}
-        xAnimation={[0, -5, 0]}
-        yAnimation={[0, 5, 0]}
-        xDuration={7}
-        yDuration={6}
-      />
-      <Blob 
-        className="absolute top-[85%] right-[30%] w-5 h-5 bg-lime-300/30 rounded-full mix-blend-soft-light filter blur-md"
-        initialDelay={2.9}
-        xAnimation={[0, 4, 0]}
-        yAnimation={[0, -4, 0]}
-        xDuration={6}
-        yDuration={7}
-      />
+      {/* Additional small blobs - Only show on larger screens for performance */}
+      <div className="hidden md:block">
+        <Blob 
+          className="absolute top-[15%] left-[35%] w-8 h-8 bg-emerald-300/30 rounded-full mix-blend-soft-light filter blur-md"
+          initialDelay={2.1}
+          xAnimation={[0, 8, 0]}
+          yAnimation={[0, -8, 0]}
+          xDuration={7}
+          yDuration={6}
+        />
+        <Blob 
+          className="absolute top-[75%] left-[15%] w-6 h-6 bg-amber-300/30 rounded-full mix-blend-soft-light filter blur-md"
+          initialDelay={2.3}
+          xAnimation={[0, -6, 0]}
+          yAnimation={[0, 6, 0]}
+          xDuration={6}
+          yDuration={8}
+        />
+        <Blob 
+          className="absolute top-[40%] right-[35%] w-9 h-9 bg-sky-300/30 rounded-full mix-blend-soft-light filter blur-md"
+          initialDelay={2.5}
+          xAnimation={[0, 7, 0]}
+          yAnimation={[0, -7, 0]}
+          xDuration={8}
+          yDuration={7}
+        />
+        <Blob 
+          className="absolute bottom-[25%] left-[40%] w-7 h-7 bg-fuchsia-300/30 rounded-full mix-blend-soft-light filter blur-md"
+          initialDelay={2.7}
+          xAnimation={[0, -5, 0]}
+          yAnimation={[0, 5, 0]}
+          xDuration={7}
+          yDuration={6}
+        />
+        <Blob 
+          className="absolute top-[85%] right-[30%] w-5 h-5 bg-lime-300/30 rounded-full mix-blend-soft-light filter blur-md"
+          initialDelay={2.9}
+          xAnimation={[0, 4, 0]}
+          yAnimation={[0, -4, 0]}
+          xDuration={6}
+          yDuration={7}
+        />
+      </div>
     </motion.div>
   );
 }; 
