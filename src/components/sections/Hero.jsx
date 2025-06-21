@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { useTheme } from '../../context/ThemeContext';
-import { BackgroundBlobs } from '../animations/BackgroundBlobs';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -94,8 +93,6 @@ export const Hero = () => {
 
   return (
     <section ref={heroRef} id="home" className="min-h-[100vh] flex items-center justify-center py-20 relative">
-      <BackgroundBlobs />
-
       <motion.div
         className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-10"
         variants={staggerContainer}
