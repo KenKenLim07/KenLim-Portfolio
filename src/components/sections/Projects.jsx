@@ -18,7 +18,7 @@ export const Projects = () => {
   const projects = [
     {
       title: "GSU Connect",
-      description: "GSU Connect is a centralized platform that aggregates and displays news, events, and announcements from various Guimaras State University campuses and official sources. I created it to solve the recurring problem of fragmented communication, where important updates were scattered across multiple Facebook pages and websites.",
+      description: "GSU Connect is a centralized platform that aggregates and displays news, events, and announcements from various Guimaras State University official sources. I created it to solve the recurring problem of fragmented communication, where important updates were scattered across multiple school portals",
       image: "",
       tech: [
         "React", "Vite", "Tailwind CSS", "Framer Motion", "React Query", "React Router", "Lucide/Heroicons", "Radix UI", "PostCSS",
@@ -126,7 +126,7 @@ export const Projects = () => {
                     rel="noopener noreferrer"
                     className={`flex items-center gap-1.5 px-2 py-1 rounded-md border-2 text-xs ${
                       isDarkMode 
-                        ? 'border-neutral-600 bg-neutral-900/90 hover:bg-neutral-800/90 text-white' 
+                        ? 'border-neutral-600 bg-white hover:bg-neutral-100 text-black' 
                         : 'border-neutral-400 bg-neutral-900/90 hover:bg-neutral-800/90 text-white'
                     }`}
                     whileHover={{ scale: 1.05 }}
@@ -144,7 +144,7 @@ export const Projects = () => {
                     rel="noopener noreferrer"
                     className={`flex items-center gap-1.5 px-2 py-1 rounded-md border-2 text-xs ${
                       isDarkMode 
-                        ? 'border-neutral-600 bg-white hover:bg-neutral-50 text-black' 
+                        ? 'border-neutral-600 bg-transparent hover:bg-neutral-900/40 text-white' 
                         : 'border-neutral-400 bg-white hover:bg-neutral-50 text-gray-900'
                     }`}
                     whileHover={{ scale: 1.05 }}

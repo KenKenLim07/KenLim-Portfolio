@@ -123,10 +123,10 @@ export const Hero = () => {
             Jose Marie Lim
           </motion.h1>
           <motion.div
-            className={`h-1 w-20 mx-auto ${isDarkMode ? 'bg-white' : 'bg-gray-900'}`}
+            className={`h-1 w-40 mx-auto ${isDarkMode ? 'bg-white' : 'bg-gray-900'}`}
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
+            transition={{ delay: 0.6, duration: 1 }}
           />
         </motion.div>
 

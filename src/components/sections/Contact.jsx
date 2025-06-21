@@ -61,13 +61,13 @@ export const Contact = () => {
   const contactInfo = [
     {
       title: "Email",
-      value: "kenkenlim07@gmail.com",
+      value: "Josemarielim7@gmail.com",
       icon: (
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       ),
-      link: "mailto:kenkenlim07@gmail.com"
+      link: "mailto:Josemarielim7@gmail.com"
     },
     {
       title: "Facebook",
@@ -126,19 +126,10 @@ export const Contact = () => {
                     whileHover={{ x: 2 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <div className={`p-1.5 rounded-md ${
-                      isDarkMode ? 'bg-neutral-800/90' : 'bg-neutral-50'
-                    }`}>
-                      {contactInfo[0].icon}
-                    </div>
-                    <div>
-                      <h4 className={`text-xs font-medium ${
-                        isDarkMode ? 'text-dark-text' : 'text-neutral-900'
-                      }`}>{contactInfo[0].title}</h4>
-                      <p className={`text-xs ${
-                        isDarkMode ? 'text-gray-300' : 'text-neutral-600'
-                      }`}>{contactInfo[0].value}</p>
-                    </div>
+                    {contactInfo[0].icon}
+                    <span className={`text-xs ${
+                      isDarkMode ? 'text-gray-300' : 'text-neutral-600'
+                    }`}>{contactInfo[0].value}</span>
                   </motion.a>
 
                   {/* Social Links */}
@@ -150,8 +141,8 @@ export const Contact = () => {
                       variants={fadeIn}
                       className={`flex items-center gap-1.5 px-2 py-1 rounded-md border ${
                         isDarkMode 
-                          ? 'border-neutral-600 bg-neutral-800/90 hover:bg-neutral-700/90 text-gray-300' 
-                          : 'border-neutral-400 bg-neutral-50 hover:bg-neutral-100 text-neutral-700'
+                          ? 'border-neutral-600 hover:bg-neutral-900/40 text-gray-300' 
+                          : 'border-neutral-400 hover:bg-neutral-50 text-neutral-700'
                       } transition-colors`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -167,8 +158,8 @@ export const Contact = () => {
                       variants={fadeIn}
                       className={`flex items-center gap-1.5 px-2 py-1 rounded-md border ${
                         isDarkMode 
-                          ? 'border-neutral-600 bg-neutral-800/90 hover:bg-neutral-700/90 text-gray-300' 
-                          : 'border-neutral-400 bg-neutral-50 hover:bg-neutral-100 text-neutral-700'
+                          ? 'border-neutral-600 hover:bg-neutral-900/40 text-gray-300' 
+                          : 'border-neutral-400 hover:bg-neutral-50 text-neutral-700'
                       } transition-colors`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
