@@ -43,13 +43,14 @@ export const MobileMenu = ({ isOpen, onClose }) => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80; // Adjust this value based on your navbar height
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
-
+      const navbar = document.querySelector('nav');
+      const navbarHeight = navbar ? navbar.offsetHeight : 80; // Fallback to 80px
+      const elementTop = element.offsetTop;
+      const offsetPosition = elementTop - navbarHeight - 20; // Extra 20px for spacing
+      
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth'
+        behavior: "smooth"
       });
       onClose(); // Close the menu after clicking
     }

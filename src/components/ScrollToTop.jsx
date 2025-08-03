@@ -75,7 +75,15 @@ export const ScrollToTop = () => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const navbar = document.querySelector('nav');
+      const navbarHeight = navbar ? navbar.offsetHeight : 80; // Fallback to 80px
+      const elementTop = element.offsetTop;
+      const offsetPosition = elementTop - navbarHeight - 20; // Extra 20px for spacing
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
     }
   };
 

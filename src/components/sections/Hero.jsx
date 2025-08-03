@@ -81,23 +81,24 @@ export const Hero = () => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - offset;
-
+      const navbar = document.querySelector('nav');
+      const navbarHeight = navbar ? navbar.offsetHeight : 80; // Fallback to 80px
+      const elementTop = element.offsetTop;
+      const offsetPosition = elementTop - navbarHeight - 20; // Extra 20px for spacing
+      
       window.scrollTo({
         top: offsetPosition,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     }
   };
 
   return (
-    <section ref={heroRef} id="home" className="min-h-[100vh] flex items-center justify-center py-20 relative">
+    <section ref={heroRef} id="home" className="min-h-[100vh] flex items-center justify-center py-20 relative overflow-hidden">
       <BackgroundBlobs />
 
       <motion.div
-        className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-10"
+        className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-20 pb-safe"
         variants={staggerContainer}
         initial="initial"
         animate="animate"
@@ -140,7 +141,7 @@ export const Hero = () => {
         </motion.p>
 
         <motion.div 
-          className="flex gap-3 md:gap-4 justify-center"
+          className="flex gap-3 md:gap-4 justify-center mobile-safe-buttons"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
@@ -202,7 +203,7 @@ export const Hero = () => {
 
       {/* Scroll Down Indicator */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center mobile-safe-buttons"
         variants={scrollIndicatorVariants}
         initial="initial"
         animate="animate"

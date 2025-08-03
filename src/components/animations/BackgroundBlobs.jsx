@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useScroll, useTransform } from 'framer-motion';
+import { useEffect } from 'react';
 
 const Blob = ({ className, initialDelay, xAnimation, yAnimation, xDuration, yDuration, ...props }) => (
   <motion.div 
@@ -48,17 +49,17 @@ const Blob = ({ className, initialDelay, xAnimation, yAnimation, xDuration, yDur
 export const BackgroundBlobs = () => {
   const { scrollY } = useScroll();
   
-  // More stable scroll-based opacity with larger range
+  // More reliable scroll-based opacity with better range
   const blobOpacity = useTransform(
     scrollY,
-    [0, 400], // Start fading earlier and over a longer distance
+    [0, 150], // Fade out over first 150px of scroll
     [1, 0],
     { clamp: true }
   );
 
   return (
     <motion.div
-      className="fixed inset-0 pointer-events-none z-0"
+      className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}

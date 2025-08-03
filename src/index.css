@@ -25,10 +25,6 @@ body {
   /* Mobile viewport fixes */
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
-  /* Use dynamic viewport height to prevent layout shifts */
-  height: 100vh; /* Fallback for older browsers */
-  height: 100dvh; /* Modern browsers */
-  width: 100%;
 }
 
 #root {
@@ -39,24 +35,50 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  height: 100vh; /* Fallback for older browsers */
-  height: 100dvh; /* Modern browsers */
+  /* Use natural height to ensure scroll events work */
+  height: auto;
+}
+
+/* Fallback for browsers that don't support dvh */
+@supports not (height: 100dvh) {
+  #root {
+    height: auto;
+  }
 }
 
 /* Mobile-specific viewport fixes */
 @media screen and (max-width: 768px) {
-  html, body {
-    height: 100vh; /* Fallback for older browsers */
-    height: 100dvh; /* Modern browsers */
-    min-height: 100vh; /* Fallback for older browsers */
-    min-height: 100dvh; /* Modern browsers */
+  #root {
+    /* Use natural height to ensure scroll events work */
+    height: auto;
+    min-height: 100vh;
   }
   
+  /* Handle mobile layout shifts with padding instead of height */
+  body {
+    padding-bottom: 20px; /* Fallback */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Ensure content is visible above mobile browser navigation */
+  .pb-safe {
+    padding-bottom: 20px; /* Fallback */
+    padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
+  }
+  
+  /* Mobile-specific button spacing */
+  .mobile-safe-buttons {
+    margin-bottom: 60px; /* Fallback */
+    margin-bottom: calc(env(safe-area-inset-bottom) + 60px);
+    margin-bottom: calc(var(--mobile-padding, 60px) + 60px); /* JavaScript fallback */
+  }
+}
+
+/* Desktop - use natural height for optimal performance */
+@media screen and (min-width: 769px) {
   #root {
-    height: 100vh; /* Fallback for older browsers */
-    height: 100dvh; /* Modern browsers */
-    min-height: 100vh; /* Fallback for older browsers */
-    min-height: 100dvh; /* Modern browsers */
+    height: auto;
+    min-height: 100vh;
   }
 }
 
@@ -101,6 +123,45 @@ p {
 
 .dark p {
   color: #d1d5db;
+}
+
+/* Scroll offset for navbar - now handled in JavaScript */
+section[id] {
+  padding-top: 20px; /* Additional padding for better spacing */
+}
+
+/* Special case for home section - no offset when navbar is transparent */
+section#home {
+  padding-top: 0px; /* No extra padding for home */
+}
+
+/* Ensure navbar stays on top */
+nav {
+  z-index: 1000 !important;
+}
+
+/* Ensure blobs don't interfere with navbar */
+.absolute.inset-0 {
+  z-index: 0;
+}
+
+/* Ensure backdrop-blur works properly */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Footer styles */
+footer {
+  position: relative;
+  z-index: 10;
+}
+
+/* Mobile-specific footer adjustments */
+@media screen and (max-width: 768px) {
+  footer {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
+  }
 }
 
 @layer utilities {
