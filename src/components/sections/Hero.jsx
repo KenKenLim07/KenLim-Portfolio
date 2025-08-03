@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRef, useMemo } from 'react';
 import React from 'react';
 // import { BackgroundBlobs } from '../animations/BackgroundBlobs';
@@ -18,42 +18,20 @@ const fadeInUp = {
   }
 };
 
-const scrollIndicatorVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.6, -0.05, 0.01, 0.99], // Match Hero easing
-      delay: 1.8 // Coordinated with Hero sequence completion
-    }
-  }
-};
-
 export const Hero = React.memo(() => {
   const { isDarkMode } = useTheme();
   const heroRef = useRef(null);
-  const { scrollY } = useScroll();
   
   // Calculate Hero animation sequence timing
   const heroAnimationTiming = {
-    greeting: 0.2,    // "Hi, I'm"
-    name: 0.4,        // "Jose Marie Lim"
-    divider: 0.6,     // Line divider
-    description: 0.8, // Description text
-    buttons: 1.0,     // Action buttons
+    greeting: 0.2,
+    name: 0.4,
+    divider: 0.6,
+    description: 1.0,
+    buttons: 1.4,
     totalDuration: 1.8 // Total sequence duration
   };
   
-  // Calculate scroll progress for scroll indicator fade out
-  const scrollIndicatorOpacity = useTransform(
-    scrollY,
-    [0, 100],
-    [1, 0],
-    { clamp: true }
-  );
-
   // Memoize scroll function to prevent recreation on every render
   const scrollToSection = useMemo(() => (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -182,42 +160,30 @@ export const Hero = React.memo(() => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Down Indicator */}
-      <motion.div 
-        className="absolute left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center scroll-indicator scroll-indicator-alt"
-        variants={scrollIndicatorVariants}
-        initial="hidden"
-        animate="visible"
-        style={{ 
-          opacity: scrollIndicatorOpacity,
-          bottom: '5rem', // Much higher base positioning
-          transform: 'translateX(-50%) translateY(0)' // Ensure proper centering
+      {/* Scroll Indicator */}
+      <motion.div
+        className="absolute left-1/2 transform -translate-x-1/2 z-10"
+        style={{
+          bottom: '2rem'
         }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.8, duration: 0.6 }}
       >
         <motion.div
-          className="w-6 h-6 flex items-center justify-center"
+          className={`w-6 h-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
           animate={{
             y: [0, 8, 0],
           }}
           transition={{
-            duration: 1.5,
+            duration: 2,
             repeat: Infinity,
             repeatType: "loop",
-            delay: 2.6 // Start bouncing after arrow appears (1.8 + 0.8 = 2.6)
+            delay: 2.6
           }}
         >
-          <svg 
-            className={`w-5 h-5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={1.5} 
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
+          <svg className="w-full h-full" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </motion.div>
       </motion.div>
