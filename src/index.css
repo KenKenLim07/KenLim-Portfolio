@@ -5,11 +5,6 @@
   :root {
     --text-color: #1f2937;
     --bg-color: #ffffff;
-    --navbar-height: 4rem; /* 64px - matches h-16 */
-    
-    /* Messenger-specific viewport fix */
-    --vh: 1vh;
-    --vw: 1vw;
   }
 
   :root[class~="dark"] {
@@ -18,84 +13,265 @@
   }
 }
 
-/* Messenger in-app browser detection and fix */
-@media screen and (max-width: 768px) {
-  :root {
-    /* Use dynamic viewport units that don't change with address bar */
-    --vh: 1vh;
-    --vw: 1vw;
-  }
-  
-  /* Force stable viewport for all sections */
-  section {
-    min-height: 100vh; /* fallback */
-    min-height: calc(var(--vh, 1vh) * 100);
-  }
-  
-  /* Hero section specific fix */
-  #home {
-    min-height: 100vh; /* fallback */
-    min-height: calc(var(--vh, 1vh) * 100);
-  }
-}
-
-/* DEBUG: Visual debugging for layout shifts */
-html {
-  border: 3px solid red !important;
-  background: rgba(255, 0, 0, 0.1) !important;
-}
-
-body {
-  border: 3px solid blue !important;
-  background: rgba(0, 0, 255, 0.1) !important;
-}
-
-#root {
-  border: 3px solid green !important;
-  background: rgba(0, 255, 0, 0.1) !important;
-}
-
-section {
-  border: 2px solid purple !important;
-  background: rgba(128, 0, 128, 0.1) !important;
-}
-
-/* DEBUG: Viewport height display */
-body::before {
-  content: 'Viewport: ' attr(data-vh) 'px';
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  background: black;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  font-size: 12px;
-  z-index: 9999;
-  font-family: monospace;
-}
-
-/* Simplified base styles - matching working project */
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-family: "Inter", sans-serif;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
+html,
 body {
   margin: 0;
-  min-width: 320px;
+  padding: 0;
+  font-family: "Inter", sans-serif;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
   background-color: var(--bg-color);
+  /* Mobile viewport fixes */
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  /* Use dynamic viewport height to prevent layout shifts */
+  height: 100vh; /* Fallback for older browsers */
+  height: 100dvh; /* Modern browsers */
+  width: 100%;
 }
 
 #root {
+  width: 100%;
   min-height: 100vh;
   background-color: var(--bg-color);
+  /* Mobile-specific fixes */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  height: 100vh; /* Fallback for older browsers */
+  height: 100dvh; /* Modern browsers */
+}
+
+/* Mobile-specific viewport fixes */
+@media screen and (max-width: 768px) {
+  html, body {
+    height: 100vh; /* Fallback for older browsers */
+    height: 100dvh; /* Modern browsers */
+    min-height: 100vh; /* Fallback for older browsers */
+    min-height: 100dvh; /* Modern browsers */
+  }
+  
+  #root {
+    height: 100vh; /* Fallback for older browsers */
+    height: 100dvh; /* Modern browsers */
+    min-height: 100vh; /* Fallback for older browsers */
+    min-height: 100dvh; /* Modern browsers */
+  }
+}
+
+/* Base text colors */
+.text-gray-600 {
+  color: #4b5563;
+}
+
+.dark .text-gray-600 {
+  color: #9ca3af;
+}
+
+.text-gray-700 {
+  color: #374151;
+}
+
+.dark .text-gray-700 {
+  color: #d1d5db;
+}
+
+.text-gray-900 {
+  color: #111827;
+}
+
+.dark .text-gray-900 {
+  color: #f1f1f1;
+}
+
+/* Ensure headings are visible */
+h1, h2, h3, h4, h5, h6 {
+  color: #111827;
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: #f1f1f1;
+}
+
+/* Ensure paragraphs are visible */
+p {
+  color: #374151;
+}
+
+.dark p {
+  color: #d1d5db;
+}
+
+@layer utilities {
+  /* Blinking cursor animation */
+  @keyframes soft-blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .animate-soft-blink {
+    animation: soft-blink 1s step-end infinite;
+  }
+
+  /* Loading bar slide animation */
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in-text span {
+    opacity: 0;
+    animation: fade-in 1.4s ease forwards;
+    display: inline-block;
+  }
+
+  @keyframes loading-bar {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-loading-bar {
+    animation: loading-bar 2s ease-in-out forwards;
+    box-shadow: 0 0 10px #facc15;
+  }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes fadeUp {
+    0% {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  @keyframes typewriter {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  .typewriter {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    animation: typewriter 2s steps(50, end) forwards;
+    color: #111827;
+    font-weight: 500;
+  }
+
+  .dark .typewriter {
+    color: #f1f1f1;
+  }
+
+  /* Define the slideDown animation */
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
+  .animate-slideDown {
+    animation: slideDown .5s ease-in forwards;
+  }
+
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(50px);
+    }
+  }
+
+  .animate-fadeSlideUp {
+    animation: fadeSlideUp 1.4s ease-out forwards;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(100px);
+    }
+  }
+
+  .animate-slideInLeft {
+    animation: slideInLeft 0.7s ease-out backwards;
+  }
+
+  /* Blob animation */
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(20px, -30px) scale(1.05);
+    }
+    66% {
+      transform: translate(-15px, 15px) scale(0.95);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+
+  .animate-blob {
+    animation: blob 7s infinite;
+    will-change: transform;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
 }

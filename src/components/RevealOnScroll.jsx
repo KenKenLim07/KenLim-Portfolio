@@ -1,16 +1,26 @@
-// RevealOnScroll.jsx - Simplified for portfolio
-import { motion } from "framer-motion";
-import { useScrollAnimation } from "../hooks/useScrollAnimation";
+// RevealOnScroll.jsx
+import { motion, useAnimation } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { useInView } from "framer-motion";
 
 export const RevealOnScroll = ({
   children,
   animationClass = "",
-  duration = 0.6,
+  duration = 0.7,
   delay = 0.1,
   yOffset = 32,
-  variants,
+  start = true,
+  variants, // NEW: allows custom animations
 }) => {
-  const { ref, isInView, config } = useScrollAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -50px 0px" });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (isInView && start) {
+      controls.start("visible");
+    }
+  }, [isInView, start, controls]);
 
   // Default fallback animation
   const defaultVariants = {
@@ -22,12 +32,8 @@ export const RevealOnScroll = ({
     <motion.div
       ref={ref}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      transition={{ 
-        duration, 
-        delay, 
-        ease: config.ease 
-      }}
+      animate={controls}
+      transition={{ duration, delay, ease: "easeOut" }}
       variants={variants || defaultVariants}
       className={animationClass}
     >

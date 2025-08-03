@@ -111,7 +111,7 @@ export const Navbar = () => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 64; // Navbar height (h-16 = 64px)
+      const offset = 80; // Navbar height + some padding
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -131,6 +131,18 @@ export const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Add scroll lock effect
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -271,9 +283,10 @@ export const Navbar = () => {
                 stiffness: 200,
                 duration: 0.3
               }}
-              className={`fixed top-0 right-0 w-64 h-full z-40 md:hidden ${
+              className={`fixed top-0 right-0 w-64 h-screen z-40 md:hidden ${
                 isDarkMode ? 'bg-black' : 'bg-white'
               } shadow-xl`}
+              style={{ height: '100dvh' }}
             >
               <div className="p-6 h-full flex flex-col pt-20">
                 <nav className="flex-1">

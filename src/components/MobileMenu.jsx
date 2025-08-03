@@ -74,7 +74,8 @@ export const MobileMenu = ({ isOpen, onClose }) => {
             initial="closed"
             animate="open"
             exit="closed"
-            className="fixed right-0 top-0 h-full w-64 bg-white shadow-xl z-[101] p-6"
+            className="fixed right-0 top-0 h-screen w-64 bg-white shadow-xl z-[101] p-6"
+            style={{ height: '100dvh' }}
           >
             <div className="flex justify-end mb-8">
               <button
