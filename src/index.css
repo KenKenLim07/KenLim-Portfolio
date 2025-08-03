@@ -87,6 +87,12 @@ body {
     min-height: 100vh;
     padding-top: 4rem; /* Account for fixed navbar */
   }
+  
+  /* Hero section specific mobile fixes */
+  #home {
+    padding-top: 5rem; /* Extra space for navbar */
+    padding-bottom: 4rem; /* Space for scroll arrow */
+  }
 }
 
 /* Prevent mobile browser address bar from causing layout shifts */

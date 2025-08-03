@@ -82,12 +82,12 @@ export const Hero = React.memo(() => {
     <section 
       ref={heroRef} 
       id="home" 
-      className="min-h-screen flex flex-col justify-center relative pt-16"
+      className="min-h-screen flex flex-col justify-start relative pt-20 pb-16 md:justify-center md:pt-16"
     >
       {/* <BackgroundBlobs /> */}
 
       <motion.div
-        className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-10 flex-1 flex flex-col justify-center"
+        className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-10 mt-8 md:mt-0"
         variants={staggerContainer}
         initial="initial"
         animate="animate"
