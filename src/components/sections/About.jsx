@@ -3,14 +3,6 @@ import { useRef } from 'react';
 import { fadeIn, staggerContainer } from '../../animations/motionVariants';
 import { useTheme } from '../../context/ThemeContext';
 
-const SectionWrapper = ({ children, className = "" }) => (
-  <section className={`py-8 min-h-screen ${className}`}>
-    <div className="max-w-3xl mx-auto px-4 mt-15">
-      {children}
-    </div>
-  </section>
-);
-
 // Senior-level animation variants for About section - optimized for scroll focus
 const aboutAnimations = {
   // Container animations
@@ -183,15 +175,17 @@ export const About = () => {
   const containerRef = useRef(null);
 
   return (
-    <SectionWrapper>
+    <section 
+      ref={containerRef}
+      id="about"
+      className="min-h-screen flex flex-col justify-center relative py-8"
+    >
       <motion.div
-        ref={containerRef}
-        id="about"
         variants={aboutAnimations.container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="space-y-6"
+        className="space-y-6 max-w-3xl mx-auto px-4"
       >
         {/* About Me Section */}
         <motion.div 
@@ -359,6 +353,6 @@ export const About = () => {
           </div>
         </motion.div>
       </motion.div>
-    </SectionWrapper>
+    </section>
   );
 };

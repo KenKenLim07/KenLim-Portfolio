@@ -297,15 +297,17 @@ export const Projects = () => {
   ];
 
   return (
-    <SectionWrapper>
+    <section 
+      ref={containerRef}
+      id="projects"
+      className="min-h-screen flex flex-col justify-center relative py-8"
+    >
       <motion.div
-        ref={containerRef}
-        id="projects"
         variants={projectAnimations.container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="space-y-6"
+        className="space-y-6 max-w-3xl mx-auto px-4"
       >
         <motion.div 
           className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
@@ -468,12 +470,11 @@ export const Projects = () => {
                       →
                     </motion.span>
                   </motion.a>
-              </motion.div>
+                </motion.div>
               </AnimatedProjectCard>
             ))}
           </div>
         </motion.div>
-      </motion.div>
-    </SectionWrapper>
-  );
-};
+      </section>
+    );
+  };

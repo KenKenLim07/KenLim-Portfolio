@@ -3,14 +3,6 @@ import { useRef, useState } from 'react';
 import { fadeIn, staggerContainer } from '../../animations/motionVariants';
 import { useTheme } from '../../context/ThemeContext';
 
-const SectionWrapper = ({ children, className = "" }) => (
-  <section className={`py-8 min-h-screen ${className}`}>
-    <div className="max-w-3xl mx-auto px-4 mt-15">
-      {children}
-    </div>
-  </section>
-);
-
 const skillCategories = [
   {
     title: "Frontend",
@@ -308,15 +300,17 @@ export const Skills = () => {
   };
 
   return (
-    <SectionWrapper>
+    <section 
+      ref={containerRef}
+      id="skills"
+      className="min-h-screen flex flex-col justify-center relative py-8"
+    >
       <motion.div
-        ref={containerRef}
-        id="skills"
         variants={skillsAnimations.container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="space-y-6 scroll-mt-[80px]"
+        className="space-y-6 max-w-3xl mx-auto px-4"
       >
         <motion.div
           variants={skillsAnimations.mainCard}
@@ -451,7 +445,7 @@ export const Skills = () => {
           </div>
         </motion.div>
       </motion.div>
-    </SectionWrapper>
+    </section>
   );
 };
  

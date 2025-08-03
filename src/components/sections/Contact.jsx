@@ -4,14 +4,6 @@ import emailjs from 'emailjs-com';
 import { fadeIn, staggerContainer } from '../../animations/motionVariants';
 import { useTheme } from '../../context/ThemeContext';
 
-const SectionWrapper = ({ children, className = "" }) => (
-  <section className={`py-8 min-h-screen ${className}`}>
-    <div className="max-w-3xl mx-auto px-4 mt-15">
-      {children}
-    </div>
-  </section>
-);
-
 // Senior-level animation variants for Contact section - consistent with other sections
 const contactAnimations = {
   // Container animations - consistent with other sections
@@ -322,16 +314,17 @@ export const Contact = () => {
   ];
 
   return (
-    <SectionWrapper>
+    <section 
+      ref={containerRef}
+      id="contact"
+      className="min-h-screen flex flex-col justify-center relative py-8"
+    >
       <motion.div
-        ref={containerRef}
-        id="contact"
         variants={contactAnimations.container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="space-y-6"
-
+        className="space-y-6 max-w-3xl mx-auto px-4"
       >
         <motion.div 
           variants={contactAnimations.card}
@@ -563,6 +556,6 @@ export const Contact = () => {
           </div>
         </motion.div>
       </motion.div>
-    </SectionWrapper>
+    </section>
   );
 };
