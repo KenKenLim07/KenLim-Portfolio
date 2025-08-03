@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { fadeIn, staggerContainer } from '../../animations/motionVariants';
 import { useTheme } from '../../context/ThemeContext';
@@ -6,8 +6,8 @@ import spotifyImage from '../../assets/spotify-project.jpg';
 import lostImage from '../../assets/lost-found-project.jpg';
 
 const SectionWrapper = ({ children, className = "" }) => (
-  <section className={`py-6 ${className}`}>
-    <div className="max-w-3xl mx-auto px-4">
+  <section className={`py-8 ${className}`}>
+    <div className="max-w-3xl mx-auto px-4 mt-15">
       {children}
     </div>
   </section>
@@ -260,10 +260,6 @@ const AnimatedProjectCard = ({ project, index, children }) => (
 export const Projects = () => {
   const { isDarkMode } = useTheme();
   const containerRef = useRef(null);
-  const { scrollY } = useScroll();
-  
-  // Parallax effect for the container
-  const containerY = useTransform(scrollY, [0, 1000], [0, -30]);
 
   const projects = [
     {
@@ -310,7 +306,6 @@ export const Projects = () => {
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
         className="space-y-6"
-        style={{ y: containerY }}
       >
         <motion.div 
           className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${

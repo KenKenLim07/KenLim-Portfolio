@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useState, useRef } from 'react';
+import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
 import { fadeIn, staggerContainer } from '../../animations/motionVariants';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -291,10 +291,6 @@ export const Skills = () => {
   const [showAll, setShowAll] = useState(false);
   const [shouldShowNew, setShouldShowNew] = useState(false);
   const containerRef = useRef(null);
-  const { scrollY } = useScroll();
-  
-  // Parallax effect for the container
-  const containerY = useTransform(scrollY, [0, 1000], [0, -25]);
   
   const alwaysVisible = skillCategories.slice(0, 3);
   const newlyRevealed = skillCategories.slice(3);
@@ -321,7 +317,6 @@ export const Skills = () => {
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
         className="space-y-6 scroll-mt-[80px]"
-        style={{ y: containerY }}
       >
         <motion.div
           variants={skillsAnimations.mainCard}

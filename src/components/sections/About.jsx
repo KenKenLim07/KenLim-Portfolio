@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { fadeIn, staggerContainer } from '../../animations/motionVariants';
 import { useTheme } from '../../context/ThemeContext';
@@ -181,10 +181,6 @@ const AnimatedParagraph = ({ children, index = 0, className = "" }) => (
 export const About = () => {
   const { isDarkMode } = useTheme();
   const containerRef = useRef(null);
-  const { scrollY } = useScroll();
-  
-  // Parallax effect for the container
-  const containerY = useTransform(scrollY, [0, 1000], [0, -50]);
 
   return (
     <SectionWrapper>
@@ -196,7 +192,6 @@ export const About = () => {
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
         className="space-y-6"
-        style={{ y: containerY }}
       >
         {/* About Me Section */}
         <motion.div 

@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState, useRef } from 'react';
 import emailjs from 'emailjs-com';
 import { fadeIn, staggerContainer } from '../../animations/motionVariants';
@@ -259,16 +259,10 @@ export const Contact = () => {
     email: '',
     message: ''
   });
-  const [status, setStatus] = useState({
-    type: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState('');
   const containerRef = useRef(null);
-  const { scrollY } = useScroll();
   
-  // Parallax effect for the container - consistent with other sections
-  const containerY = useTransform(scrollY, [0, 1000], [0, -50]);
+
 
   const SERVICE_ID = "service_3gnzubf";
   const TEMPLATE_ID = "template_8xpd072";
@@ -283,23 +277,14 @@ export const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setStatus({ type: '', message: '' });
+    setStatus('');
 
     try {
       await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target, PUBLIC_KEY);
-      setStatus({
-        type: 'success',
-        message: 'Message sent successfully! I\'ll get back to you soon.'
-      });
+      setStatus('Message sent successfully! I\'ll get back to you soon.');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
-      setStatus({
-        type: 'error',
-        message: 'Failed to send message. Please try again later.'
-      });
-    } finally {
-      setIsSubmitting(false);
+      setStatus('Failed to send message. Please try again later.');
     }
   };
 
@@ -346,7 +331,7 @@ export const Contact = () => {
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
         className="space-y-6"
-        style={{ y: containerY }}
+
       >
         <motion.div 
           variants={contactAnimations.card}
@@ -541,16 +526,16 @@ export const Contact = () => {
                   ></textarea>
                 </motion.div>
                 
-                {status.message && (
+                {status && (
                   <motion.div 
                     variants={contactAnimations.statusMessage}
                     className={`text-xs p-3 rounded-lg ${
-                      status.type === 'success' 
+                      status.includes('successfully') 
                         ? 'bg-green-50 text-green-800 border border-green-200' 
                         : 'bg-red-50 text-red-800 border border-red-200'
                     }`}
                   >
-                    {status.message}
+                    {status}
                   </motion.div>
                 )}
                 
@@ -564,13 +549,14 @@ export const Contact = () => {
                   variants={contactAnimations.submitButton}
                   whileHover="hover"
                   whileTap="tap"
-                  animate={isSubmitting ? "loading" : ""}
+                  animate={false} // Removed animate prop
                   style={{
                     willChange: "transform",
                     transform: "translateZ(0)"
                   }}
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {/* Removed isSubmitting ? 'Sending...' : 'Send Message' */}
+                  Send Message
                 </motion.button>
               </form>
             </motion.div>
