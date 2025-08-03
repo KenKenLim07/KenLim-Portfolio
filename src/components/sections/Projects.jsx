@@ -5,14 +5,6 @@ import { useTheme } from '../../context/ThemeContext';
 import spotifyImage from '../../assets/spotify-project.jpg';
 import lostImage from '../../assets/lost-found-project.jpg';
 
-const SectionWrapper = ({ children, className = "" }) => (
-  <section className={`py-8 min-h-screen ${className}`}>
-    <div className="max-w-3xl mx-auto px-4 mt-15">
-      {children}
-    </div>
-  </section>
-);
-
 // Senior-level animation variants for Projects section - optimized for scroll focus
 const projectAnimations = {
   // Container animations with sophisticated entrance
@@ -475,6 +467,7 @@ export const Projects = () => {
             ))}
           </div>
         </motion.div>
-      </section>
+      </motion.div>
+    </section>
     );
   };
