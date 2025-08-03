@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useMemo, useState, useEffect } from 'react';
+import { useRef, useMemo } from 'react';
 import React from 'react';
 // import { BackgroundBlobs } from '../animations/BackgroundBlobs';
 import { useTheme } from '../../context/ThemeContext';
@@ -54,27 +54,6 @@ export const Hero = React.memo(() => {
     { clamp: true }
   );
 
-  // Dynamic viewport height calculation for different browsers
-  const [viewportHeight, setViewportHeight] = useState('100vh');
-  
-  useEffect(() => {
-    const updateViewportHeight = () => {
-      // Use actual viewport height instead of CSS vh units
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-      setViewportHeight(`${window.innerHeight}px`);
-    };
-
-    updateViewportHeight();
-    window.addEventListener('resize', updateViewportHeight);
-    window.addEventListener('orientationchange', updateViewportHeight);
-
-    return () => {
-      window.removeEventListener('resize', updateViewportHeight);
-      window.removeEventListener('orientationchange', updateViewportHeight);
-    };
-  }, []);
-
   // Memoize scroll function to prevent recreation on every render
   const scrollToSection = useMemo(() => (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -105,7 +84,7 @@ export const Hero = React.memo(() => {
       id="home" 
       className="flex flex-col justify-center relative"
       style={{ 
-        minHeight: viewportHeight,
+        minHeight: '100vh', // Use a stable height
         paddingTop: 'var(--navbar-height, 4rem)',
         paddingBottom: '6rem' // Space for scroll arrow
       }}

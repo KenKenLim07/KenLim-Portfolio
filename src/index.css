@@ -72,9 +72,28 @@ body {
 @media screen and (max-width: 768px) {
   html, body {
     min-height: 100vh;
+    /* Prevent address bar from affecting layout */
+    height: 100vh;
+    overflow-x: hidden;
   }
   
   #root {
+    min-height: 100vh;
+    /* Use fixed height to prevent address bar shifts */
+    height: 100vh;
+  }
+  
+  /* Prevent content shifting when address bar appears/disappears */
+  section {
+    min-height: 100vh;
+  }
+}
+
+/* Prevent mobile browser address bar from causing layout shifts */
+@media screen and (max-width: 768px) {
+  .mobile-optimized {
+    /* Use viewport units that don't change with address bar */
+    height: 100vh;
     min-height: 100vh;
   }
 }
