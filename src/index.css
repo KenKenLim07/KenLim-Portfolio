@@ -72,20 +72,20 @@ body {
 @media screen and (max-width: 768px) {
   html, body {
     min-height: 100vh;
-    /* Prevent address bar from affecting layout */
-    height: 100vh;
-    overflow-x: hidden;
+    /* Remove fixed height to prevent scroll lock */
+    height: auto;
   }
   
   #root {
     min-height: 100vh;
-    /* Use fixed height to prevent address bar shifts */
-    height: 100vh;
+    /* Remove fixed height to prevent scroll lock */
+    height: auto;
   }
   
-  /* Prevent content shifting when address bar appears/disappears */
+  /* Ensure sections have proper spacing */
   section {
     min-height: 100vh;
+    padding-top: 4rem; /* Account for fixed navbar */
   }
 }
 

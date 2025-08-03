@@ -82,12 +82,7 @@ export const Hero = React.memo(() => {
     <section 
       ref={heroRef} 
       id="home" 
-      className="flex flex-col justify-center relative"
-      style={{ 
-        minHeight: '100vh', // Use a stable height
-        paddingTop: 'var(--navbar-height, 4rem)',
-        paddingBottom: '6rem' // Space for scroll arrow
-      }}
+      className="min-h-screen flex flex-col justify-center relative pt-16"
     >
       {/* <BackgroundBlobs /> */}
 
@@ -195,7 +190,7 @@ export const Hero = React.memo(() => {
         animate="visible"
         style={{ 
           opacity: scrollIndicatorOpacity,
-          bottom: '1rem', // Fixed distance from bottom
+          bottom: '2rem', // Fixed distance from bottom
           transform: 'translateX(-50%) translateY(0)' // Ensure proper centering
         }}
       >
