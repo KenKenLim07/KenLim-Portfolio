@@ -5,8 +5,8 @@ import { fadeIn, staggerContainer } from '../../animations/motionVariants';
 import { useTheme } from '../../context/ThemeContext';
 
 const SectionWrapper = ({ children, className = "" }) => (
-  <section className={`py-8 ${className}`}>
-    <div className="max-w-3xl mx-auto px-4">
+  <section className={`py-8 min-h-screen ${className}`}>
+    <div className="max-w-3xl mx-auto px-4 mt-15">
       {children}
     </div>
   </section>

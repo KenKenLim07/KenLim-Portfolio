@@ -91,7 +91,13 @@ body {
   /* Hero section specific mobile fixes */
   #home {
     padding-top: 5rem; /* Extra space for navbar */
-    padding-bottom: 6rem; /* Extra space for mobile browser bars */
+    padding-bottom: 8rem; /* Extra space for mobile browser bars */
+  }
+  
+  /* All sections should have stable layouts */
+  #about, #projects, #skills, #contact {
+    min-height: 100vh;
+    padding-top: 4rem; /* Account for fixed navbar */
   }
 }
 

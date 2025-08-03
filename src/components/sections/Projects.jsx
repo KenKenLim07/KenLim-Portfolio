@@ -6,7 +6,7 @@ import spotifyImage from '../../assets/spotify-project.jpg';
 import lostImage from '../../assets/lost-found-project.jpg';
 
 const SectionWrapper = ({ children, className = "" }) => (
-  <section className={`py-8 ${className}`}>
+  <section className={`py-8 min-h-screen ${className}`}>
     <div className="max-w-3xl mx-auto px-4 mt-15">
       {children}
     </div>
