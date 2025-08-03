@@ -4,7 +4,6 @@ import React from 'react';
 // import { BackgroundBlobs } from '../animations/BackgroundBlobs';
 import { useTheme } from '../../context/ThemeContext';
 import { staggerContainer, textVariants, buttonVariants } from '../../animations/motionVariants';
-import { useResponsiveSpacing } from '../../hooks/useScrollAnimation';
 
 const fadeInUp = {
   hidden: { 
@@ -36,7 +35,6 @@ export const Hero = React.memo(() => {
   const { isDarkMode } = useTheme();
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
-  const { scrollArrowBottom, isInAppBrowser } = useResponsiveSpacing();
   
   // Calculate Hero animation sequence timing
   const heroAnimationTiming = {
@@ -81,7 +79,7 @@ export const Hero = React.memo(() => {
   }), [isDarkMode]);
 
   return (
-    <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center py-20 relative" style={{ minHeight: 'calc(100vh - var(--navbar-height))' }}>
+    <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center py-20 relative pb-16">
       {/* <BackgroundBlobs /> */}
 
       <motion.div
@@ -182,15 +180,13 @@ export const Hero = React.memo(() => {
 
       {/* Scroll Down Indicator */}
       <motion.div 
-        className={`absolute left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center ${
-          isInAppBrowser ? 'border border-red-200 rounded-lg p-1' : ''
-        }`}
+        className="absolute left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center"
         variants={scrollIndicatorVariants}
         initial="hidden"
         animate="visible"
         style={{ 
           opacity: scrollIndicatorOpacity,
-          bottom: `calc(${scrollArrowBottom} + var(--navbar-height) + 1rem)`, // Added 1rem extra spacing
+          bottom: '2rem', // Simple, fixed positioning at bottom
           transform: 'translateX(-50%) translateY(0)' // Ensure proper centering
         }}
       >

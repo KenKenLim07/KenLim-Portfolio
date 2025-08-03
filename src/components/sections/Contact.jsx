@@ -353,11 +353,7 @@ export const Contact = () => {
           className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
           isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
-          style={{
-            willChange: "transform, opacity, filter",
-            transform: "translateZ(0)",
-            backfaceVisibility: "hidden"
-          }}
+
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Contact Info */}

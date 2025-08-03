@@ -1,7 +1,7 @@
 import { useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 
-// Unified animation configuration
+// Unified animation configuration - Simplified for portfolio
 export const ANIMATION_CONFIG = {
   // Timing
   duration: 0.6,
@@ -13,22 +13,10 @@ export const ANIMATION_CONFIG = {
 
   // Viewport
   viewportMargin: "-100px",
-  viewportOnce: true,
-
-  // Performance - Simplified for portfolio projects
-  willChange: "auto", // Only apply when needed
-  transform: "none", // Remove aggressive translateZ
-  backfaceVisibility: "visible" // Remove unnecessary property
+  viewportOnce: true
 };
 
-// Performance configuration for critical elements only
-export const CRITICAL_PERFORMANCE_CONFIG = {
-  willChange: "transform, opacity",
-  transform: "translateZ(0)",
-  backfaceVisibility: "hidden"
-};
-
-// Custom hook for consistent scroll animations
+// Custom hook for consistent scroll animations - No performance optimizations
 export const useScrollAnimation = (options = {}) => {
   const ref = useRef(null);
   const config = { ...ANIMATION_CONFIG, ...options };
@@ -38,23 +26,6 @@ export const useScrollAnimation = (options = {}) => {
     margin: config.viewportMargin,
     amount: options.amount || "some"
   });
-
-  // Performance optimization: Only apply heavy optimizations when explicitly needed
-  useEffect(() => {
-    if (ref.current && isInView && options.useCriticalPerformance) {
-      ref.current.style.willChange = CRITICAL_PERFORMANCE_CONFIG.willChange;
-      ref.current.style.transform = CRITICAL_PERFORMANCE_CONFIG.transform;
-      ref.current.style.backfaceVisibility = CRITICAL_PERFORMANCE_CONFIG.backfaceVisibility;
-    }
-
-    return () => {
-      if (ref.current) {
-        ref.current.style.willChange = "auto";
-        ref.current.style.transform = "none";
-        ref.current.style.backfaceVisibility = "visible";
-      }
-    };
-  }, [isInView, options.useCriticalPerformance]);
 
   return { ref, isInView, config };
 };

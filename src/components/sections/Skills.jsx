@@ -280,11 +280,7 @@ const AnimatedCategoryCard = ({ category, index, isNew = false, children }) => (
     initial="hidden"
     whileInView="show"
     viewport={{ once: true, margin: "-50px" }}
-    style={{
-      willChange: "transform, opacity, filter",
-      transform: "translateZ(0)",
-      backfaceVisibility: "hidden"
-    }}
+
   >
     {children}
   </motion.div>
@@ -332,11 +328,7 @@ export const Skills = () => {
           className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
             isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
-          style={{
-            willChange: "transform, opacity, filter",
-            transform: "translateZ(0)",
-            backfaceVisibility: "hidden"
-          }}
+
         >
           <div className="flex justify-between items-center mb-4">
             <AnimatedHeader>
@@ -362,10 +354,7 @@ export const Skills = () => {
               variants={skillsAnimations.toggleButton}
               whileHover="hover"
               whileTap="tap"
-              style={{
-                willChange: "transform",
-                transform: "translateZ(0)"
-              }}
+
             >
               {showAll ? "Show Less" : "View All"}
             </motion.button>

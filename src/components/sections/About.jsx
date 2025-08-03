@@ -258,10 +258,6 @@ export const About = () => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-50px" }}
-              style={{
-                willChange: "transform",
-                transform: "translateZ(0)"
-              }}
             >
               <div className="flex items-center justify-between mb-1">
                 <h3 className={`text-sm font-medium ${
@@ -295,10 +291,6 @@ export const About = () => {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-50px" }}
-              style={{
-                willChange: "transform",
-                transform: "translateZ(0)"
-              }}
             >
               <h3 className={`text-sm font-medium mb-2 ${
                 isDarkMode ? 'text-dark-text' : 'text-neutral-900'
@@ -331,11 +323,6 @@ export const About = () => {
           className={`border border-neutral-400 rounded-xl p-4 transition-colors duration-300 ${
             isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
-          style={{
-            willChange: "transform, opacity, filter",
-            transform: "translateZ(0)",
-            backfaceVisibility: "hidden"
-          }}
         >
           <AnimatedText 
             className={`text-lg font-semibold mb-2 ${
@@ -365,11 +352,6 @@ export const About = () => {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: "-50px" }}
-                style={{
-                  willChange: "transform",
-                  transform: "translateZ(0)",
-                  backfaceVisibility: "hidden"
-                }}
               >
                 <h3 className={`text-sm font-medium mb-0.5 ${
                   isDarkMode ? 'text-dark-text' : 'text-neutral-900'

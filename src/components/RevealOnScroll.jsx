@@ -1,4 +1,4 @@
-// RevealOnScroll.jsx
+// RevealOnScroll.jsx - Simplified for portfolio
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
@@ -9,9 +9,8 @@ export const RevealOnScroll = ({
   delay = 0.1,
   yOffset = 32,
   variants,
-  useCriticalPerformance = false, // Only use heavy optimizations when explicitly needed
 }) => {
-  const { ref, isInView, config } = useScrollAnimation({ useCriticalPerformance });
+  const { ref, isInView, config } = useScrollAnimation();
 
   // Default fallback animation
   const defaultVariants = {

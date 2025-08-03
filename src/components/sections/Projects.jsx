@@ -251,11 +251,7 @@ const AnimatedProjectCard = ({ project, index, children }) => (
     initial="hidden"
     whileInView="show"
     viewport={{ once: true, margin: "-50px" }}
-    style={{
-      willChange: "transform, opacity, filter",
-      transform: "translateZ(0)",
-      backfaceVisibility: "hidden"
-    }}
+
   >
     {children}
   </motion.div>
@@ -320,11 +316,7 @@ export const Projects = () => {
           className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
           isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
-          style={{
-            willChange: "transform, opacity, filter",
-            transform: "translateZ(0)",
-            backfaceVisibility: "hidden"
-          }}
+
         >
           <AnimatedHeader>
           <h2 className={`text-base font-semibold mb-1 ${
