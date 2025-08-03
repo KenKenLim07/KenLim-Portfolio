@@ -91,7 +91,36 @@ body {
   /* Hero section specific mobile fixes */
   #home {
     padding-top: 5rem; /* Extra space for navbar */
-    padding-bottom: 4rem; /* Space for scroll arrow */
+    padding-bottom: 6rem; /* Extra space for mobile browser bars */
+  }
+}
+
+/* Mobile browser bottom navigation bar fixes */
+@media screen and (max-width: 768px) {
+  /* Chrome/Safari bottom navigation bar compensation */
+  #home {
+    padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
+  }
+  
+  /* Ensure scroll arrow is above mobile browser bars */
+  .scroll-indicator {
+    bottom: calc(3rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* Safari-specific fixes */
+@supports (-webkit-touch-callout: none) {
+  @media screen and (max-width: 768px) {
+    .scroll-indicator {
+      bottom: calc(4rem + env(safe-area-inset-bottom, 0px)) !important;
+    }
+  }
+}
+
+/* Chrome mobile-specific fixes */
+@media screen and (max-width: 768px) and (-webkit-min-device-pixel-ratio: 0) {
+  .scroll-indicator {
+    bottom: calc(3.5rem + env(safe-area-inset-bottom, 0px)) !important;
   }
 }
 
