@@ -184,13 +184,13 @@ export const Hero = React.memo(() => {
 
       {/* Scroll Down Indicator */}
       <motion.div 
-        className="absolute left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center scroll-indicator"
+        className="absolute left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center scroll-indicator scroll-indicator-alt"
         variants={scrollIndicatorVariants}
         initial="hidden"
         animate="visible"
         style={{ 
           opacity: scrollIndicatorOpacity,
-          bottom: 'calc(2rem + env(safe-area-inset-bottom, 0px))', // Account for mobile browser bars
+          bottom: '5rem', // Much higher base positioning
           transform: 'translateX(-50%) translateY(0)' // Ensure proper centering
         }}
       >

@@ -99,28 +99,40 @@ body {
 @media screen and (max-width: 768px) {
   /* Chrome/Safari bottom navigation bar compensation */
   #home {
-    padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px));
+    padding-bottom: 8rem; /* Increased space for mobile browser bars */
   }
   
-  /* Ensure scroll arrow is above mobile browser bars */
+  /* Ensure scroll arrow is above mobile browser bars - AGGRESSIVE POSITIONING */
   .scroll-indicator {
-    bottom: calc(3rem + env(safe-area-inset-bottom, 0px)) !important;
+    bottom: 6rem !important; /* Much higher positioning */
   }
 }
 
-/* Safari-specific fixes */
+/* Safari-specific fixes - EVEN MORE AGGRESSIVE */
 @supports (-webkit-touch-callout: none) {
   @media screen and (max-width: 768px) {
     .scroll-indicator {
-      bottom: calc(4rem + env(safe-area-inset-bottom, 0px)) !important;
+      bottom: 7rem !important; /* Higher for Safari */
     }
   }
 }
 
-/* Chrome mobile-specific fixes */
+/* Chrome mobile-specific fixes - MAXIMUM POSITIONING */
 @media screen and (max-width: 768px) and (-webkit-min-device-pixel-ratio: 0) {
   .scroll-indicator {
-    bottom: calc(3.5rem + env(safe-area-inset-bottom, 0px)) !important;
+    bottom: 6.5rem !important; /* Higher for Chrome */
+  }
+}
+
+/* Nuclear option - Use viewport height for maximum compatibility */
+@media screen and (max-width: 768px) {
+  .scroll-indicator {
+    bottom: 8rem !important; /* Nuclear positioning */
+  }
+  
+  /* Alternative: Use viewport height percentage */
+  .scroll-indicator-alt {
+    bottom: 15vh !important; /* Use viewport height percentage */
   }
 }
 
