@@ -134,15 +134,20 @@ export const Navbar = () => {
       // Get current scroll position
       const currentScrollY = isRootScrolling ? scrollContainer.scrollTop : window.scrollY;
       
-      // Get element position relative to viewport
+      // Get element position and dimensions
       const elementRect = element.getBoundingClientRect();
       const elementTop = elementRect.top + currentScrollY;
+      const elementHeight = element.offsetHeight;
+      
+      // Get viewport dimensions
+      const viewportHeight = window.innerHeight;
       
       // Get navbar height
       const navbar = document.querySelector('nav');
       const navbarHeight = navbar ? navbar.offsetHeight : 64;
       
-      // Calculate target scroll position
+      // Calculate target scroll position to show section title at top
+      // Add some padding to ensure title is visible below navbar
       const targetScrollY = elementTop - navbarHeight - 20;
       
       // Ensure we don't scroll past the top

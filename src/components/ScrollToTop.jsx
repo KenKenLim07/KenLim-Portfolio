@@ -16,17 +16,21 @@ export const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [isScrollingUp, setIsScrollingUp] = useState(false);
 
   const updateVisibility = useCallback(() => {
-    const scrollY = window.scrollY;
+    // Get the scrollable container (could be #root or window)
+    const scrollContainer = document.getElementById('root') || window;
+    const isRootScrolling = !!document.getElementById('root');
+    
+    const scrollY = isRootScrolling ? scrollContainer.scrollTop : window.scrollY;
     const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
+    const documentHeight = isRootScrolling ? scrollContainer.scrollHeight : document.documentElement.scrollHeight;
     
     // Show button when scrolled past 20% of the page height
     const shouldBeVisible = scrollY > (documentHeight * 0.2);
+    
     setIsVisible(shouldBeVisible);
-  }, []);
+  }, [isVisible]);
 
   useEffect(() => {
     let ticking = false;
@@ -34,15 +38,17 @@ export const ScrollToTop = () => {
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY;
-          const scrollDirection = currentScrollY < lastScrollY;
-          setIsScrollingUp(scrollDirection);
+          // Get the scrollable container (could be #root or window)
+          const scrollContainer = document.getElementById('root') || window;
+          const isRootScrolling = !!document.getElementById('root');
+          
+          const currentScrollY = isRootScrolling ? scrollContainer.scrollTop : window.scrollY;
           setLastScrollY(currentScrollY);
           
           updateVisibility();
           
           // Update active section
-          const scrollPosition = window.scrollY + window.innerHeight / 3;
+          const scrollPosition = currentScrollY + window.innerHeight / 3;
           for (const section of sections) {
             const element = document.getElementById(section.id);
             if (element) {
@@ -61,8 +67,17 @@ export const ScrollToTop = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Listen to the correct scroll container
+    const scrollContainer = document.getElementById('root') || window;
+    const isRootScrolling = !!document.getElementById('root');
+    
+    if (isRootScrolling) {
+      scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+      return () => scrollContainer.removeEventListener('scroll', handleScroll);
+    } else {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
   }, [lastScrollY, updateVisibility]);
 
   const scrollToTop = () => {
@@ -93,15 +108,20 @@ export const ScrollToTop = () => {
       // Get current scroll position
       const currentScrollY = isRootScrolling ? scrollContainer.scrollTop : window.scrollY;
       
-      // Get element position relative to viewport
+      // Get element position and dimensions
       const elementRect = element.getBoundingClientRect();
       const elementTop = elementRect.top + currentScrollY;
+      const elementHeight = element.offsetHeight;
+      
+      // Get viewport dimensions
+      const viewportHeight = window.innerHeight;
       
       // Get navbar height
       const navbar = document.querySelector('nav');
       const navbarHeight = navbar ? navbar.offsetHeight : 64;
       
-      // Calculate target scroll position
+      // Calculate target scroll position to show section title at top
+      // Add some padding to ensure title is visible below navbar
       const targetScrollY = elementTop - navbarHeight - 20;
       
       // Ensure we don't scroll past the top
