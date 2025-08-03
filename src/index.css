@@ -9,6 +9,7 @@
     --scroll-arrow-bottom: 2rem; /* 32px - matches bottom-8 */
     --scroll-arrow-bottom-mobile: 4rem; /* 64px - more space on mobile */
     --scroll-arrow-bottom-inapp: 6rem; /* 96px - extra space for in-app browsers */
+    --vh: 1vh; /* Dynamic viewport height */
   }
 
   :root[class~="dark"] {

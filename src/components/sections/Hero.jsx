@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState, useEffect } from 'react';
 import React from 'react';
 // import { BackgroundBlobs } from '../animations/BackgroundBlobs';
 import { useTheme } from '../../context/ThemeContext';
@@ -54,6 +54,27 @@ export const Hero = React.memo(() => {
     { clamp: true }
   );
 
+  // Dynamic viewport height calculation for different browsers
+  const [viewportHeight, setViewportHeight] = useState('100vh');
+  
+  useEffect(() => {
+    const updateViewportHeight = () => {
+      // Use actual viewport height instead of CSS vh units
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      setViewportHeight(`${window.innerHeight}px`);
+    };
+
+    updateViewportHeight();
+    window.addEventListener('resize', updateViewportHeight);
+    window.addEventListener('orientationchange', updateViewportHeight);
+
+    return () => {
+      window.removeEventListener('resize', updateViewportHeight);
+      window.removeEventListener('orientationchange', updateViewportHeight);
+    };
+  }, []);
+
   // Memoize scroll function to prevent recreation on every render
   const scrollToSection = useMemo(() => (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -79,11 +100,20 @@ export const Hero = React.memo(() => {
   }), [isDarkMode]);
 
   return (
-    <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center py-20 relative pb-16">
+    <section 
+      ref={heroRef} 
+      id="home" 
+      className="flex flex-col justify-center relative"
+      style={{ 
+        minHeight: viewportHeight,
+        paddingTop: 'var(--navbar-height, 4rem)',
+        paddingBottom: '6rem' // Space for scroll arrow
+      }}
+    >
       {/* <BackgroundBlobs /> */}
 
       <motion.div
-        className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-10"
+        className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-10 flex-1 flex flex-col justify-center"
         variants={staggerContainer}
         initial="initial"
         animate="animate"
@@ -186,7 +216,7 @@ export const Hero = React.memo(() => {
         animate="visible"
         style={{ 
           opacity: scrollIndicatorOpacity,
-          bottom: '2rem', // Simple, fixed positioning at bottom
+          bottom: '1rem', // Fixed distance from bottom
           transform: 'translateX(-50%) translateY(0)' // Ensure proper centering
         }}
       >
