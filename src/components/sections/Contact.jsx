@@ -41,6 +41,27 @@ export const Contact = () => {
     setIsSubmitting(true);
     setStatus({ type: '', message: '' });
 
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus({
+        type: 'error',
+        message: 'Please fill in all fields.'
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setStatus({
+        type: 'error',
+        message: 'Please enter a valid email address.'
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, e.target, PUBLIC_KEY);
       setStatus({
@@ -49,6 +70,7 @@ export const Contact = () => {
       });
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
+      console.error('EmailJS Error:', error);
       setStatus({
         type: 'error',
         message: 'Failed to send message. Please try again later.'
