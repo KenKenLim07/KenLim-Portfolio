@@ -6,12 +6,73 @@
     --text-color: #1f2937;
     --bg-color: #ffffff;
     --navbar-height: 4rem; /* 64px - matches h-16 */
+    
+    /* Messenger-specific viewport fix */
+    --vh: 1vh;
+    --vw: 1vw;
   }
 
   :root[class~="dark"] {
     --text-color: #f1f1f1;
     --bg-color: #0e0e0e;
   }
+}
+
+/* Messenger in-app browser detection and fix */
+@media screen and (max-width: 768px) {
+  :root {
+    /* Use dynamic viewport units that don't change with address bar */
+    --vh: 1vh;
+    --vw: 1vw;
+  }
+  
+  /* Force stable viewport for all sections */
+  section {
+    min-height: 100vh; /* fallback */
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+  
+  /* Hero section specific fix */
+  #home {
+    min-height: 100vh; /* fallback */
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+}
+
+/* DEBUG: Visual debugging for layout shifts */
+html {
+  border: 3px solid red !important;
+  background: rgba(255, 0, 0, 0.1) !important;
+}
+
+body {
+  border: 3px solid blue !important;
+  background: rgba(0, 0, 255, 0.1) !important;
+}
+
+#root {
+  border: 3px solid green !important;
+  background: rgba(0, 255, 0, 0.1) !important;
+}
+
+section {
+  border: 2px solid purple !important;
+  background: rgba(128, 0, 128, 0.1) !important;
+}
+
+/* DEBUG: Viewport height display */
+body::before {
+  content: 'Viewport: ' attr(data-vh) 'px';
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: black;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  z-index: 9999;
+  font-family: monospace;
 }
 
 /* Simplified base styles - matching working project */

@@ -22,6 +22,48 @@ export const Hero = React.memo(() => {
   const { isDarkMode } = useTheme();
   const heroRef = useRef(null);
   
+  // DEBUG: Track viewport changes
+  React.useEffect(() => {
+    const updateViewportUnits = () => {
+      const vh = window.innerHeight;
+      const vw = window.innerWidth;
+      
+      // Update CSS custom properties for stable viewport units
+      document.documentElement.style.setProperty('--vh', `${vh * 0.01}px`);
+      document.documentElement.style.setProperty('--vw', `${vw * 0.01}px`);
+      
+      // Update body data attribute for CSS display
+      document.body.setAttribute('data-vh', vh);
+      
+      console.log('🔄 Viewport changed:', {
+        innerHeight: vh,
+        innerWidth: vw,
+        outerHeight: window.outerHeight,
+        outerWidth: window.outerWidth,
+        scrollY: window.scrollY,
+        documentHeight: document.documentElement.scrollHeight,
+        timestamp: new Date().toISOString()
+      });
+    };
+
+    // Set initial viewport units
+    updateViewportUnits();
+    
+    // Track resize events
+    window.addEventListener('resize', updateViewportUnits);
+    window.addEventListener('scroll', updateViewportUnits);
+    
+    // Track orientation changes
+    window.addEventListener('orientationchange', () => {
+      setTimeout(updateViewportUnits, 100);
+    });
+
+    return () => {
+      window.removeEventListener('resize', updateViewportUnits);
+      window.removeEventListener('scroll', updateViewportUnits);
+    };
+  }, []);
+  
   // Calculate Hero animation sequence timing
   const heroAnimationTiming = {
     greeting: 0.2,
@@ -60,7 +102,10 @@ export const Hero = React.memo(() => {
     <section 
       ref={heroRef} 
       id="home" 
-      className="min-h-screen flex flex-col justify-start relative pt-20 pb-16 md:justify-center md:pt-16"
+      className="flex flex-col justify-start relative pt-20 pb-16 md:justify-center md:pt-16"
+      style={{
+        minHeight: 'calc(var(--vh, 1vh) * 100)'
+      }}
     >
       {/* <BackgroundBlobs /> */}
 
@@ -170,6 +215,11 @@ export const Hero = React.memo(() => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8, duration: 0.6 }}
       >
+        {/* DEBUG: Visual position indicator */}
+        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white text-xs px-2 py-1 rounded">
+          Arrow Position
+        </div>
+        
         <motion.div
           className={`w-6 h-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
           animate={{

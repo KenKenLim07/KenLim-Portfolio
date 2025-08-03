@@ -303,7 +303,10 @@ export const Skills = () => {
     <section 
       ref={containerRef}
       id="skills"
-      className="min-h-screen flex flex-col justify-center relative py-8"
+      className="flex flex-col justify-center relative py-8"
+      style={{
+        minHeight: 'calc(var(--vh, 1vh) * 100)'
+      }}
     >
       <motion.div
         variants={skillsAnimations.container}
