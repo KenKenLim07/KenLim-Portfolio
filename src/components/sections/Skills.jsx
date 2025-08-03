@@ -3,8 +3,8 @@ import { useState, useRef } from 'react';
 import { fadeIn, staggerContainer } from '../../animations/motionVariants';
 import { useTheme } from '../../context/ThemeContext';
 
-const SectionWrapper = ({ children, className = "" }) => (
-  <section className={`py-6 ${className}`}>
+const SectionWrapper = ({ children, className = "", id }) => (
+  <section id={id} className={`py-6 ${className}`}>
     <div className="max-w-3xl mx-auto px-4">
       {children}
     </div>
@@ -95,7 +95,7 @@ export const Skills = () => {
   };
 
   return (
-    <SectionWrapper>
+    <SectionWrapper id="skills">
       <motion.div
         ref={sectionRef}
         id="skills"

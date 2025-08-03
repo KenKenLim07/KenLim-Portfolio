@@ -66,24 +66,59 @@ export const ScrollToTop = () => {
   }, [lastScrollY, updateVisibility]);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    // Get the scrollable container (could be #root or window)
+    const scrollContainer = document.getElementById('root') || window;
+    const isRootScrolling = !!document.getElementById('root');
+    
+    if (isRootScrolling) {
+      scrollContainer.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
   };
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const navbar = document.querySelector('nav');
-      const navbarHeight = navbar ? navbar.offsetHeight : 80; // Fallback to 80px
-      const elementTop = element.offsetTop;
-      const offsetPosition = elementTop - navbarHeight - 20; // Extra 20px for spacing
+      // Get the scrollable container (could be #root or window)
+      const scrollContainer = document.getElementById('root') || window;
+      const isRootScrolling = !!document.getElementById('root');
       
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+      // Get current scroll position
+      const currentScrollY = isRootScrolling ? scrollContainer.scrollTop : window.scrollY;
+      
+      // Get element position relative to viewport
+      const elementRect = element.getBoundingClientRect();
+      const elementTop = elementRect.top + currentScrollY;
+      
+      // Get navbar height
+      const navbar = document.querySelector('nav');
+      const navbarHeight = navbar ? navbar.offsetHeight : 64;
+      
+      // Calculate target scroll position
+      const targetScrollY = elementTop - navbarHeight - 20;
+      
+      // Ensure we don't scroll past the top
+      const finalScrollY = Math.max(0, targetScrollY);
+      
+      // Smooth scroll to target
+      if (isRootScrolling) {
+        scrollContainer.scrollTo({
+          top: finalScrollY,
+          behavior: "smooth"
+        });
+      } else {
+        window.scrollTo({
+          top: finalScrollY,
+          behavior: "smooth"
+        });
+      }
     }
   };
 

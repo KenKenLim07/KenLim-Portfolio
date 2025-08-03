@@ -4,8 +4,8 @@ import emailjs from 'emailjs-com';
 import { fadeIn, staggerContainer } from '../../animations/motionVariants';
 import { useTheme } from '../../context/ThemeContext';
 
-const SectionWrapper = ({ children, className = "" }) => (
-  <section className={`py-8 ${className}`}>
+const SectionWrapper = ({ children, className = "", id }) => (
+  <section id={id} className={`py-8 ${className}`}>
     <div className="max-w-3xl mx-auto px-4">
       {children}
     </div>
@@ -92,9 +92,8 @@ export const Contact = () => {
   ];
 
   return (
-    <SectionWrapper>
+    <SectionWrapper id="contact">
       <motion.div
-        id="contact"
         variants={staggerContainer}
         initial="hidden"
         whileInView="show"

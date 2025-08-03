@@ -6,14 +6,14 @@ export const Footer = () => {
 
   return (
     <footer className={`border-t ${isDarkMode ? 'border-gray-800 bg-black' : 'border-gray-200 bg-white'}`}>
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           {/* Brand Section */}
           <div className="col-span-1 md:col-span-2">
-            <h3 className={`text-lg font-bold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+            <h3 className={`text-lg font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
               Jose Marie Lim
             </h3>
-            <p className={`text-sm mb-4 max-w-md ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className={`text-sm mb-3 max-w-md ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
               Building secure, scalable solutions while pushing the boundaries of what's possible in tech. 
               Currently diving deep into AI, web development, and cybersecurity.
             </p>
@@ -49,7 +49,7 @@ export const Footer = () => {
                 </svg>
               </a>
               <a
-                href="mailto:jose.marie.lim@example.com"
+                href="mailto:josemarielim7@gmail.com"
                 className={`p-2 rounded-lg transition-colors ${
                   isDarkMode 
                     ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
@@ -66,10 +66,10 @@ export const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className={`text-sm font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+            <h4 className={`text-sm font-semibold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
               Quick Links
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-1.5">
               {['Home', 'About', 'Projects', 'Skills', 'Contact'].map((item) => (
                 <li key={item}>
                   <a
@@ -89,13 +89,13 @@ export const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className={`text-sm font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+            <h4 className={`text-sm font-semibold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
               Contact
             </h4>
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                 <span className="font-medium">Email:</span><br />
-                jose.marie.lim@example.com
+                josemarielim7@gmail.com
               </p>
               <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                 <span className="font-medium">Location:</span><br />
@@ -106,8 +106,8 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className={`border-t mt-8 pt-8 ${isDarkMode ? 'border-gray-800' : 'border-gray-200'}`}>
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+        <div className={`border-t mt-4 pt-4 ${isDarkMode ? 'border-gray-800' : 'border-gray-200'}`}>
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0">
             <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
               © {currentYear} Jose Marie Lim. All rights reserved.
             </p>

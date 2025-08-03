@@ -4,8 +4,8 @@ import { useTheme } from '../../context/ThemeContext';
 import spotifyImage from '../../assets/spotify-project.jpg';
 import lostImage from '../../assets/lost-found-project.jpg';
 
-const SectionWrapper = ({ children, className = "" }) => (
-  <section className={`py-6 ${className}`}>
+const SectionWrapper = ({ children, className = "", id }) => (
+  <section id={id} className={`py-6 ${className}`}>
     <div className="max-w-3xl mx-auto px-4">
       {children}
     </div>
@@ -51,9 +51,8 @@ export const Projects = () => {
   ];
 
   return (
-    <SectionWrapper>
+    <SectionWrapper id="projects">
       <motion.div
-        id="projects"
         variants={staggerContainer}
         initial="hidden"
         whileInView="show"

@@ -54,20 +54,28 @@ export const MobileMenu = ({ isOpen, onClose }) => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      // Use scrollIntoView with smooth behavior and proper offset
-      element.scrollIntoView({ 
-        behavior: "smooth",
-        block: "start"
-      });
+      // Get current scroll position
+      const currentScrollY = window.scrollY;
       
-      // Apply offset after scroll
-      setTimeout(() => {
-        const offset = 64; // Navbar height
-        window.scrollBy({
-          top: -offset,
-          behavior: "smooth"
-        });
-      }, 100);
+      // Get element position relative to viewport
+      const elementRect = element.getBoundingClientRect();
+      const elementTop = elementRect.top + currentScrollY;
+      
+      // Get navbar height
+      const navbar = document.querySelector('nav');
+      const navbarHeight = navbar ? navbar.offsetHeight : 64; // Default navbar height
+      
+      // Calculate target scroll position
+      const targetScrollY = elementTop - navbarHeight - 20; // 20px extra spacing
+      
+      // Ensure we don't scroll past the top
+      const finalScrollY = Math.max(0, targetScrollY);
+      
+      // Smooth scroll to target
+      window.scrollTo({
+        top: finalScrollY,
+        behavior: "smooth"
+      });
       
       onClose();
     }
@@ -117,16 +125,42 @@ export const Navbar = () => {
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
+    
     if (element) {
-      const navbar = document.querySelector('nav');
-      const navbarHeight = navbar ? navbar.offsetHeight : 80; // Fallback to 80px
-      const elementTop = element.offsetTop;
-      const offsetPosition = elementTop - navbarHeight - 20; // Extra 20px for spacing
+      // Get the scrollable container (could be #root or window)
+      const scrollContainer = document.getElementById('root') || window;
+      const isRootScrolling = !!document.getElementById('root');
       
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+      // Get current scroll position
+      const currentScrollY = isRootScrolling ? scrollContainer.scrollTop : window.scrollY;
+      
+      // Get element position relative to viewport
+      const elementRect = element.getBoundingClientRect();
+      const elementTop = elementRect.top + currentScrollY;
+      
+      // Get navbar height
+      const navbar = document.querySelector('nav');
+      const navbarHeight = navbar ? navbar.offsetHeight : 64;
+      
+      // Calculate target scroll position
+      const targetScrollY = elementTop - navbarHeight - 20;
+      
+      // Ensure we don't scroll past the top
+      const finalScrollY = Math.max(0, targetScrollY);
+      
+      // Smooth scroll to target
+      if (isRootScrolling) {
+        scrollContainer.scrollTo({
+          top: finalScrollY,
+          behavior: "smooth"
+        });
+      } else {
+        window.scrollTo({
+          top: finalScrollY,
+          behavior: "smooth"
+        });
+      }
+      
       setIsMenuOpen(false);
     }
   };
@@ -134,28 +168,31 @@ export const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const scrolled = scrollY > 10;
+      const scrolled = scrollY > 5; // More responsive threshold
       setIsScrolled(scrolled);
     };
 
     // Initial call to set correct state
     handleScroll();
 
-    // Simple, reliable scroll listener
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Debug navbar height and scroll behavior
-    const navbar = document.querySelector('nav');
-    if (navbar) {
-      const height = navbar.offsetHeight;
-      const rect = navbar.getBoundingClientRect();
-      console.log('🔍 Navbar height:', height, 'px');
-      console.log('🔍 Navbar rect:', rect);
-      console.log('🔍 Navbar classes:', navbar.className);
-    }
+    // Use requestAnimationFrame for better performance
+    let ticking = false;
+    const updateScroll = () => {
+      handleScroll();
+      ticking = false;
+    };
+
+    const scrollListener = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateScroll);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', scrollListener, { passive: true });
     
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', scrollListener);
     };
   }, [isDarkMode]);
 
@@ -178,12 +215,14 @@ export const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
-          isScrolled 
+        className={`sticky top-0 z-[1000] transition-all duration-300 ${
+          isScrolled
             ? isDarkMode 
-              ? 'bg-black/80 backdrop-blur-md shadow-[0_1px_2px_-1px_rgba(0,0,0,0.1)]' 
-              : 'bg-white/80 backdrop-blur-md shadow-[0_1px_2px_-1px_rgba(0,0,0,0.05)]'
-            : 'bg-transparent'
+              ? 'bg-black/95 backdrop-blur-md shadow-lg border-b border-gray-800' 
+              : 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'
+            : isDarkMode
+              ? 'bg-transparent backdrop-blur-sm'
+              : 'bg-transparent backdrop-blur-sm'
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -195,7 +234,7 @@ export const Navbar = () => {
               className={`text-xs font-bold ${
                 isScrolled 
                   ? (isDarkMode ? 'text-white' : 'text-gray-900')
-                  : (isDarkMode ? 'text-white drop-shadow-lg' : 'text-gray-900 drop-shadow-lg')
+                  : (isDarkMode ? 'text-white' : 'text-gray-900')
               }`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -215,9 +254,9 @@ export const Navbar = () => {
                     scrollToSection(section.id);
                   }}
                   className={`text-sm font-medium ${
-                    isScrolled 
+                    isScrolled
                       ? (isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900')
-                      : (isDarkMode ? 'text-white hover:text-gray-200 drop-shadow-lg' : 'text-gray-900 hover:text-gray-700 drop-shadow-lg')
+                      : (isDarkMode ? 'text-white hover:text-gray-200' : 'text-gray-900 hover:text-gray-700')
                   } transition-colors`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -234,9 +273,9 @@ export const Navbar = () => {
               <motion.button
                 onClick={toggleMenu}
                 className={`p-2 rounded-lg ${
-                  isScrolled 
+                  isScrolled
                     ? (isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900')
-                    : (isDarkMode ? 'text-white hover:text-gray-200 drop-shadow-lg' : 'text-gray-900 hover:text-gray-700 drop-shadow-lg')
+                    : (isDarkMode ? 'text-white hover:text-gray-200' : 'text-gray-900 hover:text-gray-700')
                 }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

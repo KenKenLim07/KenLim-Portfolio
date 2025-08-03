@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
+import { useRef, useEffect } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import { BackgroundBlobs } from '../animations/BackgroundBlobs';
 
@@ -51,51 +51,77 @@ const buttonVariants = {
   }
 };
 
-const scrollIndicatorVariants = {
-  initial: { opacity: 0 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 1.2,
-      duration: 0.8,
-      ease: [0.6, -0.05, 0.01, 0.99]
-    }
-  }
-};
+
 
 export const Hero = () => {
   const heroRef = useRef(null);
-  const aboutRef = useRef(null);
   const { isDarkMode } = useTheme();
-  const { scrollY } = useScroll();
 
-  // Calculate scroll progress for scroll indicator fade out
-  const scrollIndicatorOpacity = useTransform(
-    scrollY,
-    [0, 100],
-    [1, 0],
-    { clamp: true }
-  );
+
+
+  // Set dynamic height for hero section
+  useEffect(() => {
+    const updateHeroHeight = () => {
+      if (heroRef.current) {
+        const navbar = document.querySelector('nav');
+        const navbarHeight = navbar ? navbar.offsetHeight : 64;
+        const viewportHeight = window.innerHeight;
+        const availableHeight = viewportHeight - navbarHeight;
+        
+        // Set dynamic height
+        heroRef.current.style.height = `${availableHeight}px`;
+        heroRef.current.style.minHeight = `${availableHeight}px`;
+      }
+    };
+
+    updateHeroHeight();
+    window.addEventListener('resize', updateHeroHeight);
+    
+    return () => window.removeEventListener('resize', updateHeroHeight);
+  }, []);
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const navbar = document.querySelector('nav');
-      const navbarHeight = navbar ? navbar.offsetHeight : 80; // Fallback to 80px
-      const elementTop = element.offsetTop;
-      const offsetPosition = elementTop - navbarHeight - 20; // Extra 20px for spacing
+      // Get the scrollable container (could be #root or window)
+      const scrollContainer = document.getElementById('root') || window;
+      const isRootScrolling = !!document.getElementById('root');
       
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
+      // Get current scroll position
+      const currentScrollY = isRootScrolling ? scrollContainer.scrollTop : window.scrollY;
+      
+      // Get element position relative to viewport
+      const elementRect = element.getBoundingClientRect();
+      const elementTop = elementRect.top + currentScrollY;
+      
+      // Get navbar height
+      const navbar = document.querySelector('nav');
+      const navbarHeight = navbar ? navbar.offsetHeight : 64;
+      
+      // Calculate target scroll position
+      const targetScrollY = elementTop - navbarHeight - 20;
+      
+      // Ensure we don't scroll past the top
+      const finalScrollY = Math.max(0, targetScrollY);
+      
+      // Smooth scroll to target
+      if (isRootScrolling) {
+        scrollContainer.scrollTo({
+          top: finalScrollY,
+          behavior: "smooth"
+        });
+      } else {
+        window.scrollTo({
+          top: finalScrollY,
+          behavior: "smooth"
+        });
+      }
     }
   };
 
   return (
-    <section ref={heroRef} id="home" className="min-h-[100vh] flex items-center justify-center py-20 relative overflow-hidden">
-      <BackgroundBlobs />
+    <section ref={heroRef} id="home" className="hero-viewport-dynamic flex items-center justify-center relative overflow-hidden">
+      {/* <BackgroundBlobs /> */}
 
       <motion.div
         className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-20 pb-safe"
@@ -201,16 +227,15 @@ export const Hero = () => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Down Indicator */}
+      {/* Scroll Down Arrow Indicator */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center mobile-safe-buttons"
-        variants={scrollIndicatorVariants}
-        initial="initial"
-        animate="animate"
-        style={{ opacity: scrollIndicatorOpacity }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
       >
         <motion.div
-          className="w-6 h-6 flex items-center justify-center mb-2"
+          className="w-6 h-6 flex items-center justify-center"
           animate={{
             y: [0, 8, 0],
           }}
@@ -222,7 +247,7 @@ export const Hero = () => {
           }}
         >
           <svg 
-            className="w-5 h-5 text-gray-400" 
+            className={`w-5 h-5 ${isDarkMode ? 'text-gray-300' : 'text-gray-400'}`}
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
@@ -235,21 +260,8 @@ export const Hero = () => {
             />
           </svg>
         </motion.div>
-        <motion.span 
-          className="text-xs text-gray-500 tracking-wide"
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ 
-            duration: 1.5, 
-            repeat: Infinity,
-            delay: 1.2
-          }}
-        >
-          Scroll
-        </motion.span>
       </motion.div>
 
-      {/* Hidden element to detect About section */}
-      <div ref={aboutRef} className="absolute bottom-0 w-full h-1" />
     </section>
   );
 }; 
