@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useScroll, useTransform } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 const Blob = ({ className, initialDelay, xAnimation, yAnimation, xDuration, yDuration, ...props }) => (
   <motion.div 
@@ -47,6 +48,7 @@ const Blob = ({ className, initialDelay, xAnimation, yAnimation, xDuration, yDur
 
 export const BackgroundBlobs = () => {
   const { scrollY } = useScroll();
+  const containerRef = useRef(null);
   
   // More stable scroll-based opacity with larger range
   const blobOpacity = useTransform(
@@ -56,8 +58,31 @@ export const BackgroundBlobs = () => {
     { clamp: true }
   );
 
+  // Performance optimization: Pause animations when not in viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = 'running';
+          } else {
+            entry.target.style.animationPlayState = 'paused';
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <motion.div
+      ref={containerRef}
       className="fixed inset-0 pointer-events-none z-0"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

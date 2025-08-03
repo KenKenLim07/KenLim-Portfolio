@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
-
 import { useState, useEffect, useCallback } from 'react';
 import { useTheme } from '../context/ThemeContext';
+import { useThrottledScroll } from '../hooks/useScrollAnimation';
 
 const sections = [
   { id: 'home', label: 'Home' },
@@ -20,7 +20,6 @@ export const ScrollToTop = () => {
 
   const updateVisibility = useCallback(() => {
     const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
     const documentHeight = document.documentElement.scrollHeight;
     
     // Show button when scrolled past 20% of the page height
@@ -28,12 +27,7 @@ export const ScrollToTop = () => {
     setIsVisible(shouldBeVisible);
   }, []);
 
-  useEffect(() => {
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
+  const updateScrollState = useCallback(() => {
           const currentScrollY = window.scrollY;
           const scrollDirection = currentScrollY < lastScrollY;
           setIsScrollingUp(scrollDirection);
@@ -53,17 +47,10 @@ export const ScrollToTop = () => {
               }
             }
           }
-          
-          ticking = false;
-        });
-        
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY, updateVisibility]);
+
+  // Use throttled scroll handler for better performance
+  useThrottledScroll(updateScrollState, 16);
 
   const scrollToTop = () => {
     window.scrollTo({

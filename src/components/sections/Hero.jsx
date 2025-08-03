@@ -1,75 +1,40 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
+import React from 'react';
+// import { BackgroundBlobs } from '../animations/BackgroundBlobs';
 import { useTheme } from '../../context/ThemeContext';
-import { BackgroundBlobs } from '../animations/BackgroundBlobs';
+import { staggerContainer, textVariants, buttonVariants } from '../../animations/motionVariants';
 
 const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.6 }
-};
-
-const staggerContainer = {
-  animate: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2
-    }
-  }
-};
-
-const textVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.8,
-      ease: [0.6, -0.05, 0.01, 0.99]
-    }
-  }
-};
-
-const buttonVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
+  hidden: { 
+    opacity: 0, 
+    y: 32,
+    transition: { duration: 0.6 }
   },
-  hover: {
-    scale: 1.05,
-    transition: {
-      duration: 0.2
-    }
-  },
-  tap: {
-    scale: 0.95
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6 }
   }
 };
 
 const scrollIndicatorVariants = {
-  initial: { opacity: 0 },
-  animate: {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
     opacity: 1,
     y: 0,
     transition: {
-      delay: 1.2,
       duration: 0.8,
-      ease: [0.6, -0.05, 0.01, 0.99]
+      ease: "easeOut"
     }
   }
 };
 
-export const Hero = () => {
-  const heroRef = useRef(null);
-  const aboutRef = useRef(null);
+export const Hero = React.memo(() => {
   const { isDarkMode } = useTheme();
+  const heroRef = useRef(null);
   const { scrollY } = useScroll();
-
+  
   // Calculate scroll progress for scroll indicator fade out
   const scrollIndicatorOpacity = useTransform(
     scrollY,
@@ -78,23 +43,33 @@ export const Hero = () => {
     { clamp: true }
   );
 
-  const scrollToSection = (sectionId) => {
+  // Memoize scroll function to prevent recreation on every render
+  const scrollToSection = useMemo(() => (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
+      element.scrollIntoView({
         behavior: "smooth",
       });
     }
-  };
+  }, []);
+
+  // Memoize button styles to prevent recalculation
+  const buttonStyles = useMemo(() => ({
+    primary: `px-5 md:px-10 py-2.5 md:py-3.5 rounded-lg border ${
+      isDarkMode 
+        ? 'bg-white text-black border-neutral-200 hover:border-neutral-300' 
+        : 'bg-gray-900 text-white border-transparent'
+    } font-medium transition-all duration-300 relative overflow-hidden group hover:shadow-lg text-sm md:text-base`,
+    secondary: `px-5 md:px-10 py-2.5 md:py-3.5 rounded-lg border ${
+      isDarkMode 
+        ? 'border-neutral-600 hover:border-neutral-500' 
+        : 'border-neutral-400 hover:border-neutral-500'
+    } text-gray-900 font-medium transition-all duration-300 relative overflow-hidden group hover:shadow-lg text-sm md:text-base`
+  }), [isDarkMode]);
 
   return (
     <section ref={heroRef} id="home" className="min-h-[100vh] flex items-center justify-center py-20 relative">
-      <BackgroundBlobs />
+      {/* <BackgroundBlobs /> */}
 
       <motion.div
         className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-10"
@@ -147,11 +122,7 @@ export const Hero = () => {
         >
           <motion.button
             onClick={() => scrollToSection("projects")}
-            className={`px-5 md:px-10 py-2.5 md:py-3.5 rounded-lg border ${
-              isDarkMode 
-                ? 'bg-white text-black border-neutral-200 hover:border-neutral-300' 
-                : 'bg-gray-900 text-white border-transparent'
-            } font-medium transition-all duration-300 relative overflow-hidden group hover:shadow-lg text-sm md:text-base`}
+            className={buttonStyles.primary}
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
@@ -181,11 +152,7 @@ export const Hero = () => {
 
           <motion.button
             onClick={() => scrollToSection("contact")}
-            className={`px-5 md:px-10 py-2.5 md:py-3.5 rounded-lg border ${
-              isDarkMode 
-                ? 'border-neutral-600 hover:border-neutral-500' 
-                : 'border-neutral-400 hover:border-neutral-500'
-            } text-gray-900 font-medium transition-all duration-300 relative overflow-hidden group hover:shadow-lg text-sm md:text-base`}
+            className={buttonStyles.secondary}
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
@@ -204,8 +171,8 @@ export const Hero = () => {
       <motion.div 
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center"
         variants={scrollIndicatorVariants}
-        initial="initial"
-        animate="animate"
+        initial="hidden"
+        animate="visible"
         style={{ opacity: scrollIndicatorOpacity }}
       >
         <motion.div
@@ -221,7 +188,7 @@ export const Hero = () => {
           }}
         >
           <svg 
-            className="w-5 h-5 text-gray-400" 
+            className={`w-5 h-5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
@@ -235,7 +202,7 @@ export const Hero = () => {
           </svg>
         </motion.div>
         <motion.span 
-          className="text-xs text-gray-500 tracking-wide"
+          className={`text-xs tracking-wide ${isDarkMode ? 'text-gray-500' : 'text-gray-600'}`}
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ 
             duration: 1.5, 
@@ -246,9 +213,8 @@ export const Hero = () => {
           Scroll
         </motion.span>
       </motion.div>
-
-      {/* Hidden element to detect About section */}
-      <div ref={aboutRef} className="absolute bottom-0 w-full h-1" />
     </section>
   );
-}; 
+});
+
+Hero.displayName = 'Hero'; 
