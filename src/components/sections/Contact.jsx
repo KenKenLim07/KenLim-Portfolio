@@ -351,7 +351,7 @@ export const Contact = () => {
         <motion.div 
           variants={contactAnimations.card}
           className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
-            isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
+          isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
           style={{
             willChange: "transform, opacity, filter",
@@ -370,7 +370,7 @@ export const Contact = () => {
               }`}>
                 <AnimatedText 
                   className={`text-sm font-medium mb-3 ${
-                    isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+                  isDarkMode ? 'text-dark-text' : 'text-neutral-900'
                   }`}
                   delay={0.1}
                 >
@@ -453,7 +453,7 @@ export const Contact = () => {
               }`}>
                 <AnimatedText 
                   className={`text-sm font-medium mb-2 ${
-                    isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+                  isDarkMode ? 'text-dark-text' : 'text-neutral-900'
                   }`}
                   delay={0.2}
                 >
@@ -461,7 +461,7 @@ export const Contact = () => {
                 </AnimatedText>
                 <AnimatedText 
                   className={`text-xs leading-relaxed ${
-                    isDarkMode ? 'text-gray-300' : 'text-neutral-600'
+                  isDarkMode ? 'text-gray-300' : 'text-neutral-600'
                   }`}
                   delay={0.3}
                 >

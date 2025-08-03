@@ -40,10 +40,10 @@ function AppContent() {
           
           {/* Lazy load sections below the fold with single Suspense wrapper */}
           <Suspense fallback={<SectionLoader />}>
-            <About />
-            <Projects />
-            <Skills />
-            <Contact />
+          <About />
+          <Projects />
+          <Skills />
+          <Contact />
           </Suspense>
         </main>
         <ScrollToTop />

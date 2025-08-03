@@ -9,8 +9,9 @@ export const RevealOnScroll = ({
   delay = 0.1,
   yOffset = 32,
   variants,
+  useCriticalPerformance = false, // Only use heavy optimizations when explicitly needed
 }) => {
-  const { ref, isInView, config } = useScrollAnimation();
+  const { ref, isInView, config } = useScrollAnimation({ useCriticalPerformance });
 
   // Default fallback animation
   const defaultVariants = {
@@ -30,11 +31,6 @@ export const RevealOnScroll = ({
       }}
       variants={variants || defaultVariants}
       className={animationClass}
-      style={{
-        willChange: config.willChange,
-        transform: config.transform,
-        backfaceVisibility: config.backfaceVisibility
-      }}
     >
       {children}
     </motion.div>

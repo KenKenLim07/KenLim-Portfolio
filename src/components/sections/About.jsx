@@ -204,15 +204,10 @@ export const About = () => {
           className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
             isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
-          style={{
-            willChange: "transform, opacity, filter",
-            transform: "translateZ(0)",
-            backfaceVisibility: "hidden"
-          }}
         >
           <AnimatedText 
             className={`text-lg font-semibold mb-4 ${
-              isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+            isDarkMode ? 'text-dark-text' : 'text-neutral-900'
             }`}
             delay={0.1}
           >
@@ -242,15 +237,10 @@ export const About = () => {
           className={`border border-neutral-400 rounded-xl p-4 transition-colors duration-300 ${
             isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
-          style={{
-            willChange: "transform, opacity, filter",
-            transform: "translateZ(0)",
-            backfaceVisibility: "hidden"
-          }}
         >
           <AnimatedText 
             className={`text-lg font-semibold mb-3 ${
-              isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+            isDarkMode ? 'text-dark-text' : 'text-neutral-900'
             }`}
             delay={0.2}
           >
@@ -260,9 +250,9 @@ export const About = () => {
           <div className="space-y-3">
             <motion.div 
               className={`p-3 rounded-lg border ${
-                isDarkMode 
-                  ? 'border-neutral-600 bg-dark-hover text-dark-text' 
-                  : 'border-neutral-400 bg-neutral-50 text-neutral-900'
+              isDarkMode 
+                ? 'border-neutral-600 bg-dark-hover text-dark-text' 
+                : 'border-neutral-400 bg-neutral-50 text-neutral-900'
               }`}
               variants={aboutAnimations.educationItem}
               initial="hidden"
@@ -279,9 +269,9 @@ export const About = () => {
                 }`}>Bachelor of Science in Computer Science</h3>
                 <motion.span 
                   className={`text-xs px-2 py-0.5 rounded-md border ${
-                    isDarkMode 
-                      ? 'border-neutral-600 bg-neutral-800/90 text-gray-300' 
-                      : 'border-neutral-400 bg-neutral-50 text-neutral-700'
+                  isDarkMode 
+                    ? 'border-neutral-600 bg-neutral-800/90 text-gray-300' 
+                    : 'border-neutral-400 bg-neutral-50 text-neutral-700'
                   }`}
                   initial={{ scale: 0.8, opacity: 0 }}
                   whileInView={{ scale: 1, opacity: 1 }}
@@ -297,9 +287,9 @@ export const About = () => {
 
             <motion.div 
               className={`p-3 rounded-lg border ${
-                isDarkMode 
-                  ? 'border-neutral-600 bg-dark-hover text-dark-text' 
-                  : 'border-neutral-400 bg-neutral-50 text-neutral-900'
+              isDarkMode 
+                ? 'border-neutral-600 bg-dark-hover text-dark-text' 
+                : 'border-neutral-400 bg-neutral-50 text-neutral-900'
               }`}
               variants={aboutAnimations.educationItem}
               initial="hidden"
@@ -322,9 +312,9 @@ export const About = () => {
                   <span 
                     key={index} 
                     className={`text-xs px-2 py-0.5 rounded-md border ${
-                      isDarkMode 
-                        ? 'border-neutral-600 text-gray-300' 
-                        : 'border-neutral-400 text-neutral-700'
+                    isDarkMode 
+                      ? 'border-neutral-600 text-gray-300' 
+                      : 'border-neutral-400 text-neutral-700'
                     }`}
                   >
                     {course}
@@ -349,7 +339,7 @@ export const About = () => {
         >
           <AnimatedText 
             className={`text-lg font-semibold mb-2 ${
-              isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+            isDarkMode ? 'text-dark-text' : 'text-neutral-900'
             }`}
             delay={0.3}
           >

@@ -318,7 +318,7 @@ export const Projects = () => {
       >
         <motion.div 
           className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
-            isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
+          isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
           style={{
             willChange: "transform, opacity, filter",
@@ -327,14 +327,14 @@ export const Projects = () => {
           }}
         >
           <AnimatedHeader>
-            <h2 className={`text-base font-semibold mb-1 ${
-              isDarkMode ? 'text-dark-text' : 'text-neutral-900'
-            }`}>Featured Projects</h2>
-            <p className={`text-xs leading-relaxed mb-4 ${
-              isDarkMode ? 'text-gray-300' : 'text-neutral-600'
-            }`}>
-              Here are some of the projects I've worked on.
-            </p>
+          <h2 className={`text-base font-semibold mb-1 ${
+            isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+          }`}>Featured Projects</h2>
+          <p className={`text-xs leading-relaxed mb-4 ${
+            isDarkMode ? 'text-gray-300' : 'text-neutral-600'
+          }`}>
+            Here are some of the projects I've worked on.
+          </p>
           </AnimatedHeader>
 
           <div className="grid grid-cols-1 gap-4">
@@ -343,7 +343,7 @@ export const Projects = () => {
                 <div className="flex items-center justify-between mb-3">
                   <motion.h3 
                     className={`text-xs font-medium ${
-                      isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+                    isDarkMode ? 'text-dark-text' : 'text-neutral-900'
                     }`}
                     variants={projectAnimations.projectTitle}
                     style={{
@@ -355,9 +355,9 @@ export const Projects = () => {
                   </motion.h3>
                   <motion.span 
                     className={`text-xs px-2 py-1 rounded-md border ${
-                      isDarkMode 
-                        ? 'border-neutral-600 bg-dark-hover text-gray-300' 
-                        : 'border-neutral-400 bg-neutral-50 text-neutral-700'
+                    isDarkMode 
+                      ? 'border-neutral-600 bg-dark-hover text-gray-300' 
+                      : 'border-neutral-400 bg-neutral-50 text-neutral-700'
                     }`}
                     variants={projectAnimations.categoryBadge}
                     whileHover="hover"
@@ -372,7 +372,7 @@ export const Projects = () => {
 
                 <motion.p 
                   className={`text-xs leading-relaxed mb-4 ${
-                    isDarkMode ? 'text-gray-300' : 'text-neutral-600'
+                  isDarkMode ? 'text-gray-300' : 'text-neutral-600'
                   }`}
                   variants={projectAnimations.description}
                 >
@@ -481,7 +481,7 @@ export const Projects = () => {
                       →
                     </motion.span>
                   </motion.a>
-                </motion.div>
+              </motion.div>
               </AnimatedProjectCard>
             ))}
           </div>

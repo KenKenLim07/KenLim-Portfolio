@@ -378,7 +378,7 @@ export const Skills = () => {
                 <motion.h3 
                   className={`text-xs font-semibold mb-3 ${
                     isDarkMode ? 'text-dark-text' : 'text-neutral-900'
-                  }`}
+                }`}
                   variants={skillsAnimations.categoryTitle}
                   style={{
                     willChange: "transform",
@@ -412,21 +412,21 @@ export const Skills = () => {
                       {skill}
                     </motion.div>
                   ))}
-                </motion.div>
+              </motion.div>
               </AnimatedCategoryCard>
             ))}
             
             {/* Newly revealed categories */}
             {showAll && shouldShowNew && newlyRevealed.map((category, index) => (
               <AnimatedCategoryCard 
-                key={category.title} 
+                key={category.title}
                 category={{ isDarkMode }} 
                 index={index}
                 isNew={true}
               >
                 <motion.h3 
                   className={`text-xs font-semibold mb-3 ${
-                    isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+                  isDarkMode ? 'text-dark-text' : 'text-neutral-900'
                   }`}
                   variants={skillsAnimations.categoryTitle}
                   style={{
@@ -461,7 +461,7 @@ export const Skills = () => {
                       {skill}
                     </motion.div>
                   ))}
-                </motion.div>
+              </motion.div>
               </AnimatedCategoryCard>
             ))}
           </div>

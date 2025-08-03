@@ -4,6 +4,7 @@ import React from 'react';
 // import { BackgroundBlobs } from '../animations/BackgroundBlobs';
 import { useTheme } from '../../context/ThemeContext';
 import { staggerContainer, textVariants, buttonVariants } from '../../animations/motionVariants';
+import { useResponsiveSpacing } from '../../hooks/useScrollAnimation';
 
 const fadeInUp = {
   hidden: { 
@@ -25,7 +26,8 @@ const scrollIndicatorVariants = {
     y: 0,
     transition: {
       duration: 0.8,
-      ease: "easeOut"
+      ease: [0.6, -0.05, 0.01, 0.99], // Match Hero easing
+      delay: 1.8 // Coordinated with Hero sequence completion
     }
   }
 };
@@ -34,6 +36,17 @@ export const Hero = React.memo(() => {
   const { isDarkMode } = useTheme();
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
+  const { scrollArrowBottom, isInAppBrowser } = useResponsiveSpacing();
+  
+  // Calculate Hero animation sequence timing
+  const heroAnimationTiming = {
+    greeting: 0.2,    // "Hi, I'm"
+    name: 0.4,        // "Jose Marie Lim"
+    divider: 0.6,     // Line divider
+    description: 0.8, // Description text
+    buttons: 1.0,     // Action buttons
+    totalDuration: 1.8 // Total sequence duration
+  };
   
   // Calculate scroll progress for scroll indicator fade out
   const scrollIndicatorOpacity = useTransform(
@@ -85,7 +98,7 @@ export const Hero = React.memo(() => {
             className="text-xl text-gray-600 block"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
+            transition={{ delay: heroAnimationTiming.greeting, duration: 0.6 }}
           >
             Hi, I'm
           </motion.span>
@@ -93,7 +106,7 @@ export const Hero = React.memo(() => {
             className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            transition={{ delay: heroAnimationTiming.name, duration: 0.8 }}
           >
             Jose Marie Lim
           </motion.h1>
@@ -101,7 +114,7 @@ export const Hero = React.memo(() => {
             className={`h-1 w-40 mx-auto ${isDarkMode ? 'bg-white' : 'bg-gray-900'}`}
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ delay: 0.6, duration: 1 }}
+            transition={{ delay: heroAnimationTiming.divider, duration: 1 }}
           />
         </motion.div>
 
@@ -109,7 +122,7 @@ export const Hero = React.memo(() => {
           className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
+          transition={{ delay: heroAnimationTiming.description, duration: 0.8 }}
         >
           I like Building secure, scalable solutions while pushing the boundaries of what's possible in tech. Currently diving deep into AI, web development, and cybersecurity.
         </motion.p>
@@ -118,7 +131,7 @@ export const Hero = React.memo(() => {
           className="flex gap-3 md:gap-4 justify-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.8 }}
+          transition={{ delay: heroAnimationTiming.buttons, duration: 0.8 }}
         >
           <motion.button
             onClick={() => scrollToSection("projects")}
@@ -169,18 +182,20 @@ export const Hero = React.memo(() => {
 
       {/* Scroll Down Indicator */}
       <motion.div 
-        className="absolute left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center"
+        className={`absolute left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center ${
+          isInAppBrowser ? 'border border-red-200 rounded-lg p-1' : ''
+        }`}
         variants={scrollIndicatorVariants}
         initial="hidden"
         animate="visible"
         style={{ 
           opacity: scrollIndicatorOpacity,
-          bottom: 'calc(var(--scroll-arrow-bottom) + var(--navbar-height))', // Account for navbar height
+          bottom: `calc(${scrollArrowBottom} + var(--navbar-height) + 1rem)`, // Added 1rem extra spacing
           transform: 'translateX(-50%) translateY(0)' // Ensure proper centering
         }}
       >
         <motion.div
-          className="w-6 h-6 flex items-center justify-center mb-2"
+          className="w-6 h-6 flex items-center justify-center"
           animate={{
             y: [0, 8, 0],
           }}
@@ -188,7 +203,7 @@ export const Hero = React.memo(() => {
             duration: 1.5,
             repeat: Infinity,
             repeatType: "loop",
-            delay: 1.2
+            delay: 2.6 // Start bouncing after arrow appears (1.8 + 0.8 = 2.6)
           }}
         >
           <svg 
@@ -205,17 +220,6 @@ export const Hero = React.memo(() => {
             />
           </svg>
         </motion.div>
-        <motion.span 
-          className={`text-xs tracking-wide ${isDarkMode ? 'text-gray-500' : 'text-gray-600'}`}
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ 
-            duration: 1.5, 
-            repeat: Infinity,
-            delay: 1.2
-          }}
-        >
-          Scroll
-        </motion.span>
       </motion.div>
     </section>
   );
