@@ -68,7 +68,7 @@ export const Hero = React.memo(() => {
   }), [isDarkMode]);
 
   return (
-    <section ref={heroRef} id="home" className="min-h-[100vh] flex items-center justify-center py-20 relative">
+    <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center py-20 relative" style={{ minHeight: 'calc(100vh - var(--navbar-height))' }}>
       {/* <BackgroundBlobs /> */}
 
       <motion.div
@@ -169,11 +169,15 @@ export const Hero = React.memo(() => {
 
       {/* Scroll Down Indicator */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center"
+        className="absolute left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center"
         variants={scrollIndicatorVariants}
         initial="hidden"
         animate="visible"
-        style={{ opacity: scrollIndicatorOpacity }}
+        style={{ 
+          opacity: scrollIndicatorOpacity,
+          bottom: 'calc(var(--scroll-arrow-bottom) + var(--navbar-height))', // Account for navbar height
+          transform: 'translateX(-50%) translateY(0)' // Ensure proper centering
+        }}
       >
         <motion.div
           className="w-6 h-6 flex items-center justify-center mb-2"
