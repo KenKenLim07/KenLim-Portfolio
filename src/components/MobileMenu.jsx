@@ -76,10 +76,10 @@ export const MobileMenu = ({ isOpen, onClose }) => {
           behavior: "smooth"
         });
       } else {
-        window.scrollTo({
+      window.scrollTo({
           top: finalScrollY,
           behavior: "smooth"
-        });
+      });
       }
       
       onClose(); // Close the menu after clicking

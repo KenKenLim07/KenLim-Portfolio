@@ -17,24 +17,61 @@ export const Projects = () => {
 
   const projects = [
     {
-      title: "GSU Connect",
-      description: "GSU Connect is a centralized platform that aggregates and displays news, events, and announcements from various Guimaras State University official sources. I created it to solve the recurring problem of fragmented communication, where important updates were scattered across multiple school portals",
+      title: "GPPO Troop Deployment Tracker",
+      description: "During my internship at the Guimaras Provincial Police Office, I observed officers struggling with Google Maps for troop deployment—it lacked customization and critical operational features. Recognizing this gap, I proposed and developed a comprehensive tracking solution.",
+      challenges: "The biggest challenge was overcoming Android's aggressive background process management, especially during battery saver mode, which would kill the APK and break real-time tracking. I solved this through strategic use of Capacitor's background geolocation plugins, Firebase's persistent connections, and intelligent app lifecycle management.",
+      result: "The result is a robust system that maintains continuous tracking even under the most restrictive OS conditions, providing officers with reliable real-time troop positioning and deployment coordination.",
       image: "",
       tech: [
-        "React", "Vite", "Tailwind CSS", "Framer Motion", "React Query", "React Router", "Lucide/Heroicons", "Radix UI", "PostCSS",
-        "Node.js", "Express", "Supabase", "Cheerio", "node-fetch", "axios",
-        "GitHub",
-        "TypeScript"
+        "React", "TypeScript", "Vite", "Tailwind CSS", 
+        "React Router", "Leaflet", "Leaflet Marker Cluster",
+        "Firebase", "Firestore", "Realtime Database", "Authentication", "Storage", "Analytics",
+        "Capacitor", "Android", "Geolocation", "Background Geolocation",
+        "Push Notifications", "Local Notifications", "OpenStreetMap"
+      ],
+      github: "",
+      demo: "https://gppo-tracker.web.app/",
+      category: "Mobile Web App"
+    },
+    {
+      title: "GSU Connect",
+      description: "I built this because I noticed that information was scattered across different school portals, making it difficult for students to stay updated. So I came up with an idea to create a centralized web app for all school news.",
+      challenges: "The main challenge was ensuring data consistency and avoiding duplicate entries while scraping from multiple sources. I also needed to handle different portal structures and maintain the system's reliability. I solved this by implementing intelligent deduplication logic, error handling for various portal formats, and robust GitHub Actions workflows with proper error recovery.",
+      result: "The clever part? I implemented automated data scraping using GitHub Actions that runs every 2 hours, automatically fetching only new data and saving it to my database. This way, I can just sit back and watch the system maintain itself—no manual updates needed. The result is a seamless, always-updated platform that consolidates all university communications in one place.",
+      image: "",
+      tech: [
+        "React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", 
+        "React Query", "React Router", "Heroicons", "Radix UI",
+        "Node.js", "Express", "Supabase", "PostgreSQL",
+        "Cheerio", "Axios", "GitHub Actions", "Automated Scraping", "Data Deduplication"
       ],
       github: "",
       demo: "https://kenkenlim07.github.io/gsu-connect/",
       category: "Full Stack"
     },
     {
+      title: "MKLA Store",
+      description: "I built this for my 13-year-old cousin who wanted to start her own small business selling carefully picked products to her classmates. She needed a simple e-commerce app with GCash payment integration, so I created a full-featured platform with a complete admin panel for product management.",
+      challenges: "The challenge was making it simple enough for a teenager to use while including all the essential e-commerce features. I had to design an intuitive admin interface, implement secure payment processing with GCash, and ensure the database structure was both scalable and user-friendly. I also needed to handle inventory management and order processing in a way that a 13-year-old could understand and manage effectively.",
+      result: "The result is a modern, user-friendly store that empowers young entrepreneurs to start their business journey. The admin panel provides complete CRUD operations, real-time inventory tracking, and secure payment processing, all wrapped in an interface that's accessible to young users.",
+      image: "",
+      tech: [
+        "React", "TypeScript", "Vite", "Tailwind CSS", "Tailwind Animate",
+        "React Router", "Heroicons", "Class Variance Authority", "CLSX", "Tailwind Merge",
+        "Supabase", "PostgreSQL", "Row Level Security", "Authentication",
+        "GCash Integration", "CRUD Operations", "Admin Panel", "E-commerce"
+      ],
+      github: "",
+      demo: "https://mkla-store.vercel.app/",
+      category: "E-commerce"
+    },
+    {
       title: "Lost & Found Web",
       description: "A campus-focused platform that makes it easy for students to report lost belongings or share items they've found. By posting pictures, descriptions and item statuses, users help reconnect lost items with their rightful owners, fostering a more responsible and supportive school community.",
+      challenges: "The main challenges were creating an intuitive image upload system, implementing effective search and filtering mechanisms, and ensuring user privacy while maintaining transparency. I also needed to design a notification system that would help users quickly find their items without overwhelming them with irrelevant updates.",
+      result: "The platform successfully connects lost items with their owners through an easy-to-use interface, complete with image management, search functionality, and status tracking. It has become a valuable tool for the campus community.",
       image: lostImage,
-      tech: ["React", "JavaScript", "CSS", "HTML", "GitHub Pages"],
+      tech: ["React", "JavaScript", "CSS", "HTML", "GitHub Pages", "Image Upload", "Search & Filter", "User Notifications", "Responsive Design"],
       github: "https://github.com/kenkenlim07/lost-and-found",
       demo: "https://kenkenlim07.github.io/lost-and-found/#",
       category: "Web Development"
@@ -42,13 +79,17 @@ export const Projects = () => {
     {
       title: "Spotify Data Mining",
       description: "Leveraged Orange data mining platform to analyze Spotify's music recommendation algorithms. Uncovered patterns in user behavior and music preferences, demonstrating how data can reveal insights into modern music consumption.",
+      challenges: "The primary challenge was working with large datasets and extracting meaningful insights from complex music recommendation algorithms. I had to learn Orange's data mining tools, understand Spotify's API limitations, and develop analytical models that could identify patterns in user behavior and music preferences.",
+      result: "Successfully uncovered patterns in user behavior and music preferences, demonstrating how data can reveal insights into modern music consumption. The project showcased the power of data mining in understanding user behavior patterns.",
       image: spotifyImage,
-      tech: ["Python", "Orange", "Data Mining", "Spotify API"],
+      tech: ["Python", "Orange", "Data Mining", "Spotify API", "Data Analysis", "Pattern Recognition", "Machine Learning"],
       github: "https://github.com/yourusername/spotify-mining",
       demo: "https://spotify-mining-demo.com",
       category: "Data Science"
     }
   ];
+
+
 
   return (
     <SectionWrapper id="projects">
@@ -59,6 +100,7 @@ export const Projects = () => {
         viewport={{ once: true, margin: "-100px" }}
         className="space-y-4"
       >
+        {/* Featured Projects Section */}
         <motion.div variants={fadeIn} className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
           isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
         }`}>
@@ -76,7 +118,7 @@ export const Projects = () => {
               <motion.div
                 key={index}
                 variants={fadeIn}
-                className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
+                className={`border border-neutral-400 rounded-xl p-4 transition-colors duration-300 ${
                   isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
                 }`}
               >
@@ -95,13 +137,43 @@ export const Projects = () => {
                   </span>
                 </div>
 
-                <p className={`text-xs leading-relaxed mb-3 ${
+                <p className={`text-xs leading-relaxed mb-2 ${
                   isDarkMode ? 'text-gray-300' : 'text-neutral-600'
                 }`}>
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-1.5 mb-3">
+                {project.challenges && (
+                  <div className="mb-2">
+                    <h4 className={`text-xs font-medium mb-1 ${
+                      isDarkMode ? 'text-blue-300' : 'text-blue-600'
+                    }`}>
+                      🎯 Challenges & Solutions
+                    </h4>
+                    <p className={`text-xs leading-relaxed ${
+                      isDarkMode ? 'text-gray-300' : 'text-neutral-600'
+                    }`}>
+                      {project.challenges}
+                    </p>
+                  </div>
+                )}
+
+                {project.result && (
+                  <div className="mb-2">
+                    <h4 className={`text-xs font-medium mb-1 ${
+                      isDarkMode ? 'text-green-300' : 'text-green-600'
+                    }`}>
+                      ✅ Results & Impact
+                    </h4>
+                    <p className={`text-xs leading-relaxed ${
+                      isDarkMode ? 'text-gray-300' : 'text-neutral-600'
+                    }`}>
+                      {project.result}
+                    </p>
+                  </div>
+                )}
+
+                <div className="flex flex-wrap gap-1.5 mb-2">
                   {project.tech.map((tech, i) => (
                     <motion.span
                       key={i}
@@ -160,6 +232,8 @@ export const Projects = () => {
             ))}
           </div>
         </motion.div>
+
+
       </motion.div>
     </SectionWrapper>
   );

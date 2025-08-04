@@ -160,10 +160,10 @@ export const Navbar = () => {
           behavior: "smooth"
         });
       } else {
-        window.scrollTo({
+      window.scrollTo({
           top: finalScrollY,
-          behavior: "smooth"
-        });
+        behavior: "smooth"
+      });
       }
       
       setIsMenuOpen(false);
@@ -221,7 +221,7 @@ export const Navbar = () => {
     <>
       <motion.nav
         className={`sticky top-0 z-[1000] transition-all duration-300 ${
-          isScrolled
+          isScrolled 
             ? isDarkMode 
               ? 'bg-black/95 backdrop-blur-md shadow-lg border-b border-gray-800' 
               : 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100'

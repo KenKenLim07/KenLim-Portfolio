@@ -75,8 +75,8 @@ export const ScrollToTop = () => {
       scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
       return () => scrollContainer.removeEventListener('scroll', handleScroll);
     } else {
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
     }
   }, [lastScrollY, updateVisibility]);
 
@@ -91,10 +91,10 @@ export const ScrollToTop = () => {
         behavior: 'smooth'
       });
     } else {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     }
   };
 

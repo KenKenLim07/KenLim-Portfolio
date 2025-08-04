@@ -116,10 +116,10 @@ export const Hero = () => {
           behavior: "smooth"
         });
       } else {
-        window.scrollTo({
+      window.scrollTo({
           top: finalScrollY,
           behavior: "smooth"
-        });
+      });
       }
     }
   };
@@ -168,7 +168,7 @@ export const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
         >
-          I like Building secure, scalable solutions while pushing the boundaries of what's possible in tech. Currently diving deep into AI, web development, and cybersecurity.
+          I enjoy identifying complex problems and crafting elegant solutions that drive real impact. I transform challenges into opportunities by combining technical expertise with strategic thinking. Currently focused on building robust, user-centric applications that solve real-world problems.
         </motion.p>
 
         <motion.div 
