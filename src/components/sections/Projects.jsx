@@ -6,7 +6,7 @@ import lostImage from '../../assets/lost-found-project.jpg';
 
 const SectionWrapper = ({ children, className = "", id }) => (
   <section id={id} className={`py-6 ${className}`}>
-    <div className="max-w-3xl mx-auto px-4">
+    <div className="max-w-3xl mx-auto px-3">
       {children}
     </div>
   </section>
@@ -98,10 +98,10 @@ export const Projects = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="space-y-4"
+        className="space-y-2"
       >
         {/* Featured Projects Section */}
-        <motion.div variants={fadeIn} className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
+        <motion.div variants={fadeIn} className={`border border-neutral-400 rounded-xl p-2 transition-colors duration-300 ${
           isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
         }`}>
           <h2 className={`text-base font-semibold mb-1 ${

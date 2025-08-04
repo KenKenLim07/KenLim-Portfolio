@@ -4,7 +4,7 @@ import { useTheme } from '../../context/ThemeContext';
 
 const SectionWrapper = ({ children, className = "", id }) => (
   <section id={id} className={`py-8 ${className}`}>
-    <div className="max-w-3xl mx-auto px-4 mt-15">
+    <div className="max-w-3xl mx-auto px-3 mt-5">
       {children}
     </div>
   </section>
@@ -20,12 +20,12 @@ export const About = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="space-y-4"
+        className="space-y-2"
       >
         {/* About Me Section */}
         <motion.div 
           variants={fadeIn}
-          className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
+          className={`border border-neutral-400 rounded-xl p-2 transition-colors duration-300 ${
             isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
         >
@@ -52,7 +52,7 @@ export const About = () => {
         {/* Education Section */}
         <motion.div 
           variants={fadeIn}
-          className={`border border-neutral-400 rounded-xl p-4 transition-colors duration-300 ${
+          className={`border border-neutral-400 rounded-xl p-2 transition-colors duration-300 ${
             isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
         >
@@ -110,7 +110,7 @@ export const About = () => {
         {/* Interests Grid */}
         <motion.div 
           variants={fadeIn}
-          className={`border border-neutral-400 rounded-xl p-4 transition-colors duration-300 ${
+          className={`border border-neutral-400 rounded-xl p-2 transition-colors duration-300 ${
             isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
         >

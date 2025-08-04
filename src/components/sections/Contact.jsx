@@ -6,7 +6,7 @@ import { useTheme } from '../../context/ThemeContext';
 
 const SectionWrapper = ({ children, className = "", id }) => (
   <section id={id} className={`py-8 ${className}`}>
-    <div className="max-w-3xl mx-auto px-4">
+    <div className="max-w-3xl mx-auto px-3">
       {children}
     </div>
   </section>
@@ -120,14 +120,14 @@ export const Contact = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="space-y-3"
+        className="space-y-2"
       >
-        <motion.div variants={fadeIn} className={`border border-neutral-400 rounded-xl p-4 transition-colors duration-300 ${
+        <motion.div variants={fadeIn} className={`border border-neutral-400 rounded-xl p-2 transition-colors duration-300 ${
           isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
         }`}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Contact Info */}
-            <motion.div variants={fadeIn} className="space-y-3">
+            <motion.div variants={fadeIn} className="space-y-2">
               <div className={`border border-neutral-400 rounded-lg p-3 transition-colors duration-300 ${
                 isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
               }`}>
@@ -208,7 +208,7 @@ export const Contact = () => {
 
             {/* Contact Form */}
             <motion.div variants={fadeIn}>
-              <form onSubmit={handleSubmit} className="space-y-3">
+              <form onSubmit={handleSubmit} className="space-y-2">
                 <div>
                   <label htmlFor="name" className={`block text-xs font-medium mb-1 ${
                     isDarkMode ? 'text-gray-300' : 'text-neutral-700'

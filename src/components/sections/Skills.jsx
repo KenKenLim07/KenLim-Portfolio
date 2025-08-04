@@ -5,7 +5,7 @@ import { useTheme } from '../../context/ThemeContext';
 
 const SectionWrapper = ({ children, className = "", id }) => (
   <section id={id} className={`py-6 ${className}`}>
-    <div className="max-w-3xl mx-auto px-4">
+    <div className="max-w-3xl mx-auto px-3">
       {children}
     </div>
   </section>
@@ -103,11 +103,11 @@ export const Skills = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        className="space-y-4 scroll-mt-[80px]"
+        className="space-y-2 scroll-mt-[80px]"
       >
         <motion.div
           variants={fadeIn}
-          className={`border border-neutral-400 rounded-xl p-6 transition-colors duration-300 ${
+          className={`border border-neutral-400 rounded-xl p-2 transition-colors duration-300 ${
             isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
           }`}
         >

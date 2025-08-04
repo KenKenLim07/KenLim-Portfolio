@@ -129,14 +129,14 @@ export const Hero = () => {
       {/* <BackgroundBlobs /> */}
 
       <motion.div
-        className="text-center space-y-8 max-w-3xl mx-auto px-4 relative z-20 pb-safe"
+        className="text-center space-y-8 max-w-3xl mx-auto px-2 relative z-20 pb-safe"
         variants={staggerContainer}
         initial="initial"
         animate="animate"
       >
         <motion.div
           variants={textVariants}
-          className="space-y-4"
+          className="space-y-2"
         >
           <motion.span
             className="text-xl text-gray-600 block"
@@ -168,7 +168,7 @@ export const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
         >
-          I enjoy identifying complex problems and crafting elegant solutions that drive real impact. I transform challenges into opportunities by combining technical expertise with strategic thinking. Currently focused on building robust, user-centric applications that solve real-world problems.
+          I specialize in identifying complex problems and crafting elegant solutions that drive real impact. From government systems to student platforms, I transform challenges into opportunities by combining technical expertise with strategic thinking. Currently focused on building robust, user-centric applications that solve real-world problems.
         </motion.p>
 
         <motion.div 
