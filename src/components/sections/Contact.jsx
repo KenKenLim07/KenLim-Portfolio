@@ -134,89 +134,89 @@ export const Contact = () => {
       >
         <motion.div variants={fadeIn}>
           <BorderedSection title="Get in Touch">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Contact Info */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Contact Info */}
               <motion.div variants={fadeIn} className="space-y-2">
-                <div className={`border border-neutral-400 rounded-lg p-3 transition-colors duration-300 ${
-                  isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
-                }`}>
-                  <h3 className={`text-sm font-medium mb-2 ${
-                    isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+              <div className={`border border-neutral-400 rounded-lg p-3 transition-colors duration-300 ${
+                isDarkMode ? 'bg-dark-card text-dark-text' : 'bg-white text-neutral-900'
+              }`}>
+                <h3 className={`text-sm font-medium mb-2 ${
+                  isDarkMode ? 'text-dark-text' : 'text-neutral-900'
                   }`}>Contact Info</h3>
-                  <div className="space-y-2">
-                    {/* Email */}
+                <div className="space-y-2">
+                  {/* Email */}
+                  <motion.a
+                    href={contactInfo[0].link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variants={fadeIn}
+                    className={`flex items-center gap-2 text-sm ${
+                      isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
+                    } transition-colors`}
+                    whileHover={{ x: 2 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {contactInfo[0].icon}
+                    <span className={`text-xs ${
+                      isDarkMode ? 'text-gray-300' : 'text-neutral-600'
+                    }`}>{contactInfo[0].value}</span>
+                  </motion.a>
+
+                  {/* Social Links */}
+                  <div className="flex gap-2">
                     <motion.a
-                      href={contactInfo[0].link}
+                      href={contactInfo[1].link}
                       target="_blank"
                       rel="noopener noreferrer"
                       variants={fadeIn}
-                      className={`flex items-center gap-2 text-sm ${
-                        isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900'
+                      className={`flex items-center gap-1.5 px-2 py-1 rounded-md border ${
+                        isDarkMode 
+                          ? 'border-neutral-600 hover:bg-neutral-900/40 text-gray-300' 
+                          : 'border-neutral-400 hover:bg-neutral-50 text-neutral-700'
                       } transition-colors`}
-                      whileHover={{ x: 2 }}
-                      transition={{ duration: 0.2 }}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      {contactInfo[0].icon}
-                      <span className={`text-xs ${
-                        isDarkMode ? 'text-gray-300' : 'text-neutral-600'
-                      }`}>{contactInfo[0].value}</span>
+                      {contactInfo[1].icon}
+                      <span className="text-xs font-medium">{contactInfo[1].title}</span>
                     </motion.a>
 
-                    {/* Social Links */}
-                    <div className="flex gap-2">
-                      <motion.a
-                        href={contactInfo[1].link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        variants={fadeIn}
-                        className={`flex items-center gap-1.5 px-2 py-1 rounded-md border ${
-                          isDarkMode 
-                            ? 'border-neutral-600 hover:bg-neutral-900/40 text-gray-300' 
-                            : 'border-neutral-400 hover:bg-neutral-50 text-neutral-700'
-                        } transition-colors`}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        {contactInfo[1].icon}
-                        <span className="text-xs font-medium">{contactInfo[1].title}</span>
-                      </motion.a>
-
-                      <motion.a
-                        href={contactInfo[2].link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        variants={fadeIn}
-                        className={`flex items-center gap-1.5 px-2 py-1 rounded-md border ${
-                          isDarkMode 
-                            ? 'border-neutral-600 hover:bg-neutral-900/40 text-gray-300' 
-                            : 'border-neutral-400 hover:bg-neutral-50 text-neutral-700'
-                        } transition-colors`}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        {contactInfo[2].icon}
-                        <span className="text-xs font-medium">{contactInfo[2].title}</span>
-                      </motion.a>
-                    </div>
+                    <motion.a
+                      href={contactInfo[2].link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      variants={fadeIn}
+                      className={`flex items-center gap-1.5 px-2 py-1 rounded-md border ${
+                        isDarkMode 
+                          ? 'border-neutral-600 hover:bg-neutral-900/40 text-gray-300' 
+                          : 'border-neutral-400 hover:bg-neutral-50 text-neutral-700'
+                      } transition-colors`}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      {contactInfo[2].icon}
+                      <span className="text-xs font-medium">{contactInfo[2].title}</span>
+                    </motion.a>
                   </div>
                 </div>
+              </div>
 
-                <div className={`p-3 transition-colors duration-300 ${
+              <div className={`p-3 transition-colors duration-300 ${
+                isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+              }`}>
+                <h3 className={`text-sm font-medium mb-2 ${
                   isDarkMode ? 'text-dark-text' : 'text-neutral-900'
+                }`}>QuickChat</h3>
+                <p className={`text-xs leading-relaxed ${
+                  isDarkMode ? 'text-gray-300' : 'text-neutral-600'
                 }`}>
-                  <h3 className={`text-sm font-medium mb-2 ${
-                    isDarkMode ? 'text-dark-text' : 'text-neutral-900'
-                  }`}>QuickChat</h3>
-                  <p className={`text-xs leading-relaxed ${
-                    isDarkMode ? 'text-gray-300' : 'text-neutral-600'
-                  }`}>
-                    I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-                  </p>
-                </div>
-              </motion.div>
+                  I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                </p>
+              </div>
+            </motion.div>
 
-              {/* Contact Form */}
-              <motion.div variants={fadeIn}>
+            {/* Contact Form */}
+            <motion.div variants={fadeIn}>
                 <form onSubmit={handleSubmit} className="space-y-6">
 
                   {/* Name Input */}
@@ -235,19 +235,19 @@ export const Contact = () => {
                     >
                       Name
                     </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                       onFocus={() => handleFocus('name')}
                       onBlur={handleBlur}
                       placeholder="Name"
                       className="w-full bg-transparent focus:outline-none text-sm text-neutral-900 dark:text-gray-200 placeholder-transparent"
-                      required
-                    />
-                  </div>
+                    required
+                  />
+                </div>
 
                   {/* Email Input */}
                   <div 
@@ -265,19 +265,19 @@ export const Contact = () => {
                     >
                       Email
                     </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                       onFocus={() => handleFocus('email')}
                       onBlur={handleBlur}
                       placeholder="Email"
                       className="w-full bg-transparent focus:outline-none text-sm text-neutral-900 dark:text-gray-200 placeholder-transparent"
-                      required
-                    />
-                  </div>
+                    required
+                  />
+                </div>
 
                   {/* Message Textarea */}
                   <div 
@@ -295,48 +295,48 @@ export const Contact = () => {
                     >
                       Message
                     </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                       onFocus={() => handleFocus('message')}
                       onBlur={handleBlur}
                       rows={3}
                       placeholder="Message"
                       className="w-full bg-transparent focus:outline-none text-sm text-neutral-900 dark:text-gray-200 placeholder-transparent resize-none"
-                      required
+                    required
                     />
-                  </div>
+                </div>
 
                   {/* Status Message */}
-                  {status.message && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
+                {status.message && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
                       className="text-xs p-2 rounded-lg bg-neutral-50 text-neutral-900 dark:bg-dark-card dark:text-white"
-                    >
-                      {status.message}
-                    </motion.div>
-                  )}
+                  >
+                    {status.message}
+                  </motion.div>
+                )}
 
                   {/* Submit Button */}
-                  <motion.button
-                    type="submit"
+                <motion.button
+                  type="submit"
                     className={`w-full px-3 py-4 rounded-lg border text-sm font-medium transition-colors
                       ${isDarkMode
-                        ? 'bg-white text-black border-neutral-200 hover:border-neutral-300'
-                        : 'bg-white text-gray-900 border-neutral-400 hover:border-neutral-500'
+                      ? 'bg-white text-black border-neutral-200 hover:border-neutral-300' 
+                      : 'bg-white text-gray-900 border-neutral-400 hover:border-neutral-500'
                       }`}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </motion.button>
-                </form>
-              </motion.div>
-            </div>
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </motion.button>
+              </form>
+            </motion.div>
+          </div>
           </BorderedSection>
         </motion.div>
       </motion.div>
