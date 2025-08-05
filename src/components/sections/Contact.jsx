@@ -229,7 +229,7 @@ export const Contact = () => {
                       className={`absolute left-3 px-1 text-sm transition-all duration-200 pointer-events-none
                         ${
                           formData.name || focusedField === "name"
-                            ? '-top-2 text-xs text-neutral-700 dark:text-gray-300 bg-white dark:bg-dark-card'
+                            ? `-top-2 text-xs ${isDarkMode ? 'text-gray-300 bg-[#0e0e0e]' : 'text-neutral-700 bg-white'}`
                             : 'top-3 text-gray-500 dark:text-gray-400'
                         }`}
                     >
@@ -259,7 +259,7 @@ export const Contact = () => {
                       className={`absolute left-3 px-1 text-sm transition-all duration-200 pointer-events-none
                         ${
                           formData.email || focusedField === "email"
-                            ? '-top-2 text-xs text-neutral-700 dark:text-gray-300 bg-white dark:bg-dark-card'
+                            ? `-top-2 text-xs ${isDarkMode ? 'text-gray-300 bg-[#0e0e0e]' : 'text-neutral-700 bg-white'}`
                             : 'top-3 text-gray-500 dark:text-gray-400'
                         }`}
                     >
@@ -289,7 +289,7 @@ export const Contact = () => {
                       className={`absolute left-3 px-1 text-sm transition-all duration-200 pointer-events-none
                         ${
                           formData.message || focusedField === "message"
-                            ? '-top-2 text-xs text-neutral-700 dark:text-gray-300 bg-white dark:bg-dark-card'
+                            ? `-top-2 text-xs ${isDarkMode ? 'text-gray-300 bg-[#0e0e0e]' : 'text-neutral-700 bg-white'}`
                             : 'top-3 text-gray-500 dark:text-gray-400'
                         }`}
                     >
