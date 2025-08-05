@@ -57,7 +57,7 @@ export const About = () => {
                 }`}>Bachelor of Science in Computer Science</h3>
                 <span className={`text-xs px-2 py-0.5 rounded-md border ${
                   isDarkMode 
-                    ? 'border-neutral-600 bg-neutral-800/90 text-gray-300' 
+                    ? 'border-neutral-600 bg-[#0e0e0e]/90 text-gray-300' 
                     : 'border-neutral-400 bg-neutral-50 text-neutral-700'
                 }`}>2025</span>
               </div>

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useRef, useEffect } from 'react';
 import { useTheme } from '../../context/ThemeContext';
+import profileImage from '../../assets/profile.jpg';
 
 export const Hero = () => {
   const heroRef = useRef(null);
@@ -80,7 +81,7 @@ export const Hero = () => {
       name: 'Python',
       icon: (
         <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 md:w-8 md:h-8">
-          <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm0 2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm0 2c3.314 0 6 2.686 6 6s-2.686 6-6 6-6-2.686-6-6 2.686-6 6-6z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-2 16.5c-1.5 0-2.5-1-2.5-2.5s1-2.5 2.5-2.5 2.5 1 2.5 2.5-1 2.5-2.5 2.5zm4-9c-1.5 0-2.5-1-2.5-2.5S12.5 2.5 14 2.5s2.5 1 2.5 2.5S15.5 7 14 7z"/>
         </svg>
       )
     },
@@ -97,6 +98,7 @@ export const Hero = () => {
       icon: (
         <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 md:w-8 md:h-8">
           <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm0 2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm0 2c3.314 0 6 2.686 6 6s-2.686 6-6 6-6-2.686-6-6 2.686-6 6-6z"/>
+          <path d="M7 8h10v2H7V8zm0 4h10v2H7v-2zm0 4h8v2H7v-2z"/>
         </svg>
       )
     },
@@ -113,6 +115,7 @@ export const Hero = () => {
       icon: (
         <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 md:w-8 md:h-8">
           <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm0 2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm0 2c3.314 0 6 2.686 6 6s-2.686 6-6 6-6-2.686-6-6 2.686-6 6-6z"/>
+          <path d="M8 6h8v2H8V6zm0 4h8v2H8v-2zm0 4h6v2H8v-2z"/>
         </svg>
       )
     },
@@ -136,7 +139,8 @@ export const Hero = () => {
       name: 'PostgreSQL',
       icon: (
         <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 md:w-8 md:h-8">
-          <path d="M3.9 15.5c-.7 0-1.3-.6-1.3-1.3s.6-1.3 1.3-1.3 1.3.6 1.3 1.3-.6 1.3-1.3 1.3zm0-2.6c-.7 0-1.3.6-1.3 1.3s.6 1.3 1.3 1.3 1.3-.6 1.3-1.3-.6-1.3-1.3-1.3zm0 2.6c-.7 0-1.3-.6-1.3-1.3s.6-1.3 1.3-1.3 1.3.6 1.3 1.3-.6 1.3-1.3 1.3zm0-2.6c-.7 0-1.3.6-1.3 1.3s.6 1.3 1.3 1.3 1.3-.6 1.3-1.3-.6-1.3-1.3-1.3z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm0 2c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm0 2c3.314 0 6 2.686 6 6s-2.686 6-6 6-6-2.686-6-6 2.686-6 6-6z"/>
+          <path d="M8 8h8v2H8V8zm0 4h8v2H8v-2zm0 4h6v2H8v-2z"/>
         </svg>
       )
     }
@@ -146,114 +150,163 @@ export const Hero = () => {
     <section
       ref={heroRef}
       id="home"
-      className="hero-viewport-dynamic flex flex-col justify-center relative overflow-hidden px-2 md:px-8"
+      className="hero-viewport-dynamic flex flex-col justify-start relative overflow-hidden pt-4"
     >
-      {/* Main Content - Reduced height */}
-      <div className="flex flex-row items-center justify-center w-full flex-1 max-h-[60vh]">
-        {/* Left: Bordered Box with Floating Label */}
-        <div
-          className={`relative flex-1 flex items-center justify-center min-w-0 w-7/12 h-full`}
-        >
+      <div className="max-w-3xl mx-auto px-3">
+        {/* Main Content - Flexible height matching */}
+        <div className="flex flex-row items-stretch w-full min-h-[400px]">
+          {/* Left: Bordered Box with Floating Label */}
           <div
-            className={`relative w-full max-w-xl border border-gray-300 dark:border-neutral-700 rounded-lg p-4 md:p-6 shadow-lg transition-colors duration-300 ${
-              isDarkMode ? 'bg-neutral-800 text-gray-200' : 'bg-white text-neutral-900'
-            }`}
+            className={`relative flex-1 flex items-center justify-center min-w-0 w-7/12 p-4`}
           >
-            {/* Floating Label */}
             <div
-              className={`absolute -top-4 left-6 px-3 py-1 text-xs font-bold uppercase tracking-wide border border-gray-300 dark:border-neutral-400 rounded bg-white dark:bg-neutral-800 ${
-                isDarkMode ? 'text-gray-200' : 'text-neutral-700'
+              className={`relative w-full border border-gray-300 dark:border-neutral-700 rounded-lg p-4 md:p-6 shadow-lg transition-colors duration-300 ${
+                isDarkMode ? 'bg-[#0e0e0e] text-gray-200' : 'bg-white text-neutral-900'
               }`}
-              style={{ letterSpacing: '0.08em' }}
             >
-              Hi, i'm jose marie lim
+              {/* Floating Label */}
+              <div
+                className={`absolute -top-4 left-6 px-3 py-1 text-xs font-bold uppercase tracking-wide border border-gray-300 dark:border-neutral-400 rounded ${
+                  isDarkMode ? 'bg-[#0e0e0e] text-gray-200' : 'bg-white text-neutral-700'
+                }`}
+                style={{ 
+                  letterSpacing: '0.08em',
+                  backgroundColor: isDarkMode ? '#0e0e0e' : '#ffffff'
+                }}
+              >
+                Hi, I'm Jose Marie Lim
+              </div>
+              <div className="space-y-2 mt-2">
+                <p 
+                  className="text-gray-700 dark:text-gray-300 leading-relaxed"
+                  style={{
+                    fontSize: 'clamp(14px, 2.8vw, 18px)',
+                    lineHeight: 'clamp(1.4, 2.5vw, 1.6)'
+                  }}
+                >
+                  I specialize in identifying complex problems and crafting elegant solutions that drive real impact. From enterprise applications to student platforms, I transform challenges into opportunities by combining technical expertise with strategic thinking. Currently focused on building robust, user-centric applications that solve real-world problems.
+                </p>
+              </div>
             </div>
-            <div className="space-y-2 mt-2">
-              <div className={`h-1 w-24 md:w-40 my-2 ${isDarkMode ? 'bg-white/80' : 'bg-gray-900/80'}`}></div>
-              <p className="text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                I specialize in identifying complex problems and crafting elegant solutions that drive real impact. From government systems to student platforms, I transform challenges into opportunities by combining technical expertise with strategic thinking. Currently focused on building robust, user-centric applications that solve real-world problems.
-              </p>
-            </div>
+          </div>
+
+          {/* Right: Profile Picture and Buttons */}
+          <div className="flex flex-col items-center justify-center w-5/12 gap-3.5 md:gap-4 p-4">
+            {/* Profile Picture */}
+          <motion.div
+              className="mb-4"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className={`w-44 h-44 md:w-56 md:h-56 rounded-xl overflow-hidden border-4 shadow-lg p-1 ${
+                isDarkMode 
+                  ? 'border-neutral-600/50 bg-neutral-800' 
+                  : 'border-gray-300/50 bg-white'
+              }`}>
+                <img
+                  src={profileImage}
+                  alt="Jose Marie Lim"
+                  className="w-full h-full object-cover rounded-lg"
+          />
+              </div>
+        </motion.div>
+
+          <motion.button
+              onClick={() => scrollToSection('projects')}
+              className={`py-2 md:py-3 rounded-lg border-2 font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
+              isDarkMode 
+                ? 'bg-white text-black border-neutral-200 hover:border-neutral-300' 
+                : 'bg-gray-900 text-white border-transparent'
+              }`}
+              style={{
+                width: 'clamp(80px, 15vw, 224px)',
+                fontSize: 'clamp(12px, 2.5vw, 16px)',
+                paddingLeft: 'clamp(8px, 2vw, 16px)',
+                paddingRight: 'clamp(8px, 2vw, 16px)'
+              }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+          >
+              <span className="relative z-10 flex items-center justify-center gap-1 md:gap-2">
+                <svg 
+                  className="flex-shrink-0" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                  style={{ width: 'clamp(12px, 2.5vw, 16px)', height: 'clamp(12px, 2.5vw, 16px)' }}
+                >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+                <span className="hidden sm:inline">View Projects</span>
+                <span className="sm:hidden">Projects</span>
+            </span>
+          </motion.button>
+          <motion.button
+              onClick={() => scrollToSection('contact')}
+              className={`py-2 md:py-3 rounded-lg border-2 font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
+              isDarkMode 
+                  ? 'border-neutral-600 hover:border-neutral-500 bg-neutral-900 text-white'
+                  : 'border-neutral-400 hover:border-neutral-500 bg-white text-gray-900'
+              }`}
+              style={{
+                width: 'clamp(80px, 15vw, 224px)',
+                fontSize: 'clamp(12px, 2.5vw, 16px)',
+                paddingLeft: 'clamp(8px, 2vw, 16px)',
+                paddingRight: 'clamp(8px, 2vw, 16px)'
+              }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+          >
+              <span className="relative z-10 flex items-center justify-center gap-1 md:gap-2">
+                <svg 
+                  className="flex-shrink-0" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                  style={{ width: 'clamp(12px, 2.5vw, 16px)', height: 'clamp(12px, 2.5vw, 16px)' }}
+                >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+                <span className="hidden sm:inline">Contact Me</span>
+                <span className="sm:hidden">Contact</span>
+            </span>
+          </motion.button>
           </div>
         </div>
 
-        {/* Right: Buttons */}
-        <div className="flex flex-col items-center justify-center w-5/12 h-full gap-3 md:gap-4">
-          <motion.button
-            onClick={() => scrollToSection('projects')}
-            className={`w-20 md:w-56 py-2 md:py-3 rounded-lg border-2 text-xs md:text-base font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
-              isDarkMode
-                ? 'bg-white text-black border-neutral-200 hover:border-neutral-300'
-                : 'bg-gray-900 text-white border-transparent'
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            <span className="relative z-10 flex items-center justify-center gap-1 md:gap-2">
-              <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-              </svg>
-              <span className="hidden md:inline">View Projects</span>
-              <span className="md:hidden">Projects</span>
-            </span>
-          </motion.button>
-          <motion.button
-            onClick={() => scrollToSection('contact')}
-            className={`w-20 md:w-56 py-2 md:py-3 rounded-lg border-2 text-xs md:text-base font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
-              isDarkMode
-                ? 'border-neutral-600 hover:border-neutral-500 bg-neutral-900 text-white'
-                : 'border-neutral-400 hover:border-neutral-500 bg-white text-gray-900'
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-          >
-            <span className="relative z-10 flex items-center justify-center gap-1 md:gap-2">
-              <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              <span className="hidden md:inline">Contact Me</span>
-              <span className="md:hidden">Contact</span>
-            </span>
-          </motion.button>
-        </div>
-      </div>
-
-      {/* Tech Stack Section - Much closer */}
-      <div className="w-full -mt-13 md:mt-4">
-        <div className={`relative flex flex-wrap justify-center items-center gap-3 md:gap-4 px-4 py-3 rounded-lg border ${
-          isDarkMode 
-            ? 'border-neutral-700 bg-neutral-800' 
-            : 'border-gray-900 bg-white'
-        }`}>
-          {techStack.map((tech, index) => (
-            <motion.div
-              key={tech.name}
-              className="flex flex-col items-center gap-1"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-            >
-              <motion.div
-                className={`w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg border-2 ${
-                  isDarkMode 
-                    ? 'bg-neutral-800 border-neutral-600 hover:border-neutral-500 text-gray-300' 
-                    : 'bg-white border-gray-300 hover:border-gray-400 text-gray-700'
-                }`}
-                whileHover={{ 
-                  scale: 1.1,
-                  transition: { duration: 0.2 }
-                }}
-                title={tech.name}
-              >
-                {tech.icon}
-              </motion.div>
-              <span className={`text-xs font-medium ${
-                isDarkMode ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                {tech.name}
-              </span>
-            </motion.div>
-          ))}
+        {/* Tech Stack Section - Directly after main content */}
+        <div className="w-full mt-0">
+          <div className={`relative flex flex-wrap justify-center items-center gap-2 md:gap-3 px-4 py-2 rounded-lg ${
+            isDarkMode 
+              ? 'bg-[#0e0e0e]' 
+              : 'bg-white'
+          }`}>
+            {techStack.map((tech, index) => (
+      <motion.div 
+                key={tech.name}
+                className="flex items-center justify-center"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+      >
+        <motion.div
+                  className={`w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg border-2 ${
+                    isDarkMode 
+                      ? 'bg-neutral-800 border-neutral-600 hover:border-neutral-500 text-gray-300' 
+                      : 'bg-white border-gray-300 hover:border-gray-400 text-gray-700'
+                  }`}
+                  whileHover={{ 
+                    scale: 1.1,
+                    transition: { duration: 0.2 }
+                  }}
+                  title={tech.name}
+                >
+                  {tech.icon}
+        </motion.div>
+      </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

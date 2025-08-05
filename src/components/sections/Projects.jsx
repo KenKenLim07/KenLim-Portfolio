@@ -187,7 +187,7 @@ export const Projects = () => {
                     className={`flex items-center gap-1.5 px-2 py-1 rounded-md border-2 text-xs ${
                       isDarkMode 
                         ? 'border-neutral-600 bg-white hover:bg-neutral-100 text-black' 
-                        : 'border-neutral-400 bg-neutral-900/90 hover:bg-neutral-800/90 text-white'
+                        : 'border-neutral-400 bg-[#0e0e0e]/90 hover:bg-[#0e0e0e]/90 text-white'
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}

@@ -13,10 +13,10 @@ export default function BorderedSection({ title, children, className = "" }: Pro
   
   return (
     <section className={`relative border border-gray-300 dark:border-neutral-700 rounded-md p-4 mt-6 ${
-      isDarkMode ? 'bg-neutral-800 text-gray-200' : 'bg-white text-neutral-900'
+      isDarkMode ? 'bg-[#0e0e0e] text-gray-200' : 'bg-white text-neutral-900'
     } ${className}`}>
       <h2 className={`absolute -top-3 left-4 px-2 text-sm font-semibold border border-gray-300 dark:border-neutral-400 rounded uppercase tracking-wide ${
-        isDarkMode ? 'bg-neutral-800 text-gray-200' : 'bg-white text-neutral-700'
+        isDarkMode ? 'bg-[#0e0e0e] text-gray-200' : 'bg-white text-neutral-700'
       }`}>
         {title}
       </h2>
