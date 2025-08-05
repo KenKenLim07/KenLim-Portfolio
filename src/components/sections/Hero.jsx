@@ -154,13 +154,13 @@ export const Hero = () => {
     >
       <div className="max-w-3xl mx-auto px-3">
         {/* Main Content - Flexible height matching */}
-        <div className="flex flex-row items-stretch w-full min-h-[400px]">
+        <div className="flex flex-col md:flex-row items-stretch w-full min-h-[400px]">
           {/* Left: Bordered Box with Floating Label */}
           <div
-            className={`relative flex-1 flex items-center justify-center min-w-0 w-7/12 p-4`}
+            className={`relative flex-1 flex items-center justify-center min-w-0 w-full md:w-7/12 p-2 md:p-4`}
           >
             <div
-              className={`relative w-full border border-gray-300 dark:border-neutral-700 rounded-lg p-4 md:p-6 shadow-lg transition-colors duration-300 ${
+              className={`relative w-full border border-gray-300 dark:border-neutral-700 rounded-lg p-3 md:p-6 shadow-lg transition-colors duration-300 ${
                 isDarkMode ? 'bg-[#0e0e0e] text-gray-200' : 'bg-white text-neutral-900'
               }`}
             >
@@ -191,7 +191,7 @@ export const Hero = () => {
           </div>
 
           {/* Right: Profile Picture and Buttons */}
-          <div className="flex flex-col items-center justify-center w-5/12 gap-3.5 md:gap-4 p-4">
+          <div className="flex flex-col items-center justify-center w-full md:w-5/12 gap-3 md:gap-4 p-2 md:p-4 mt-4 md:mt-0">
             {/* Profile Picture */}
           <motion.div
               className="mb-4"
