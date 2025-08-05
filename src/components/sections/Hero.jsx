@@ -199,7 +199,7 @@ export const Hero = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <div className={`w-48 h-48 md:w-56 md:h-56 rounded-xl overflow-hidden border-2 shadow-lg p-1 ${
+              <div className={`w-44 h-44 md:w-56 md:h-56 rounded-xl overflow-hidden border-1 shadow-lg p-1 ${
                 isDarkMode 
                   ? 'border-neutral-600/50 bg-neutral-800' 
                   : 'border-gray-300/50 bg-white'
