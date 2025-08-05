@@ -154,10 +154,10 @@ export const Hero = () => {
     >
       <div className="max-w-3xl mx-auto px-3">
         {/* Main Content - Flexible height matching */}
-        <div className="flex flex-col md:flex-row items-stretch w-full min-h-[400px]">
+        <div className="mt-2 flex flex-row items-start w-full min-h-[400px]">
           {/* Left: Bordered Box with Floating Label */}
           <div
-            className={`relative flex-1 flex items-center justify-center min-w-0 w-full md:w-7/12 p-2 md:p-4`}
+            className={`relative flex-1 flex items-start justify-center min-w-0 w-7/12 p-2 md:p-4`}
           >
             <div
               className={`relative w-full border border-gray-300 dark:border-neutral-700 rounded-lg p-3 md:p-6 shadow-lg transition-colors duration-300 ${
@@ -166,7 +166,7 @@ export const Hero = () => {
             >
               {/* Floating Label */}
               <div
-                className={`absolute -top-4 left-6 px-3 py-1 text-xs font-bold uppercase tracking-wide border border-gray-300 dark:border-neutral-400 rounded ${
+                className={`absolute -top-3 left-4 px-2 py-0.5 text-xs font-bold uppercase tracking-wide border border-gray-300 dark:border-neutral-400 rounded ${
                   isDarkMode ? 'bg-[#0e0e0e] text-gray-200' : 'bg-white text-neutral-700'
                 }`}
                 style={{ 
@@ -184,22 +184,22 @@ export const Hero = () => {
                     lineHeight: 'clamp(1.4, 2.5vw, 1.6)'
                   }}
                 >
-                  I specialize in identifying complex problems and crafting elegant solutions that drive real impact. From enterprise applications to student platforms, I transform challenges into opportunities by combining technical expertise with strategic thinking. Currently focused on building robust, user-centric applications that solve real-world problems.
+                  I specialize in identifying complex problems and crafting elegant solutions that drive real impact. I transform challenges into opportunities by combining technical expertise with strategic thinking. Currently focused on building robust, user-centric applications that solve real-world problems.
                 </p>
               </div>
             </div>
           </div>
 
           {/* Right: Profile Picture and Buttons */}
-          <div className="flex flex-col items-center justify-center w-full md:w-5/12 gap-3 md:gap-4 p-2 md:p-4 mt-4 md:mt-0">
+          <div className="flex flex-col items-center justify-start w-5/12 gap-3 md:gap-4 p-2 md:p-4">
             {/* Profile Picture */}
-          <motion.div
-              className="mb-4"
+            <motion.div
+              className="mb-2 md:mb-4"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <div className={`w-44 h-44 md:w-56 md:h-56 rounded-xl overflow-hidden border-4 shadow-lg p-1 ${
+              <div className={`w-48 h-48 md:w-56 md:h-56 rounded-xl overflow-hidden border-2 shadow-lg p-1 ${
                 isDarkMode 
                   ? 'border-neutral-600/50 bg-neutral-800' 
                   : 'border-gray-300/50 bg-white'
@@ -208,16 +208,16 @@ export const Hero = () => {
                   src={profileImage}
                   alt="Jose Marie Lim"
                   className="w-full h-full object-cover rounded-lg"
-          />
+                />
               </div>
-        </motion.div>
+            </motion.div>
 
-          <motion.button
+            <motion.button
               onClick={() => scrollToSection('projects')}
               className={`py-2 md:py-3 rounded-lg border-2 font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
-              isDarkMode 
-                ? 'bg-white text-black border-neutral-200 hover:border-neutral-300' 
-                : 'bg-gray-900 text-white border-transparent'
+                isDarkMode
+                  ? 'bg-white text-black border-neutral-200 hover:border-neutral-300'
+                  : 'bg-gray-900 text-white border-transparent'
               }`}
               style={{
                 width: 'clamp(80px, 15vw, 224px)',
@@ -227,7 +227,7 @@ export const Hero = () => {
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-          >
+            >
               <span className="relative z-10 flex items-center justify-center gap-1 md:gap-2">
                 <svg 
                   className="flex-shrink-0" 
@@ -236,16 +236,16 @@ export const Hero = () => {
                   viewBox="0 0 24 24"
                   style={{ width: 'clamp(12px, 2.5vw, 16px)', height: 'clamp(12px, 2.5vw, 16px)' }}
                 >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-              </svg>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
                 <span className="hidden sm:inline">View Projects</span>
                 <span className="sm:hidden">Projects</span>
-            </span>
-          </motion.button>
-          <motion.button
+              </span>
+            </motion.button>
+            <motion.button
               onClick={() => scrollToSection('contact')}
               className={`py-2 md:py-3 rounded-lg border-2 font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
-              isDarkMode 
+                isDarkMode
                   ? 'border-neutral-600 hover:border-neutral-500 bg-neutral-900 text-white'
                   : 'border-neutral-400 hover:border-neutral-500 bg-white text-gray-900'
               }`}
@@ -257,7 +257,7 @@ export const Hero = () => {
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
-          >
+            >
               <span className="relative z-10 flex items-center justify-center gap-1 md:gap-2">
                 <svg 
                   className="flex-shrink-0" 
@@ -266,12 +266,12 @@ export const Hero = () => {
                   viewBox="0 0 24 24"
                   style={{ width: 'clamp(12px, 2.5vw, 16px)', height: 'clamp(12px, 2.5vw, 16px)' }}
                 >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
                 <span className="hidden sm:inline">Contact Me</span>
                 <span className="sm:hidden">Contact</span>
-            </span>
-          </motion.button>
+              </span>
+            </motion.button>
           </div>
         </div>
 
