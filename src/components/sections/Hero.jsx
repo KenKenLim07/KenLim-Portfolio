@@ -75,13 +75,13 @@ export const Hero = () => {
         {/* Main Content - Flexible height matching */}
         <div className="flex flex-row items-start justify-center gap-x-4 min-w-0 overflow-x-auto w-full pt-3">
           {/* Left: Bordered Box with Floating Label */}
-          <motion.div
+      <motion.div
             className="relative flex items-start justify-start max-w-xs md:max-w-lg"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
-          >
-            <motion.div
+      >
+        <motion.div
               className={`relative w-full border border-gray-300 dark:border-neutral-700 md:border-2 rounded-lg p-4 shadow-lg transition-colors duration-300 ${
                 isDarkMode ? 'bg-[#0e0e0e] text-gray-200' : 'bg-white text-neutral-900'
               }`}
@@ -98,7 +98,7 @@ export const Hero = () => {
                   letterSpacing: '0.08em',
                   backgroundColor: isDarkMode ? '#0e0e0e' : '#ffffff'
                 }}
-              >
+          >
                 Hi, I'm Jose Marie Lim
               </div>
               <div className="space-y-2 mt-2">
@@ -138,7 +138,7 @@ export const Hero = () => {
                   src={profileImage}
                   alt="Jose Marie Lim"
                   className="w-full h-full object-cover rounded-lg"
-                />
+          />
               </div>
         </motion.div>
 
@@ -160,7 +160,7 @@ export const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, ease: 'easeOut', delay: 0.35 }}
-            >
+          >
               <span className="relative z-10 flex items-center justify-center gap-1 md:gap-2">
                 <svg 
                   className="flex-shrink-0" 
@@ -193,7 +193,7 @@ export const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, ease: 'easeOut', delay: 0.45 }}
-            >
+          >
               <span className="relative z-10 flex items-center justify-center gap-1 md:gap-2">
                 <svg 
                   className="flex-shrink-0" 
@@ -208,7 +208,7 @@ export const Hero = () => {
                 <span className="sm:hidden">Contact</span>
             </span>
           </motion.button>
-          </motion.div>
+        </motion.div>
         </div>
 
         {/* Tech Stack Section - Directly after main content */}
