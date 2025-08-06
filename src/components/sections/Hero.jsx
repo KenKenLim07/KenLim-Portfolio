@@ -147,20 +147,16 @@ export const Hero = () => {
   ];
 
   return (
-    <section
-      ref={heroRef}
-      id="home"
-      className="hero-viewport-dynamic flex flex-col justify-start relative overflow-hidden pt-4"
-    >
-      <div className="max-w-3xl mx-auto px-3">
+    <section className="py-8">
+      <div className="max-w-3xl mx-auto px-3 mt-5">
         {/* Main Content - Flexible height matching */}
-        <div className="mt-2 flex flex-row items-start w-full min-h-[400px]">
+        <div className="flex flex-row items-start w-full min-h-[400px] pt-6">
           {/* Left: Bordered Box with Floating Label */}
           <div
-            className={`relative flex-1 flex items-start justify-center min-w-0 w-7/12 p-2 md:p-4`}
+            className={`relative flex-1 flex items-start justify-center min-w-0 w-7/12`}
           >
             <div
-              className={`relative w-full border border-gray-300 dark:border-neutral-700 rounded-lg p-3 md:p-6 shadow-lg transition-colors duration-300 ${
+              className={`relative w-full border border-gray-300 dark:border-neutral-700 rounded-lg p-4 shadow-lg transition-colors duration-300 ${
                 isDarkMode ? 'bg-[#0e0e0e] text-gray-200' : 'bg-white text-neutral-900'
               }`}
             >
@@ -191,18 +187,18 @@ export const Hero = () => {
           </div>
 
           {/* Right: Profile Picture and Buttons */}
-          <div className="flex flex-col items-center justify-start w-5/12 gap-3 md:gap-4 p-2 md:p-4">
+          <div className="flex flex-col items-center justify-start w-5/12 gap-3 md:gap-4">
             {/* Profile Picture */}
-            <motion.div
+          <motion.div
               className="mb-2 md:mb-4"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <div className={`w-44 h-44 md:w-56 md:h-56 rounded-xl overflow-hidden border-1 shadow-lg p-1 ${
+              <div className={`w-48 h-48 md:w-56 md:h-56 rounded-xl overflow-hidden shadow-lg p-1 ${
                 isDarkMode 
-                  ? 'border-neutral-600/50 bg-neutral-800' 
-                  : 'border-gray-300/50 bg-white'
+                  ? 'bg-neutral-800' 
+                  : 'bg-white'
               }`}>
                 <img
                   src={profileImage}
@@ -210,14 +206,14 @@ export const Hero = () => {
                   className="w-full h-full object-cover rounded-lg"
                 />
               </div>
-            </motion.div>
+        </motion.div>
 
-            <motion.button
+          <motion.button
               onClick={() => scrollToSection('projects')}
               className={`py-2 md:py-3 rounded-lg border-2 font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
-                isDarkMode
-                  ? 'bg-white text-black border-neutral-200 hover:border-neutral-300'
-                  : 'bg-gray-900 text-white border-transparent'
+              isDarkMode 
+                ? 'bg-white text-black border-neutral-200 hover:border-neutral-300' 
+                : 'bg-gray-900 text-white border-transparent'
               }`}
               style={{
                 width: 'clamp(80px, 15vw, 224px)',
@@ -236,16 +232,16 @@ export const Hero = () => {
                   viewBox="0 0 24 24"
                   style={{ width: 'clamp(12px, 2.5vw, 16px)', height: 'clamp(12px, 2.5vw, 16px)' }}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
                 <span className="hidden sm:inline">View Projects</span>
                 <span className="sm:hidden">Projects</span>
-              </span>
-            </motion.button>
-            <motion.button
+            </span>
+          </motion.button>
+          <motion.button
               onClick={() => scrollToSection('contact')}
               className={`py-2 md:py-3 rounded-lg border-2 font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
-                isDarkMode
+              isDarkMode 
                   ? 'border-neutral-600 hover:border-neutral-500 bg-neutral-900 text-white'
                   : 'border-neutral-400 hover:border-neutral-500 bg-white text-gray-900'
               }`}
@@ -266,12 +262,12 @@ export const Hero = () => {
                   viewBox="0 0 24 24"
                   style={{ width: 'clamp(12px, 2.5vw, 16px)', height: 'clamp(12px, 2.5vw, 16px)' }}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
                 <span className="hidden sm:inline">Contact Me</span>
                 <span className="sm:hidden">Contact</span>
-              </span>
-            </motion.button>
+            </span>
+          </motion.button>
           </div>
         </div>
 
