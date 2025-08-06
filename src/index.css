@@ -25,6 +25,7 @@ body {
   /* Mobile viewport fixes */
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
+  min-height: calc(100vh + 1px);
 }
 
 #root {
