@@ -202,7 +202,7 @@ export const Hero = () => {
   ];
 
   return (
-    <section ref={heroRef} className="py-8 min-h-screen md:min-h-screen lg:min-h-screen">
+    <section id="home" ref={heroRef} className="py-8 min-h-screen md:min-h-screen lg:min-h-screen">
       <div className={`max-w-3xl mx-auto px-3 ${isLandscape ? 'py-1 mt-1' : 'py-4 mt-2'}`}>
         {/* Main Content - Flexible height matching */}
         <div className={`flex flex-row items-start justify-center gap-x-4 min-w-0 overflow-x-auto w-full ${isLandscape ? 'pt-0 gap-x-1' : 'pt-3'}`}>
