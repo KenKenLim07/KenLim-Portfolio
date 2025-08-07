@@ -8,9 +8,68 @@ import { SiTypescript, SiJavascript, SiFirebase, SiSupabase, SiTailwindcss, SiVi
 export const Hero = () => {
   const heroRef = useRef(null);
   const { isDarkMode } = useTheme();
-  const [isMobileLandscape, setIsMobileLandscape] = useState(false);
+  const [isLandscape, setIsLandscape] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Enhanced height calculation with mobile landscape detection
+  // Detect mobile landscape mode
+  useEffect(() => {
+    const checkOrientation = () => {
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Senior dev approach: Detect mobile landscape more accurately
+      const isLandscapeMode = viewportHeight < viewportWidth;
+      const isMobileView = viewportWidth < 768 || (isLandscapeMode && viewportHeight < 600);
+      const newIsLandscape = isMobileView && isLandscapeMode;
+      
+      console.log('🔄 ORIENTATION CHECK:', {
+        windowWidth: viewportWidth,
+        windowHeight: viewportHeight,
+        isMobileView,
+        isLandscapeMode,
+        newIsLandscape,
+        currentIsLandscape: isLandscape,
+        currentIsMobile: isMobile,
+        orientationChanged: newIsLandscape !== isLandscape,
+        mobileDetection: {
+          widthCheck: viewportWidth < 768,
+          heightCheck: viewportHeight < 600,
+          landscapeCheck: isLandscapeMode
+    }
+      });
+      
+      setIsMobile(isMobileView);
+      setIsLandscape(newIsLandscape);
+      
+      if (newIsLandscape !== isLandscape) {
+        console.log('🔄 ORIENTATION STATE CHANGED:', {
+          from: { isLandscape, isMobile },
+          to: { isLandscape: newIsLandscape, isMobile: isMobileView }
+        });
+      }
+    };
+
+    console.log('🚀 INITIAL ORIENTATION DETECTION');
+    checkOrientation();
+    
+    window.addEventListener('resize', () => {
+      console.log('📱 WINDOW RESIZE - CHECKING ORIENTATION');
+      checkOrientation();
+    });
+    
+    window.addEventListener('orientationchange', () => {
+      console.log('📱 ORIENTATION CHANGE EVENT');
+      // Add delay to ensure new dimensions are available
+      setTimeout(checkOrientation, 100);
+    });
+    
+    return () => {
+      window.removeEventListener('resize', checkOrientation);
+      window.removeEventListener('orientationchange', checkOrientation);
+    };
+  }, [isLandscape]);
+
+  // Set dynamic height for hero section
   useEffect(() => {
     const updateHeroHeight = () => {
       if (heroRef.current) {
@@ -19,36 +78,85 @@ export const Hero = () => {
         const viewportHeight = window.innerHeight;
         const viewportWidth = window.innerWidth;
         
-        // Detect mobile landscape
-        const isLandscape = viewportWidth > viewportHeight;
-        const isMobile = viewportWidth <= 768;
-        const isMobileLandscapeMode = isLandscape && isMobile;
+        // Debug logging
+        console.log('🔍 HERO DEBUG:', {
+          isLandscape,
+          isMobile,
+          viewportHeight,
+          viewportWidth,
+          navbarHeight,
+          heroElement: heroRef.current,
+          heroCurrentHeight: heroRef.current.style.height,
+          heroCurrentMinHeight: heroRef.current.style.minHeight,
+          heroCurrentMaxHeight: heroRef.current.style.maxHeight
+        });
         
-        setIsMobileLandscape(isMobileLandscapeMode);
-        
-        // Calculate available height
-        let availableHeight;
-        if (isMobileLandscapeMode) {
-          // In mobile landscape, use a more conservative height
-          availableHeight = Math.min(viewportHeight - navbarHeight, 500);
+        // Senior dev approach: Precise height management
+        if (isLandscape) {
+          // Landscape mode: Natural content flow for better UX
+          console.log('📱 LANDSCAPE MODE: Natural content flow');
+          heroRef.current.style.height = 'auto';
+          heroRef.current.style.minHeight = 'auto';
+          heroRef.current.style.maxHeight = 'none';
+          heroRef.current.style.overflowY = 'visible';
+          heroRef.current.style.overflowX = 'hidden';
+        } else if (viewportHeight < 600 && viewportWidth > viewportHeight) {
+          // Short landscape viewport: Natural content flow
+          console.log('📱 SHORT LANDSCAPE: Natural content flow');
+          heroRef.current.style.height = 'auto';
+          heroRef.current.style.minHeight = 'auto';
+          heroRef.current.style.maxHeight = 'none';
+          heroRef.current.style.overflowY = 'visible';
+          heroRef.current.style.overflowX = 'hidden';
         } else {
-          availableHeight = viewportHeight - navbarHeight;
+          // Portrait/Desktop: Fill viewport below sticky navbar using dvh/vh hybrid
+          console.log('📱 PORTRAIT/DESKTOP: calc(100dvh - navbarHeight) with fallback');
+          const viewportUnit = (window.CSS && CSS.supports('height', '100dvh')) ? 'dvh' : 'vh';
+          heroRef.current.style.height = 'auto';
+          heroRef.current.style.minHeight = `calc(100${viewportUnit} - ${navbarHeight}px)`;
+          heroRef.current.style.maxHeight = 'none';
+          heroRef.current.style.overflowY = 'visible';
+          heroRef.current.style.overflowX = 'hidden';
         }
         
-        heroRef.current.style.height = `${availableHeight}px`;
-        heroRef.current.style.minHeight = `${availableHeight}px`;
+        // Final debug log
+        console.log('✅ FINAL HERO STATE:', {
+          height: heroRef.current.style.height,
+          minHeight: heroRef.current.style.minHeight,
+          maxHeight: heroRef.current.style.maxHeight,
+          overflowY: heroRef.current.style.overflowY,
+          overflowX: heroRef.current.style.overflowX,
+          actualHeight: heroRef.current.offsetHeight,
+          scrollHeight: heroRef.current.scrollHeight
+        });
+      } else {
+        console.warn('⚠️ Hero ref not available');
       }
     };
     
-    updateHeroHeight();
-    window.addEventListener('resize', updateHeroHeight);
-    window.addEventListener('orientationchange', updateHeroHeight);
+    // Initial calculation with delay to ensure component is mounted
+    const initialTimeoutId = setTimeout(() => {
+      console.log('🚀 INITIAL HERO HEIGHT CALCULATION');
+      updateHeroHeight();
+    }, 50);
+    
+    // Recalculate after a longer delay to ensure content is rendered
+    const contentTimeoutId = setTimeout(() => {
+      console.log('⏰ CONTENT RENDERED HERO HEIGHT RECALCULATION');
+      updateHeroHeight();
+    }, 200);
+    
+    window.addEventListener('resize', () => {
+      console.log('🔄 WINDOW RESIZE DETECTED');
+      updateHeroHeight();
+    });
     
     return () => {
       window.removeEventListener('resize', updateHeroHeight);
-      window.removeEventListener('orientationchange', updateHeroHeight);
+      clearTimeout(initialTimeoutId);
+      clearTimeout(contentTimeoutId);
     };
-  }, []);
+  }, [isLandscape, isMobile]); // Add isMobile as dependency
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -94,30 +202,30 @@ export const Hero = () => {
   ];
 
   return (
-    <section ref={heroRef} className={`py-8 ${isMobileLandscape ? 'mb-8' : ''}`}>
-      <div className="max-w-3xl mx-auto px-3 mt-2">
+    <section ref={heroRef} className="py-8 min-h-screen md:min-h-screen lg:min-h-screen">
+      <div className={`max-w-3xl mx-auto px-3 ${isLandscape ? 'py-1 mt-1' : 'py-4 mt-2'}`}>
         {/* Main Content - Flexible height matching */}
-        <div className={`flex ${isMobileLandscape ? 'flex-col' : 'flex-row'} items-start justify-center gap-x-4 min-w-0 overflow-x-auto w-full pt-3`}>
+        <div className={`flex flex-row items-start justify-center gap-x-4 min-w-0 overflow-x-auto w-full ${isLandscape ? 'pt-0 gap-x-1' : 'pt-3'}`}>
           {/* Left: Bordered Box with Floating Label */}
       <motion.div
-            className={`relative flex items-start justify-start ${isMobileLandscape ? 'max-w-full mb-4' : 'max-w-xs md:max-w-lg'}`}
+            className={`relative flex items-start justify-start ${isLandscape ? 'flex-1 min-w-0 pt-2' : 'max-w-xs md:max-w-lg'}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
       >
         <motion.div
-              className={`relative w-full border border-gray-300 dark:border-neutral-700 md:border-2 rounded-lg p-4 shadow-lg transition-colors duration-300 ${
+              className={`relative w-full border border-gray-300 dark:border-neutral-700 md:border-2 rounded-lg shadow-lg transition-colors duration-300 ${
                 isDarkMode ? 'bg-[#0e0e0e] text-gray-200' : 'bg-white text-neutral-900'
-              }`}
+              } ${isLandscape ? 'p-2 pt-1' : 'p-4'}`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
             >
               {/* Floating Label */}
               <div
-                className={`absolute -top-3 left-4 px-2 py-0.5 text-xs font-bold uppercase tracking-wide border border-gray-300 dark:border-neutral-400 rounded ${
+                className={`absolute px-2 py-0.5 font-bold uppercase tracking-wide rounded z-10 ${
                   isDarkMode ? 'bg-[#0e0e0e] text-gray-200' : 'bg-white text-neutral-700'
-                }`}
+                } ${isLandscape ? 'text-xs -top-2.5 left-3' : 'text-xs -top-3 left-4'}`}
                 style={{ 
                   letterSpacing: '0.08em',
                   backgroundColor: isDarkMode ? '#0e0e0e' : '#ffffff'
@@ -125,16 +233,12 @@ export const Hero = () => {
           >
                 Hi, I'm Jose Marie Lim
               </div>
-              <div className="space-y-2 mt-2">
+              <div className={`space-y-2 ${isLandscape ? 'space-y-1 mt-3.5' : 'mt-2 space-y-2'}`}>
                 <p 
                   className="text-gray-700 dark:text-gray-300 leading-relaxed"
                   style={{
-                    fontSize: isMobileLandscape 
-                      ? 'clamp(12px, 2.5vw, 16px)' 
-                      : 'clamp(14px, 2.8vw, 18px)',
-                    lineHeight: isMobileLandscape 
-                      ? 'clamp(1.3, 2.2vw, 1.5)' 
-                      : 'clamp(1.4, 2.5vw, 1.6)'
+                    fontSize: isLandscape ? 'clamp(11px, 2.2vw, 13px)' : 'clamp(14px, 2.8vw, 18px)',
+                    lineHeight: isLandscape ? 'clamp(1.3, 2vw, 1.4)' : 'clamp(1.4, 2.5vw, 1.6)'
                   }}
                 >
                   I specialize in identifying complex problems and crafting elegant solutions that drive real impact. I transform challenges into opportunities by combining technical expertise with strategic thinking. Currently focused on building robust, user-centric applications that solve real-world problems.
@@ -145,23 +249,23 @@ export const Hero = () => {
 
           {/* Right: Profile Picture and Buttons */}
           <motion.div
-            className={`flex ${isMobileLandscape ? 'flex-row justify-center' : 'flex-col'} items-center justify-center max-w-xs gap-3 md:gap-4 h-full`}
+            className={`flex flex-col items-center justify-center h-full ${isLandscape ? 'gap-2 flex-1 min-w-0 max-w-[200px]' : 'gap-3 md:gap-4 max-w-xs'}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
           >
             {/* Profile Picture */}
           <motion.div
-              className={`${isMobileLandscape ? 'mb-0' : 'mb-2 md:mb-4'}`}
+              className={`${isLandscape ? 'mb-1' : 'mb-2 md:mb-4'}`}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <div className={`${isMobileLandscape ? 'w-24 h-24' : 'w-40 h-40 md:w-56 md:h-56'} rounded-xl overflow-hidden shadow-lg p-1 ${
+              <div className={`rounded-xl overflow-hidden shadow-lg p-1 ${
                 isDarkMode 
                   ? 'bg-neutral-800' 
                   : 'bg-white'
-              }`}>
+              } ${isLandscape ? 'w-24 h-24' : 'w-40 h-40 md:w-56 md:h-56'}`}>
                 <img
                   src={profileImage}
                   alt="Jose Marie Lim"
@@ -170,27 +274,18 @@ export const Hero = () => {
               </div>
         </motion.div>
 
-          <div className={`flex ${isMobileLandscape ? 'flex-col' : 'flex-col'} gap-2`}>
           <motion.button
               onClick={() => scrollToSection('projects')}
-              className={`py-2 md:py-3 rounded-lg border-2 font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
+              className={`rounded-lg border-2 font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
               isDarkMode 
                 ? 'bg-white text-black border-neutral-200 hover:border-neutral-300' 
                 : 'bg-gray-900 text-white border-transparent'
-              }`}
+              } ${isLandscape ? 'py-1 text-xs' : 'py-2 md:py-3'}`}
               style={{
-                width: isMobileLandscape 
-                  ? 'clamp(60px, 12vw, 120px)' 
-                  : 'clamp(80px, 15vw, 224px)',
-                fontSize: isMobileLandscape 
-                  ? 'clamp(10px, 2vw, 14px)' 
-                  : 'clamp(12px, 2.5vw, 16px)',
-                paddingLeft: isMobileLandscape 
-                  ? 'clamp(4px, 1.5vw, 8px)' 
-                  : 'clamp(8px, 2vw, 16px)',
-                paddingRight: isMobileLandscape 
-                  ? 'clamp(4px, 1.5vw, 8px)' 
-                  : 'clamp(8px, 2vw, 16px)'
+                width: isLandscape ? 'clamp(80px, 15vw, 120px)' : 'clamp(80px, 15vw, 224px)',
+                fontSize: isLandscape ? 'clamp(10px, 2vw, 12px)' : 'clamp(12px, 2.5vw, 16px)',
+                paddingLeft: isLandscape ? 'clamp(6px, 1.5vw, 10px)' : 'clamp(8px, 2vw, 16px)',
+                paddingRight: isLandscape ? 'clamp(6px, 1.5vw, 10px)' : 'clamp(8px, 2vw, 16px)'
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
@@ -204,37 +299,26 @@ export const Hero = () => {
                   fill="none" 
                   stroke="currentColor" 
                   viewBox="0 0 24 24"
-                  style={{ 
-                    width: isMobileLandscape ? 'clamp(10px, 2vw, 14px)' : 'clamp(12px, 2.5vw, 16px)', 
-                    height: isMobileLandscape ? 'clamp(10px, 2vw, 14px)' : 'clamp(12px, 2.5vw, 16px)' 
-                  }}
+                  style={{ width: isLandscape ? 'clamp(10px, 2vw, 12px)' : 'clamp(12px, 2.5vw, 16px)', height: isLandscape ? 'clamp(10px, 2vw, 12px)' : 'clamp(12px, 2.5vw, 16px)' }}
                 >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
-                <span className="hidden sm:inline">View Projects</span>
-                <span className="sm:hidden">Projects</span>
+                <span className={isLandscape ? 'hidden' : 'hidden sm:inline'}>View Projects</span>
+                <span className={isLandscape ? 'text-xs' : 'sm:hidden'}>Projects</span>
             </span>
           </motion.button>
           <motion.button
               onClick={() => scrollToSection('contact')}
-              className={`py-2 md:py-3 rounded-lg border-2 font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
+              className={`rounded-lg border-2 font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
               isDarkMode 
                   ? 'border-neutral-600 hover:border-neutral-500 bg-neutral-900 text-white'
                   : 'border-neutral-400 hover:border-neutral-500 bg-white text-gray-900'
-              }`}
+              } ${isLandscape ? 'py-1 text-xs' : 'py-2 md:py-3'}`}
               style={{
-                width: isMobileLandscape 
-                  ? 'clamp(60px, 12vw, 120px)' 
-                  : 'clamp(80px, 15vw, 224px)',
-                fontSize: isMobileLandscape 
-                  ? 'clamp(10px, 2vw, 14px)' 
-                  : 'clamp(12px, 2.5vw, 16px)',
-                paddingLeft: isMobileLandscape 
-                  ? 'clamp(4px, 1.5vw, 8px)' 
-                  : 'clamp(8px, 2vw, 16px)',
-                paddingRight: isMobileLandscape 
-                  ? 'clamp(4px, 1.5vw, 8px)' 
-                  : 'clamp(8px, 2vw, 16px)'
+                width: isLandscape ? 'clamp(80px, 15vw, 120px)' : 'clamp(80px, 15vw, 224px)',
+                fontSize: isLandscape ? 'clamp(10px, 2vw, 12px)' : 'clamp(12px, 2.5vw, 16px)',
+                paddingLeft: isLandscape ? 'clamp(6px, 1.5vw, 10px)' : 'clamp(8px, 2vw, 16px)',
+                paddingRight: isLandscape ? 'clamp(6px, 1.5vw, 10px)' : 'clamp(8px, 2vw, 16px)'
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
@@ -248,49 +332,47 @@ export const Hero = () => {
                   fill="none" 
                   stroke="currentColor" 
                   viewBox="0 0 24 24"
-                  style={{ 
-                    width: isMobileLandscape ? 'clamp(10px, 2vw, 14px)' : 'clamp(12px, 2.5vw, 16px)', 
-                    height: isMobileLandscape ? 'clamp(10px, 2vw, 14px)' : 'clamp(12px, 2.5vw, 16px)' 
-                  }}
+                  style={{ width: isLandscape ? 'clamp(10px, 2vw, 12px)' : 'clamp(12px, 2.5vw, 16px)', height: isLandscape ? 'clamp(10px, 2vw, 12px)' : 'clamp(12px, 2.5vw, 16px)' }}
                 >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-                <span className="hidden sm:inline">Contact Me</span>
-                <span className="sm:hidden">Contact</span>
+                <span className={isLandscape ? 'hidden' : 'hidden sm:inline'}>Contact Me</span>
+                <span className={isLandscape ? 'text-xs' : 'sm:hidden'}>Contact</span>
             </span>
           </motion.button>
-          </div>
         </motion.div>
         </div>
 
         {/* Tech Stack Section - Directly after main content */}
-        <div className="w-full mt-6">
-          <div className={`relative flex flex-wrap justify-center items-center gap-2 md:gap-3 px-4 py-2 rounded-lg ${
+        <div className={`w-full ${isLandscape ? 'mt-1' : 'mt-6'}`}>
+          <div className={`relative flex flex-wrap items-center rounded-lg ${
             isDarkMode 
               ? 'bg-[#0e0e0e]' 
               : 'bg-white'
-          }`}>
+          } ${isLandscape ? 'gap-2 px-3 py-1 justify-between' : 'gap-2 md:gap-3 px-4 py-2 justify-center'}`}>
             {techStack.map((tech, index) => (
       <motion.div 
                 key={tech.name}
-                className="flex items-center justify-center"
+                className={`flex items-center justify-center ${isLandscape ? 'flex-1 min-w-0 h-full' : ''}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
       >
         <motion.div
-                  className={`${isMobileLandscape ? 'w-6 h-6' : 'w-8 h-8 md:w-10 md:h-10'} rounded-lg flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg border-2 ${
+                  className={`rounded-lg flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg border-2 ${
                     isDarkMode 
                       ? 'bg-neutral-800 border-neutral-600 hover:border-neutral-500 text-gray-300' 
                       : 'bg-white border-gray-300 hover:border-gray-400 text-gray-700'
-                  }`}
+                  } ${isLandscape ? 'w-8 h-8 flex-shrink-0' : 'w-8 h-8 md:w-10 md:h-10'}`}
                   whileHover={{ 
                     scale: 1.1,
                     transition: { duration: 0.2 }
                   }}
                   title={tech.name}
                 >
-                  {tech.icon}
+                  <div className={`flex items-center justify-center ${isLandscape ? 'w-5 h-5' : 'w-6 h-6 md:w-8 md:h-8'}`}>
+                    {tech.icon}
+                  </div>
         </motion.div>
       </motion.div>
             ))}
