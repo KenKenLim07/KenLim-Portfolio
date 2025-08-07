@@ -156,7 +156,7 @@ export const Projects = () => {
                         isDarkMode ? 'text-gray-300' : 'text-neutral-600'
                       }`}>
                         {project.problem}
-                      </p>
+                </p>
                     </div>
                   )}
 

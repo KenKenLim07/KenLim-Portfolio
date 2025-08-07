@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import profileImage from '../../assets/profile.jpg';
 import { FaReact, FaNodeJs, FaPython, FaGitAlt, FaDocker } from 'react-icons/fa';
@@ -8,22 +8,46 @@ import { SiTypescript, SiJavascript, SiFirebase, SiSupabase, SiTailwindcss, SiVi
 export const Hero = () => {
   const heroRef = useRef(null);
   const { isDarkMode } = useTheme();
+  const [isMobileLandscape, setIsMobileLandscape] = useState(false);
 
-  // Set dynamic height for hero section
+  // Enhanced height calculation with mobile landscape detection
   useEffect(() => {
     const updateHeroHeight = () => {
       if (heroRef.current) {
         const navbar = document.querySelector('nav');
         const navbarHeight = navbar ? navbar.offsetHeight : 64;
         const viewportHeight = window.innerHeight;
-        const availableHeight = viewportHeight - navbarHeight;
+        const viewportWidth = window.innerWidth;
+        
+        // Detect mobile landscape
+        const isLandscape = viewportWidth > viewportHeight;
+        const isMobile = viewportWidth <= 768;
+        const isMobileLandscapeMode = isLandscape && isMobile;
+        
+        setIsMobileLandscape(isMobileLandscapeMode);
+        
+        // Calculate available height
+        let availableHeight;
+        if (isMobileLandscapeMode) {
+          // In mobile landscape, use a more conservative height
+          availableHeight = Math.min(viewportHeight - navbarHeight, 500);
+        } else {
+          availableHeight = viewportHeight - navbarHeight;
+        }
+        
         heroRef.current.style.height = `${availableHeight}px`;
         heroRef.current.style.minHeight = `${availableHeight}px`;
       }
     };
+    
     updateHeroHeight();
     window.addEventListener('resize', updateHeroHeight);
-    return () => window.removeEventListener('resize', updateHeroHeight);
+    window.addEventListener('orientationchange', updateHeroHeight);
+    
+    return () => {
+      window.removeEventListener('resize', updateHeroHeight);
+      window.removeEventListener('orientationchange', updateHeroHeight);
+    };
   }, []);
 
   const scrollToSection = (sectionId) => {
@@ -70,13 +94,13 @@ export const Hero = () => {
   ];
 
   return (
-    <section ref={heroRef} className="py-8">
+    <section ref={heroRef} className={`py-8 ${isMobileLandscape ? 'mb-8' : ''}`}>
       <div className="max-w-3xl mx-auto px-3 mt-2">
         {/* Main Content - Flexible height matching */}
-        <div className="flex flex-row items-start justify-center gap-x-4 min-w-0 overflow-x-auto w-full pt-3">
+        <div className={`flex ${isMobileLandscape ? 'flex-col' : 'flex-row'} items-start justify-center gap-x-4 min-w-0 overflow-x-auto w-full pt-3`}>
           {/* Left: Bordered Box with Floating Label */}
       <motion.div
-            className="relative flex items-start justify-start max-w-xs md:max-w-lg"
+            className={`relative flex items-start justify-start ${isMobileLandscape ? 'max-w-full mb-4' : 'max-w-xs md:max-w-lg'}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
@@ -105,8 +129,12 @@ export const Hero = () => {
                 <p 
                   className="text-gray-700 dark:text-gray-300 leading-relaxed"
                   style={{
-                    fontSize: 'clamp(14px, 2.8vw, 18px)',
-                    lineHeight: 'clamp(1.4, 2.5vw, 1.6)'
+                    fontSize: isMobileLandscape 
+                      ? 'clamp(12px, 2.5vw, 16px)' 
+                      : 'clamp(14px, 2.8vw, 18px)',
+                    lineHeight: isMobileLandscape 
+                      ? 'clamp(1.3, 2.2vw, 1.5)' 
+                      : 'clamp(1.4, 2.5vw, 1.6)'
                   }}
                 >
                   I specialize in identifying complex problems and crafting elegant solutions that drive real impact. I transform challenges into opportunities by combining technical expertise with strategic thinking. Currently focused on building robust, user-centric applications that solve real-world problems.
@@ -117,19 +145,19 @@ export const Hero = () => {
 
           {/* Right: Profile Picture and Buttons */}
           <motion.div
-            className="flex flex-col items-center justify-center max-w-xs gap-3 md:gap-4 h-full"
+            className={`flex ${isMobileLandscape ? 'flex-row justify-center' : 'flex-col'} items-center justify-center max-w-xs gap-3 md:gap-4 h-full`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
           >
             {/* Profile Picture */}
           <motion.div
-              className="mb-2 md:mb-4"
+              className={`${isMobileLandscape ? 'mb-0' : 'mb-2 md:mb-4'}`}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <div className={`w-40 h-40 md:w-56 md:h-56 rounded-xl overflow-hidden shadow-lg p-1 ${
+              <div className={`${isMobileLandscape ? 'w-24 h-24' : 'w-40 h-40 md:w-56 md:h-56'} rounded-xl overflow-hidden shadow-lg p-1 ${
                 isDarkMode 
                   ? 'bg-neutral-800' 
                   : 'bg-white'
@@ -142,6 +170,7 @@ export const Hero = () => {
               </div>
         </motion.div>
 
+          <div className={`flex ${isMobileLandscape ? 'flex-col' : 'flex-col'} gap-2`}>
           <motion.button
               onClick={() => scrollToSection('projects')}
               className={`py-2 md:py-3 rounded-lg border-2 font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
@@ -150,10 +179,18 @@ export const Hero = () => {
                 : 'bg-gray-900 text-white border-transparent'
               }`}
               style={{
-                width: 'clamp(80px, 15vw, 224px)',
-                fontSize: 'clamp(12px, 2.5vw, 16px)',
-                paddingLeft: 'clamp(8px, 2vw, 16px)',
-                paddingRight: 'clamp(8px, 2vw, 16px)'
+                width: isMobileLandscape 
+                  ? 'clamp(60px, 12vw, 120px)' 
+                  : 'clamp(80px, 15vw, 224px)',
+                fontSize: isMobileLandscape 
+                  ? 'clamp(10px, 2vw, 14px)' 
+                  : 'clamp(12px, 2.5vw, 16px)',
+                paddingLeft: isMobileLandscape 
+                  ? 'clamp(4px, 1.5vw, 8px)' 
+                  : 'clamp(8px, 2vw, 16px)',
+                paddingRight: isMobileLandscape 
+                  ? 'clamp(4px, 1.5vw, 8px)' 
+                  : 'clamp(8px, 2vw, 16px)'
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
@@ -167,7 +204,10 @@ export const Hero = () => {
                   fill="none" 
                   stroke="currentColor" 
                   viewBox="0 0 24 24"
-                  style={{ width: 'clamp(12px, 2.5vw, 16px)', height: 'clamp(12px, 2.5vw, 16px)' }}
+                  style={{ 
+                    width: isMobileLandscape ? 'clamp(10px, 2vw, 14px)' : 'clamp(12px, 2.5vw, 16px)', 
+                    height: isMobileLandscape ? 'clamp(10px, 2vw, 14px)' : 'clamp(12px, 2.5vw, 16px)' 
+                  }}
                 >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
@@ -183,10 +223,18 @@ export const Hero = () => {
                   : 'border-neutral-400 hover:border-neutral-500 bg-white text-gray-900'
               }`}
               style={{
-                width: 'clamp(80px, 15vw, 224px)',
-                fontSize: 'clamp(12px, 2.5vw, 16px)',
-                paddingLeft: 'clamp(8px, 2vw, 16px)',
-                paddingRight: 'clamp(8px, 2vw, 16px)'
+                width: isMobileLandscape 
+                  ? 'clamp(60px, 12vw, 120px)' 
+                  : 'clamp(80px, 15vw, 224px)',
+                fontSize: isMobileLandscape 
+                  ? 'clamp(10px, 2vw, 14px)' 
+                  : 'clamp(12px, 2.5vw, 16px)',
+                paddingLeft: isMobileLandscape 
+                  ? 'clamp(4px, 1.5vw, 8px)' 
+                  : 'clamp(8px, 2vw, 16px)',
+                paddingRight: isMobileLandscape 
+                  ? 'clamp(4px, 1.5vw, 8px)' 
+                  : 'clamp(8px, 2vw, 16px)'
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
@@ -200,7 +248,10 @@ export const Hero = () => {
                   fill="none" 
                   stroke="currentColor" 
                   viewBox="0 0 24 24"
-                  style={{ width: 'clamp(12px, 2.5vw, 16px)', height: 'clamp(12px, 2.5vw, 16px)' }}
+                  style={{ 
+                    width: isMobileLandscape ? 'clamp(10px, 2vw, 14px)' : 'clamp(12px, 2.5vw, 16px)', 
+                    height: isMobileLandscape ? 'clamp(10px, 2vw, 14px)' : 'clamp(12px, 2.5vw, 16px)' 
+                  }}
                 >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
@@ -208,6 +259,7 @@ export const Hero = () => {
                 <span className="sm:hidden">Contact</span>
             </span>
           </motion.button>
+          </div>
         </motion.div>
         </div>
 
@@ -227,7 +279,7 @@ export const Hero = () => {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
       >
         <motion.div
-                  className={`w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg border-2 ${
+                  className={`${isMobileLandscape ? 'w-6 h-6' : 'w-8 h-8 md:w-10 md:h-10'} rounded-lg flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg border-2 ${
                     isDarkMode 
                       ? 'bg-neutral-800 border-neutral-600 hover:border-neutral-500 text-gray-300' 
                       : 'bg-white border-gray-300 hover:border-gray-400 text-gray-700'
