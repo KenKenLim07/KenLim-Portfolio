@@ -7,7 +7,7 @@ export const ThemeToggle = () => {
   return (
     <motion.button
       onClick={toggleTheme}
-      className="relative w-14 h-7 rounded-full p-1 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+      className="relative w-14 h-7 rounded-full p-1 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 z-[1005]"
       style={{
         backgroundColor: isDarkMode ? '#d1d5db' : '#e5e7eb'
       }}

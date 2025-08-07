@@ -137,7 +137,7 @@ section#home {
 
 /* Ensure navbar stays on top */
 nav {
-  z-index: 1000 !important;
+  z-index: 9999;
 }
 
 /* Ensure blobs don't interfere with navbar */

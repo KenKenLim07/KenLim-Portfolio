@@ -223,14 +223,16 @@ export const Hero = () => {
             >
               {/* Floating Label */}
               <div
-                className={`absolute px-2 py-0.5 font-bold uppercase tracking-wide rounded z-10 border ${
-                  isDarkMode ? 'bg-[#0e0e0e] text-gray-200 border-neutral-700' : 'bg-white text-neutral-700 border-gray-300'
-                } ${isLandscape ? 'text-xs -top-3 left-3' : 'text-xs -top-3 left-4'}`}
+                className={`absolute px-3 py-1 font-bold uppercase tracking-wide rounded-lg z-10 border-1 shadow-lg backdrop-blur-sm ${
+                  isDarkMode 
+                    ? 'bg-gradient-to-r from-neutral-900 to-neutral-800 text-gray-100 border-neutral-300 shadow-neutral-900/50' 
+                    : 'bg-gradient-to-r from-white to-gray-50 text-neutral-800 border-gray-400 shadow-gray-400/30'
+                } ${isLandscape ? 'text-xs -top-2.5 left-3' : 'text-xs -top-3 left-4'}`}
                 style={{ 
-                  letterSpacing: '0.08em',
-                  backgroundColor: isDarkMode ? '#0e0e0e' : '#ffffff'
+                  letterSpacing: '0.1em',
+                  textShadow: isDarkMode ? '0 1px 2px rgba(0,0,0,0.8)' : '0 1px 2px rgba(255,255,255,0.8)'
                 }}
-          >
+              >
                 Hi, I'm Jose Marie Lim
               </div>
               <div className={`space-y-2 ${isLandscape ? 'space-y-1 mt-3.5' : 'mt-2 space-y-2'}`}>
@@ -276,7 +278,7 @@ export const Hero = () => {
 
           <motion.button
               onClick={() => scrollToSection('projects')}
-              className={`rounded-lg border-2 font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
+              className={`rounded-lg border font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
               isDarkMode 
                 ? 'bg-white text-black border-neutral-200 hover:border-neutral-300' 
                 : 'bg-gray-900 text-white border-transparent'
@@ -309,7 +311,7 @@ export const Hero = () => {
           </motion.button>
           <motion.button
               onClick={() => scrollToSection('contact')}
-              className={`rounded-lg border-2 font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
+              className={`rounded-lg border font-semibold shadow-md transition-all duration-300 relative overflow-hidden group hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
               isDarkMode 
                   ? 'border-neutral-600 hover:border-neutral-500 bg-neutral-900 text-white'
                   : 'border-neutral-400 hover:border-neutral-500 bg-white text-gray-900'
@@ -359,7 +361,7 @@ export const Hero = () => {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
       >
         <motion.div
-                  className={`rounded-lg flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg border-2 ${
+                  className={`rounded-lg flex items-center justify-center shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg border ${
                     isDarkMode 
                       ? 'bg-neutral-800 border-neutral-600 hover:border-neutral-500 text-gray-300' 
                       : 'bg-white border-gray-300 hover:border-gray-400 text-gray-700'

@@ -220,7 +220,7 @@ export const Navbar = () => {
   return (
     <>
       <motion.nav
-        className={`sticky top-0 z-[1000] transition-all duration-300 ${
+        className={`sticky top-0 z-[9999] transition-all duration-300 ${
           isScrolled 
             ? isDarkMode 
               ? 'bg-black/95 backdrop-blur-md shadow-lg border-b border-gray-800' 
@@ -272,8 +272,8 @@ export const Navbar = () => {
               <ThemeToggle />
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center space-x-4">
+            {/* Mobile Menu Button - Hidden on mobile, only floating controls show */}
+            <div className="hidden md:hidden flex items-center space-x-4">
               <ThemeToggle />
               <motion.button
                 onClick={toggleMenu}
@@ -337,7 +337,69 @@ export const Navbar = () => {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Floating Controls - Always on top */}
+      <div className="md:hidden fixed top-4 right-4 z-[10010] flex items-center space-x-4">
+        <ThemeToggle />
+        <motion.button
+          onClick={toggleMenu}
+          className={`p-2 rounded-lg ${
+            isScrolled
+              ? (isDarkMode ? 'text-gray-300 hover:text-white' : 'text-neutral-600 hover:text-neutral-900')
+              : (isDarkMode ? 'text-white hover:text-gray-200' : 'text-gray-900 hover:text-gray-700')
+          }`}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <motion.div
+            className="w-6 h-6 flex flex-col justify-center items-center relative"
+            animate={isMenuOpen ? "open" : "closed"}
+          >
+            <motion.span
+              className="w-6 h-0.5 bg-current block origin-center absolute"
+              variants={{
+                closed: { rotate: 0, y: -6 },
+                open: { 
+                  rotate: 45, 
+                  y: 0,
+                  transition: {
+                    duration: 0.4,
+                    ease: [0.34, 1.56, 0.64, 1]
+                  }
+                }
+              }}
+            />
+            <motion.span
+              className="w-6 h-0.5 bg-current block absolute"
+              variants={{
+                closed: { opacity: 1, y: 0 },
+                open: { 
+                  opacity: 0,
+                  transition: {
+                    duration: 0.2,
+                    ease: "easeInOut"
+                  }
+                }
+              }}
+            />
+            <motion.span
+              className="w-6 h-0.5 bg-current block origin-center absolute"
+              variants={{
+                closed: { rotate: 0, y: 6 },
+                open: { 
+                  rotate: -45, 
+                  y: 0,
+                  transition: {
+                    duration: 0.4,
+                    ease: [0.34, 1.56, 0.64, 1]
+                  }
+                }
+              }}
+            />
+          </motion.div>
+        </motion.button>
+      </div>
+
+      {/* Mobile Menu - Covers navbar */}
       <AnimatePresence mode="wait">
         {isMenuOpen && (
           <>
@@ -347,7 +409,7 @@ export const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[10000] md:hidden"
               onClick={toggleMenu}
             />
             
@@ -362,7 +424,7 @@ export const Navbar = () => {
                 stiffness: 200,
                 duration: 0.3
               }}
-              className={`fixed top-0 right-0 w-64 h-screen z-40 md:hidden ${
+              className={`fixed top-0 right-0 w-64 h-screen z-[10001] md:hidden ${
                 isDarkMode ? 'bg-black' : 'bg-white'
               } shadow-xl`}
               style={{ height: '100dvh' }}

@@ -19,11 +19,11 @@ export const Projects = () => {
   const projects = [
     {
       title: "GPPO Troop Deployment Tracker",
-      summary: "Real-time troop tracking system built with React, Firebase, leaflet, openstreetmap, capacitor, and Capacitor background geolocation.",
-      problem: "During my internship at the Provincial Police Office I noticed officers were struggling with Google Maps for troop deployment—it lacked customization and critical operational features needed for police operations.",
+      summary: "Real-time troop tracking system built with React, Firebase, and Capacitor for Android devices, deployed at the Provincial Police Office.",
+      problem: "Officers were struggling with Google Maps for troop deployment—it lacked customization and critical operational features needed for police operations.",
       challenge: "Overcoming Android's aggressive background process management, especially during battery saver mode, which would kill the APK and break real-time tracking.",
       solution: "Strategic use of Capacitor's background geolocation plugins, Firebase's persistent connections, and intelligent app lifecycle management.",
-      impact: "The system is now used by the Provincial Police Office for troop deployment and tracking, providing officers with reliable real-time troop positioning and deployment coordination. It is also used by the Regional Police Office for troop deployment and tracking.",
+      impact: "Robust system that maintains continuous tracking even under the most restrictive OS conditions, providing officers with reliable real-time troop positioning and deployment coordination.",
       image: "",
       tech: [
         "React", "TypeScript", "Vite", "Tailwind CSS", 
@@ -39,10 +39,10 @@ export const Projects = () => {
     {
       title: "GSU Connect",
       summary: "Centralized university news aggregator built with React, Node.js, and automated scraping via GitHub Actions.",
-      problem: " I noticed that University information was scattered across different school portals, making it difficult for students to stay updated on important announcements.",
+      problem: "University information was scattered across different school portals, making it difficult for students to stay updated on important announcements.",
       challenge: "Ensuring data consistency and avoiding duplicate entries while scraping from multiple sources with different portal structures.",
       solution: "Intelligent deduplication logic, error handling for various portal formats, and robust GitHub Actions workflows with proper error recovery.",
-      impact: "Automated data scraping runs every 2 hours, creating a seamless, always-updated platform that consolidates all university communications in one place. It is also used by the University of the Philippines Visayas for news aggregation.",
+      impact: "Automated data scraping runs every 2 hours, creating a seamless, always-updated platform that consolidates all university communications in one place.",
       image: "",
       tech: [
         "React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", 
