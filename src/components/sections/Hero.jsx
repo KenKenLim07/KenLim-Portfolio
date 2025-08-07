@@ -205,10 +205,10 @@ export const Hero = () => {
     <section id="home" ref={heroRef} className="py-8 min-h-screen md:min-h-screen lg:min-h-screen">
       <div className={`max-w-3xl mx-auto px-3 ${isLandscape ? 'py-1 mt-1' : 'py-4 mt-2'}`}>
         {/* Main Content - Flexible height matching */}
-        <div className={`flex flex-row items-start justify-center gap-x-4 min-w-0 overflow-x-auto w-full ${isLandscape ? 'pt-0 gap-x-1' : 'pt-3'}`}>
+        <div className={`flex flex-row items-start justify-center gap-x-2 min-w-0 overflow-x-auto w-full ${isLandscape ? 'pt-0 gap-x-1' : 'pt-3'}`}>
           {/* Left: Bordered Box with Floating Label */}
       <motion.div
-            className={`relative flex items-start justify-start ${isLandscape ? 'flex-1 min-w-0 pt-2' : 'max-w-xs md:max-w-lg'}`}
+            className={`relative flex items-start justify-start ${isLandscape ? 'flex-1 min-w-0 pt-2' : 'max-w-md md:max-w-lg lg:max-w-xl'}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
@@ -223,7 +223,7 @@ export const Hero = () => {
             >
               {/* Floating Label */}
               <div
-                className={`absolute px-3 py-1 font-bold uppercase tracking-wide rounded-lg z-10 border-1 shadow-lg backdrop-blur-sm ${
+                className={`absolute px-1 py-1 font-bold uppercase tracking-wide rounded-lg z-10 border-1 shadow-lg backdrop-blur-sm ${
                   isDarkMode 
                     ? 'bg-gradient-to-r from-neutral-900 to-neutral-800 text-gray-100 border-neutral-300 shadow-neutral-900/50' 
                     : 'bg-gradient-to-r from-white to-gray-50 text-neutral-800 border-gray-400 shadow-gray-400/30'
@@ -239,8 +239,8 @@ export const Hero = () => {
                 <p 
                   className="text-gray-700 dark:text-gray-300 leading-relaxed"
                   style={{
-                    fontSize: isLandscape ? 'clamp(11px, 2.2vw, 13px)' : 'clamp(14px, 2.8vw, 18px)',
-                    lineHeight: isLandscape ? 'clamp(1.3, 2vw, 1.4)' : 'clamp(1.4, 2.5vw, 1.6)'
+                    fontSize: isLandscape ? 'clamp(11px, 2vw, 13px)' : 'clamp(14px, 2.5vw, 16px)',
+                    lineHeight: isLandscape ? '1.4' : '1.8'
                   }}
                 >
                   I specialize in identifying complex problems and crafting elegant solutions that drive real impact. I transform challenges into opportunities by combining technical expertise with strategic thinking. Currently focused on building robust, user-centric applications that solve real-world problems.
@@ -267,7 +267,7 @@ export const Hero = () => {
                 isDarkMode 
                   ? 'bg-neutral-800' 
                   : 'bg-white'
-              } ${isLandscape ? 'w-24 h-24' : 'w-40 h-40 md:w-56 md:h-56'}`}>
+              } ${isLandscape ? 'w-24 h-24' : 'w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48'}`}>
                 <img
                   src={profileImage}
                   alt="Jose Marie Lim"
