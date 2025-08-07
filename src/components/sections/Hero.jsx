@@ -223,9 +223,9 @@ export const Hero = () => {
             >
               {/* Floating Label */}
               <div
-                className={`absolute px-2 py-0.5 font-bold uppercase tracking-wide rounded z-10 ${
-                  isDarkMode ? 'bg-[#0e0e0e] text-gray-200' : 'bg-white text-neutral-700'
-                } ${isLandscape ? 'text-xs -top-2.5 left-3' : 'text-xs -top-3 left-4'}`}
+                className={`absolute px-2 py-0.5 font-bold uppercase tracking-wide rounded z-10 border ${
+                  isDarkMode ? 'bg-[#0e0e0e] text-gray-200 border-neutral-700' : 'bg-white text-neutral-700 border-gray-300'
+                } ${isLandscape ? 'text-sm -top-3 left-3' : 'text-sm -top-3 left-4'}`}
                 style={{ 
                   letterSpacing: '0.08em',
                   backgroundColor: isDarkMode ? '#0e0e0e' : '#ffffff'
