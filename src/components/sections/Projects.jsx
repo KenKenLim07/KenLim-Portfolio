@@ -19,18 +19,18 @@ export const Projects = () => {
   const projects = [
     {
       title: "GPPO Troop Deployment Tracker",
-      summary: "Real-time troop tracking system built with React, Firebase, and Capacitor for Android devices, deployed at the Provincial Police Office.",
-      problem: "Officers were struggling with Google Maps for troop deployment—it lacked customization and critical operational features needed for police operations.",
-      challenge: "Overcoming Android's aggressive background process management, especially during battery saver mode, which would kill the APK and break real-time tracking.",
+      summary: "Real-time troop tracking system built with React, Firebase, Capacitor, Capacitor Background Geolocation, Leaflet, and Push Notifications for Android devices",
+      problem: "During my internship at the Provincial Police Office I noticed that officers were struggling with Google Maps for troop deployment—it lacked customization and critical operational features needed for police operations.",
+      challenge: "Overcoming Android's aggressive background process management, especially during lock screen and background state, which would kill the APK and break real-time tracking.",
       solution: "Strategic use of Capacitor's background geolocation plugins, Firebase's persistent connections, and intelligent app lifecycle management.",
       impact: "Robust system that maintains continuous tracking even under the most restrictive OS conditions, providing officers with reliable real-time troop positioning and deployment coordination.",
       image: "",
       tech: [
         "React", "TypeScript", "Vite", "Tailwind CSS", 
         "React Router", "Leaflet", "Leaflet Marker Cluster",
-        "Firebase", "Firestore", "Realtime Database", "Authentication", "Storage", "Analytics",
-        "Capacitor", "Android", "Geolocation", "Background Geolocation",
-        "Push Notifications", "Local Notifications", "OpenStreetMap"
+        "Firebase", "Realtime Database", "Authentication",
+        "Capacitor", "Android Studio", "Geolocation", "Background Geolocation",
+        "Push Notifications", "Push Notifications", "OpenStreetMap", "Github Action",
       ],
       github: "",
       demo: "https://gppo-tracker.web.app/",
@@ -38,17 +38,17 @@ export const Projects = () => {
     },
     {
       title: "GSU Connect",
-      summary: "Centralized university news aggregator built with React, Node.js, and automated scraping via GitHub Actions.",
-      problem: "University information was scattered across different school portals, making it difficult for students to stay updated on important announcements.",
-      challenge: "Ensuring data consistency and avoiding duplicate entries while scraping from multiple sources with different portal structures.",
-      solution: "Intelligent deduplication logic, error handling for various portal formats, and robust GitHub Actions workflows with proper error recovery.",
+      summary: "Centralized serverless university news aggregator built with React, Node.js, and automated scraping via GitHub Actions.",
+      problem: "While browsing through our University website i noticed that our school's University information was scattered across different school portals, making it difficult for students to stay updated on important announcements,events and other important information.",
+      challenge: "Ensuring data consistency and avoiding duplicate entries while scraping from multiple sources with different portal structures, while avoiding sending too many requests to the server and trying to stay lowkey to not get blocked.",
+      solution: "I made sure my backend only pull's the latest news to avoid sending to many request, implemented intelligent deduplication logic, error handling for various portal formats, and robust GitHub Actions workflows with proper error recovery.",
       impact: "Automated data scraping runs every 2 hours, creating a seamless, always-updated platform that consolidates all university communications in one place.",
       image: "",
       tech: [
         "React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", 
         "React Query", "React Router", "Heroicons", "Radix UI",
         "Node.js", "Express", "Supabase", "PostgreSQL",
-        "Cheerio", "Axios", "GitHub Actions", "Automated Scraping", "Data Deduplication"
+        "Cheerio", "Axios", "GitHub Actions", "Automated Scraping","Github Action"
       ],
       github: "",
       demo: "https://kenkenlim07.github.io/gsu-connect/",
@@ -64,9 +64,9 @@ export const Projects = () => {
       image: "",
       tech: [
         "React", "TypeScript", "Vite", "Tailwind CSS", "Tailwind Animate",
-        "React Router", "Heroicons", "Class Variance Authority", "CLSX", "Tailwind Merge",
+        "React Router", "Heroicons", "CLSX", "Tailwind Merge",
         "Supabase", "PostgreSQL", "Row Level Security", "Authentication",
-        "GCash Integration", "CRUD Operations", "Admin Panel", "E-commerce"
+        "GCash Integration", "CRUD Operations", "Admin Panel"
       ],
       github: "",
       demo: "https://mkla-store.vercel.app/",

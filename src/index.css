@@ -83,6 +83,26 @@ body {
 }
 
 /* Hero responsive layout overrides (CSS-only) */
+/* Debug borders for Hero layout - toggle by adding .hero-debug */
+.hero-debug {
+  outline: 2px solid #ef4444; /* red */
+}
+.hero-debug .hero-row {
+  outline: 2px dashed #3b82f6; /* blue */
+}
+.hero-debug .hero-intro {
+  outline: 2px dashed #10b981; /* green */
+}
+.hero-debug .hero-aside {
+  outline: 2px dashed #f59e0b; /* amber */
+}
+.hero-debug .hero-image {
+  outline: 2px dashed #8b5cf6; /* violet */
+}
+.hero-debug .hero-intro > div {
+  outline: 2px dotted #6b7280; /* slate */
+}
+
 @media screen and (max-width: 920px) and (orientation: landscape) {
   .hero-row {
     display: grid;
@@ -96,6 +116,8 @@ body {
   .hero-intro {
     min-width: 0;
     max-width: 32rem;
+    /* allow upward offset to take effect */
+    transform: translateY(-29px); /* subtle lift */
   }
 
   .hero-aside {
@@ -105,9 +127,9 @@ body {
   }
 
   .hero-image {
-    flex: none;
-    width: 5.5rem;
-    height: 5.5rem;
+    flex: none;    width: 6.5rem;
+    height: 6.5rem;
+    transform: translateY(8px);
   }
 
   .hero-intro > div {
