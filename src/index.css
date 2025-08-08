@@ -82,6 +82,39 @@ body {
   /* Height will be set dynamically via JavaScript */
 }
 
+/* Hero responsive layout overrides (CSS-only) */
+@media screen and (max-width: 920px) and (orientation: landscape) {
+  .hero-row {
+    display: grid;
+    grid-template-columns: auto auto; /* let both columns size to content */
+    align-items: center; /* vertical centering */
+    justify-content: center; /* center the pair as a unit */
+    justify-items: center; /* center each cell's content */
+    column-gap: 0.5rem;
+  }
+
+  .hero-intro {
+    min-width: 0;
+    max-width: 32rem;
+  }
+
+  .hero-aside {
+    min-width: 0;
+    align-items: center; /* center its children */
+    justify-content: center;
+  }
+
+  .hero-image {
+    flex: none;
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+
+  .hero-intro > div {
+    padding: 0.5rem;
+  }
+}
+
 /* Base text colors */
 .text-gray-600 {
   color: #4b5563;

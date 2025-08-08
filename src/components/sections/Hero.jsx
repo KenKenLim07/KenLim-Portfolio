@@ -203,13 +203,13 @@ export const Hero = () => {
 
   return (
     <section id="home" ref={heroRef} className="py-8 min-h-screen md:min-h-screen lg:min-h-screen">
-      <div className={`max-w-3xl mx-auto px-3 ${isLandscape ? 'py-1 mt-1' : 'py-4 mt-2'}`}>
+      <div className={`max-w-3xl mx-auto px-1 ${isLandscape ? 'py-1 mt-1' : 'py-4 mt-2'}`}>
         {/* Main Content - Flexible height matching */}
-        <div className={`flex flex-row items-start justify-center gap-x-2 min-w-0 overflow-x-auto w-full ${isLandscape ? 'pt-0 gap-x-1' : 'pt-3'}`}>
+        <div className={`hero-row flex flex-row items-start justify-center gap-x-2 min-w-0 overflow-x-auto w-full ${isLandscape ? 'pt-0 gap-x-1' : 'pt-3'}`}>
           {/* Left: Bordered Box with Floating Label */}
-      <motion.div
-            className={`relative flex items-start justify-start ${isLandscape ? 'flex-1 min-w-0 pt-2' : 'max-w-md md:max-w-lg lg:max-w-xl'}`}
-            initial={{ opacity: 0 }}
+            <motion.div
+            className={`hero-intro relative flex items-start justify-start ${isLandscape ? 'min-w-0 pt-2' : 'max-w-md md:max-w-lg lg:max-w-xl'}`}
+             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, ease: 'easeOut' }}
       >
@@ -250,9 +250,9 @@ export const Hero = () => {
           </motion.div>
 
           {/* Right: Profile Picture and Buttons */}
-          <motion.div
-            className={`flex flex-col items-center justify-center h-full ${isLandscape ? 'gap-2 flex-1 min-w-0 max-w-[200px]' : 'gap-3 md:gap-4 max-w-xs'}`}
-            initial={{ opacity: 0 }}
+                    <motion.div
+            className={`hero-aside flex flex-col items-center justify-center h-full ${isLandscape ? 'gap-2 min-w-0' : 'gap-3 md:gap-4 max-w-xs'}`}
+             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
           >
@@ -263,7 +263,7 @@ export const Hero = () => {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
             >
-              <div className={`rounded-xl overflow-hidden shadow-lg p-1 ${
+              <div className={`hero-image rounded-xl overflow-hidden shadow-lg p-1 ${
                 isDarkMode 
                   ? 'bg-neutral-800' 
                   : 'bg-white'
