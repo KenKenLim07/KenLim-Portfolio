@@ -207,7 +207,7 @@ export const Hero = () => {
         {/* Main Content - Flexible height matching */}
         <div className={`hero-row flex flex-row items-start justify-center gap-x-2 min-w-0 overflow-x-auto w-full ${isLandscape ? 'pt-0 gap-x-1' : 'pt-3'}`}>
           {/* Left: Bordered Box with Floating Label */}
-            <motion.div
+      <motion.div
             className={`hero-intro relative flex items-start justify-start ${isLandscape ? 'min-w-0 pt-2' : 'max-w-md md:max-w-lg lg:max-w-xl'}`}
              initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

@@ -48,7 +48,7 @@ export const Projects = () => {
         "React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", 
         "React Query", "React Router", "Heroicons", "Radix UI",
         "Node.js", "Express", "Supabase", "PostgreSQL",
-        "Cheerio", "Axios", "GitHub Actions", "Automated Scraping","Github Action"
+        "Cheerio", "Axios", "GitHub Actions", "Automated Scraping"
       ],
       github: "",
       demo: "https://kenkenlim07.github.io/gsu-connect/",
@@ -58,18 +58,18 @@ export const Projects = () => {
       title: "MKLA Store",
       summary: "Youth-friendly e-commerce platform with GCash integration and intuitive admin panel for young entrepreneurs.",
       problem: "My 13-year-old cousin wanted to start her own small business but needed a simple, secure e-commerce solution with payment processing.",
-      challenge: "Making it simple enough for a teenager to use while including all essential e-commerce features and secure payment processing.",
+      challenge: "Making it simple enough for a teenager to use while including all essential e-commerce features and secure payment processing. Also migrated the project from Vite to Next.js.",
       solution: "Intuitive admin interface design, secure GCash integration, and user-friendly inventory management system.",
       impact: "Modern, user-friendly store that empowers young entrepreneurs to start their business journey with complete CRUD operations and real-time inventory tracking.",
       image: "",
       tech: [
-        "React", "TypeScript", "Vite", "Tailwind CSS", "Tailwind Animate",
+        "React", "TypeScript", "Next.js", "Vite", "Tailwind CSS", "Tailwind Animate",
         "React Router", "Heroicons", "CLSX", "Tailwind Merge",
         "Supabase", "PostgreSQL", "Row Level Security", "Authentication",
         "GCash Integration", "CRUD Operations", "Admin Panel"
       ],
       github: "",
-      demo: "https://mkla-store.vercel.app/",
+      demo: "https://kela-store.vercel.app/",
       category: "E-commerce"
     },
     {
